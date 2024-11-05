@@ -22,6 +22,9 @@ flange_slenderness_flexure(i)
 # ╔═╡ 5e496975-84e9-409b-a5df-45c4b7f5c7bc
 i isa DoublySymmetricBuiltUpIShape{T, S, Compact, Slender} where {T, S}
 
+# ╔═╡ a94b5d77-6069-4827-8437-09af8275368b
+w = WShape("W8x13")
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -286,5 +289,6 @@ version = "17.4.0+2"
 # ╠═a5cca891-7203-46a2-a3ed-148c66e27835
 # ╠═8c4d7ee7-a0fa-4c47-af8a-a5887eaa3aee
 # ╠═5e496975-84e9-409b-a5df-45c4b7f5c7bc
+# ╠═a94b5d77-6069-4827-8437-09af8275368b
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
