@@ -12,6 +12,7 @@ struct WShape
     tf
     k
     k1
+    h
     Ix
     Zx
     Sx
@@ -46,36 +47,37 @@ function WShape(shape)
     
     WShape(
         wshape.shape,
-        wshape.weight,
-        wshape.area,
-        wshape.d,
-        wshape.bf,
-        wshape.tw,
-        wshape.tf,
-        wshape.k,
-        wshape.k1,
-        wshape.Ix,
-        wshape.Zx,
-        wshape.Sx,
-        wshape.rx,
-        wshape.Iy,
-        wshape.Zy,
-        wshape.Sy,
-        wshape.ry,
-        wshape.J,
-        wshape.Cw,
-        wshape.Wno,
-        wshape.Sw1,
-        wshape.Qf,
-        wshape.Qw,
-        wshape.rts,
-        wshape.ho,
-        wshape.PA,
-        wshape.PB,
-        wshape.PC,
-        wshape.PD,
-        wshape.T,
-        wshape.WGi,
+        wshape.weight * plf,
+        wshape.area * inch^2,
+        wshape.d * inch,
+        wshape.bf * inch,
+        wshape.tw * inch,
+        wshape.tf * inch,
+        wshape.k * inch,
+        wshape.k1 * inch,
+        wshape.h * inch,
+        wshape.Ix * inch^4,
+        wshape.Zx * inch^3,
+        wshape.Sx * inch^3,
+        wshape.rx * inch,
+        wshape.Iy * inch^4,
+        wshape.Zy * inch^3,
+        wshape.Sy * inch^3,
+        wshape.ry * inch,
+        wshape.J * inch^4,
+        wshape.Cw * inch^6,
+        wshape.Wno * inch^2,
+        wshape.Sw1 * inch^4,
+        wshape.Qf * inch^3,
+        wshape.Qw * inch^3,
+        wshape.rts * inch,
+        wshape.ho * inch,
+        wshape.PA * inch,
+        wshape.PB * inch,
+        wshape.PC * inch,
+        wshape.PD * inch,
+        wshape.T * inch,
+        wshape.WGi * inch,
         wshape.WGo,
     )
 end
@@ -90,9 +92,9 @@ function classify_flange_for_lb((;bf, tf)::WShape, E, F_y)
 
 end
 
-function classify_web_for_lb((;T, tw)::WShape, E, F_y)
+function classify_web_for_lb((;h, tw)::WShape, E, F_y)
 
-    h = T
+    h = h
     tw = tw
     class = classify_section_for_lb_case15(h, tw, E, F_y)
 

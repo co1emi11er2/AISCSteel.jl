@@ -79,7 +79,7 @@ function classify_section_for_lb_case10(b, t, E, F_y)
                 :slender
             end
     
-    return class
+    return λ, λ_p, λ_r, class
 end
 
 """
@@ -114,7 +114,7 @@ function classify_section_for_lb_case13(b, t, E, F_y)
                 :slender
             end
     
-    return class
+    return λ, λ_p, λ_r, class
 end
 
 
@@ -152,5 +152,5 @@ function classify_section_for_lb_case15(h, t_w, E, F_y)
                 :slender
             end
     
-    return class
+    return λ, λ_p, λ_r, class
 end
