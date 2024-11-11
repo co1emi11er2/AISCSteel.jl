@@ -76,9 +76,23 @@ Description of applicable member: Doubly symmetric compact I-shaped members and 
 """
 function flexure_capacity_f2(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=1)
 
-    M_n = _calc_ltb(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b)
+    # 1. Yielding 
+    M_p = _calc_Mp(F_y, Z_x)
 
-    return M_n
+    # 2. Lateral-Torsional Buckling
+    L_p = 1.76*r_y*sqrt(E/F_y)
+    L_r = 1.95*r_ts*(E/(0.7*F_y))*sqrt((J*c)/(S_x*h_0) + sqrt(((J*c)/(S_x*h_0))^2 + 6.76*((0.7*F_y)/E)^2))
+    F_cr = _calc_Fcr(C_b, E, L_b, r_ts, J, c, S_x, h_0)
+
+    M_n =   if L_b <= L_p
+                M_p
+            elseif L_p < L_b <= L_r
+                C_b*(M_p - (M_p-0.7*F_y*S_x)*((L_b-L_p)/(L_r-L_p)))
+            else
+                F_cr*S_x
+            end
+
+    M_n = min(M_n, M_p)
 end
 
 ##########################################################################################
@@ -125,13 +139,23 @@ function flexure_capacity_f3(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=1,
     # Plastic Moment
     M_p = _calc_Mp(F_y, Z_x)
 
-    # Lateral Torsional Buckling from F2
-    M_n1 = _calc_ltb(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b)
+    # 1. Lateral Torsional Buckling from F2
+    L_p = 1.76*r_y*sqrt(E/F_y)
+    L_r = 1.95*r_ts*(E/(0.7*F_y))*sqrt((J*c)/(S_x*h_0) + sqrt(((J*c)/(S_x*h_0))^2 + 6.76*((0.7*F_y)/E)^2))
+    F_cr = _calc_Fcr(C_b, E, L_b, r_ts, J, c, S_x, h_0)
+
+    M_n1 =   if L_b <= L_p
+                M_p
+            elseif L_p < L_b <= L_r
+                C_b*(M_p - (M_p-0.7*F_y*S_x)*((L_b-L_p)/(L_r-L_p)))
+            else
+                F_cr*S_x
+            end
 
     k_c = 4/sqrt(h/t_w)
     k_c = max(min(k_c, 0.76), 0.35)
 
-    # Compression Flange Local Buckling
+    # 2. Compression Flange Local Buckling
     M_n2 =  if f_class == :noncompact
                 M_p - (M_p - 0.7*F_y*S_x)((λ - λ_pf)/(λ_rf - λ_pf))
             elseif f_class == :slender
@@ -182,7 +206,17 @@ end
 
 function _calc_Rpt(I_yc, I_y, h_c, t_w, λ, λ_pw, λ_rw, M_p, M_yt) 
 
-    R_pc =  _calc_Rpc(I_yc, I_y, h_c, t_w, λ, λ_pw, λ_rw, M_p, M_yt)
+    R_pt =  if I_yc/I_y > 0.23
+        if h_c/t_w <= λ_pw
+            M_p/M_yt
+        else
+            min((M_p/M_yt) - (M_p/M_yt - 1)*((λ - λ_pw)/(λ_rw - λ_pw)), M_p/M_yt)
+        end
+    else
+        1.0
+    end
+
+return R_pt
 
 end
 
@@ -226,6 +260,8 @@ function flexure_capacity_f4(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=1,
     M_n = error("Not implemented")
     M_p = min(F_y*Z_x, 1.6*F_y*S_x)
 
+    R_pc = _calc_Rpc(I_yc, I_y, h_c, t_w, λ, λ_pw, λ_rw, M_p, M_yc) 
+
     # 1. Compression Flange Yielding
     M_n1 = R_pc*M_yc
 
@@ -257,7 +293,7 @@ function flexure_capacity_f4(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=1,
     L_r = 1.95*r_t*(E/(F_L))*sqrt((J)/(S_xc*h_0) + sqrt(((J)/(S_xc*h_0))^2 + 6.76*((F_L)/E)^2))
 
     # (6) R_pc
-    R_pc = _calc_Rpc(I_yc, I_y, h_c, t_w, λ, λ_pw, λ_rw, M_p, M_yc) 
+    
 
     M_n2 =  if L_b <= L_p
                 M_p
