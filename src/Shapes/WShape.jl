@@ -86,9 +86,9 @@ function classify_flange_for_lb((;bf, tf)::WShape, E, F_y)
 
     b = bf/2
     t = tf
-    class = classify_section_for_lb_case10(b, t, E, F_y)
+    λ_fclass = classify_section_for_lb_case10(b, t, E, F_y)
 
-    return class
+    return λ_fclass
 
 end
 
@@ -96,25 +96,78 @@ function classify_web_for_lb((;h, tw)::WShape, E, F_y)
 
     h = h
     tw = tw
-    class = classify_section_for_lb_case15(h, tw, E, F_y)
+    λ_wclass = classify_section_for_lb_case15(h, tw, E, F_y)
 
-    return class
+    return λ_wclass
 
 end
 
-function flexure_capacity_f2((;Zx, Sx, ry, ho, J, rts)::WShape, E, F_y, L_b)
-    M = flexure_capacity_f2(
-    E,
-    F_y,
-    Zx,
-    Sx,
-    ry,
-    ho,
-    J,
-    1,
-    rts,
-    L_b,
+##########################################################################################
+# Design of members for flexure - Section F2
+##########################################################################################
+
+function flexure_capacity_f2_1((;Zx)::WShape, F_y)
+
+    M_n1 = flexure_capacity_f2_1(F_y, Z_x)
+
+    return M_n1
+end
+
+function flexure_capacity_f2_2((;Zx, Sx, ry, ho, J, rts)::WShape, M_p, E, F_y, L_b)
+    M_n2 = flexure_capacity_f2_2(
+        M_p,
+        E,
+        F_y,
+        Sx,
+        ry,
+        ho,
+        J,
+        1,
+        rts,
+        L_b,
     )
 
+    return M_n2
+end
+
+function flexure_capacity_f2((;Zx, Sx, ry, ho, J, rts)::WShape, E, F_y, L_b)
+    M_n = flexure_capacity_f2(
+        E,
+        F_y,
+        Zx,
+        Sx,
+        ry,
+        ho,
+        J,
+        1,
+        rts,
+        L_b,
+    )
+
+    return M_n
+end
+
+##########################################################################################
+# Design of members for flexure - Section F3
+##########################################################################################
+
+function flexure_capacity_f3_1((;Zx, Sx, ry, ho, J, rts)::WShape, E, F_y, L_b)
+
+    M_n1 = flexure_capacity_f3_1(E, F_y, Zx, Sx, ry, ho, J, 1, rts, L_b)
+
     return M
+end
+
+function flexure_capacity_f3_2((;Zx, Sx, ry, ho, J, rts, tw)::WShape, M_p, E, F_y, L_b, λ_f, λ_pf, λ_rf, λ_fclass)
+
+    M_n2 = flexure_capacity_f3_2(E, F_y, Sx, h, tw, λ_f, λ_pf, λ_rf, λ_fclass)
+
+    return M_n2
+end
+
+function flexure_capacity_f3((;Zx, Sx, ry, ho, J, rts)::WShape, E, F_y, L_b)
+
+    M_n = flexure_capacity_f3(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
+
+    return M_n
 end
