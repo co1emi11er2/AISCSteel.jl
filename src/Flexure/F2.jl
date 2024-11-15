@@ -6,11 +6,11 @@
 
 # Plastic moment 
 function _calc_Mp(F_y, Z_x) 
-    M_p = F_y * Z_x
+    M_p = F_y * Z_x |> kip*ft
 end
 
 function _calc_Fcr(C_b, E, L_b, r_ts, J, c, S_x, h_0)
-    F_cr = ((C_b*π^2*E)/(L_b/r_ts)^2)*sqrt(1 + 0.078*((J*c)/(S_x*h_0))*(L_b/r_ts)^2)
+    F_cr = ((C_b*π^2*E)/(L_b/r_ts)^2)*sqrt(1 + 0.078*((J*c)/(S_x*h_0))*(L_b/r_ts)^2) |> ksi
 end
 
 
@@ -41,7 +41,7 @@ end
 
 function flexure_capacity_f2_1(F_y, Z_x)
     # 1. Yielding 
-    M_p = _calc_Mp(F_y, Z_x)
+    M_p = _calc_Mp(F_y, Z_x) |> kip*ft
 end
 
 function flexure_capacity_f2_2(M_p, E, F_y, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=1)
@@ -56,7 +56,7 @@ function flexure_capacity_f2_2(M_p, E, F_y, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=
                 C_b*(M_p - (M_p-0.7*F_y*S_x)*((L_b-L_p)/(L_r-L_p)))
             else
                 F_cr*S_x
-            end
+            end |> kip*ft
     
 end
 
@@ -123,7 +123,7 @@ function flexure_capacity_f3_1(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b)
             end
 end
 
-function flexure_capacity_f3_2(E, F_y, S_x, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
+function flexure_capacity_f3_2(E, F_y, Z_x, S_x, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
 
     # Plastic Moment
     M_p = _calc_Mp(F_y, Z_x)
@@ -136,12 +136,16 @@ function flexure_capacity_f3_2(E, F_y, S_x, h, t_w, λ_f, λ_pf, λ_rf, λ_fclas
                 M_p - (M_p - 0.7*F_y*S_x)*((λ_f - λ_pf)/(λ_rf - λ_pf))
             elseif λ_fclass == :slender
                 (0.9*E*k_c*S_x)/(λ_f^2)
+            else
+                M_p
             end
+
+    return M_n2
 end
 
 
 """
-    flexure_capacity_f3(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, λ, λ_pf, λ_rf, λ_fclass)
+    flexure_capacity_f3(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
 
 Calculates the moment capacity of the applicable section.
 
@@ -177,7 +181,7 @@ function flexure_capacity_f3(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w
     M_n1 = flexure_capacity_f3_1(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b)
 
     # 2. Compression Flange Local Buckling
-    M_n2 =  flexure_capacity_f3_2(E, F_y, S_x, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
+    M_n2 =  flexure_capacity_f3_2(E, F_y, Z_x, S_x, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
 
     M_n = min(M_n1, M_n2)
 

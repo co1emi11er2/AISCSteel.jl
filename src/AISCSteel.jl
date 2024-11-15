@@ -6,6 +6,7 @@ export classify_section_for_lb_case10, classify_section_for_lb_case13, classify_
 export WShape
 export flexure_capacity_f2_1, flexure_capacity_f2_2, flexure_capacity_f2, _calc_Mp
 export flexure_capacity_f3_1, flexure_capacity_f3_2, flexure_capacity_f3, _calc_Fcr
+export classify_flange_for_flexure, classify_web_for_flexure
 
 # Directories
 projectdir(parts...) = normpath(joinpath(@__DIR__, "..", parts...))
