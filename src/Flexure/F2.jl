@@ -208,12 +208,12 @@ function _calc_FL(S_xt, S_xc, F_y)
     return F_L
 end
 
-function _calc_Rpc(I_yc, I_y, h_c, t_w, λ, λ_pw, λ_rw, M_p, M_yc) 
+function _calc_Rpc(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yc) 
     R_pc =  if I_yc/I_y > 0.23
                 if h_c/t_w <= λ_pw
                     M_p/M_yc
                 else
-                    min((M_p/M_yc) - (M_p/M_yc - 1)*((λ - λ_pw)/(λ_rw - λ_pw)), M_p/M_yc)
+                    min((M_p/M_yc) - (M_p/M_yc - 1)*((λ_w - λ_pw)/(λ_rw - λ_pw)), M_p/M_yc)
                 end
             else
                 1.0
@@ -237,6 +237,86 @@ function _calc_Rpt(I_yc, I_y, h_c, t_w, λ, λ_pw, λ_rw, M_p, M_yt)
 
     return R_pt
 
+end
+
+function flexure_capacity_f4_variables(E, F_y, Z_x, S_x, S_xc, S_xt, b_fc, t_fc, h, h_c, t_w, J, h_0, I_y, I_yc, λ_w, λ_pw, λ_rw, L_b, C_b)
+
+    M_p = min(F_y*Z_x, 1.6*F_y*S_x)
+
+    M_yc = F_y*S_xc
+    M_yt = F_y*S_xt
+
+    # (2) F_cr
+    a_w = _calc_aw(h_c, t_w, b_fc, t_fc)
+    r_t = _calc_rt(b_fc, a_w)
+    J = if I_yc/I_y <= 0.23
+            zero(typeof(J))
+        else
+            J
+        end
+
+    k_c = 4/sqrt(h/t_w)
+    k_c = max(min(k_c, 0.76), 0.35)
+
+    F_cr = ((C_b*π^2*E)/(L_b/r_t)^2)*sqrt(1 + 0.078*((J)/(S_xc*h_0))*(L_b/r_t)^2) |> ksi
+
+    # (3) F_L
+    F_L = _calc_FL(S_xt, S_xc, F_y) 
+
+    # (4) L_p
+    L_p = 1.1*r_t*sqrt(E/F_y)
+
+    # (5) L_r
+    L_r = 1.95*r_t*(E/(F_L))*sqrt((J)/(S_xc*h_0) + sqrt(((J)/(S_xc*h_0))^2 + 6.76*((F_L)/E)^2))
+
+    R_pc = _calc_Rpc(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yc) 
+    R_pt = _calc_Rpt(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yt) 
+
+    return (;M_p, M_yc, M_yt, k_c, F_cr, F_L, L_p, L_r, R_pc, R_pt)
+end
+
+function flexure_capacity_f4_1(R_pc, M_yc)
+    # 1. Compression Flange Yielding
+    M_n1 = R_pc*M_yc
+
+    return M_n1
+end
+
+function flexure_capacity_f4_2(M_p, R_pc, M_yc, F_L, S_xc, F_cr, C_b, L_b, L_p, L_r)
+    # 2. Lateral Torsional Buckling
+    M_n2 =  if L_b <= L_p
+        M_p
+    elseif L_p < L_b <= L_r
+        C_b*(R_pc*M_yc - (R_pc*M_yc - F_L*S_xc)*((L_b - L_p)/(L_r - L_p)))
+    else
+        F_cr*S_xc
+    end
+
+    return M_n2
+end
+
+function flexure_capacity_f4_3(M_p, R_pc, M_yc, F_L, S_xc, E, k_c, λ_f, λ_pf, λ_rf, λ_fclass)
+    # 3. Compression Flange Local Buckling
+    M_n3 =  if λ_fclass == :compact
+        M_p
+    elseif λ_fclass == :noncompact
+        R_pc*M_yc - (R_pc*M_yc - F_L*S_xc) * ((λ_f - λ_pf)/(λ_rf - λ_pf))
+    else
+        (0.9*E*k_c*S_xc)/λ_f^2
+    end
+
+    return M_n3
+end
+
+function flexure_capacity_f4_4(M_p, R_pt, M_yt, S_xc, S_xt)
+    # 4. Tension Flange Yielding
+    M_n4 =  if S_xt >= S_xc
+        M_p
+    else
+        R_pt*M_yt
+    end
+
+    return M_n4
 end
 
 """
@@ -270,71 +350,21 @@ Description of applicable member: Doubly symmetric I-shaped members with compact
 # Reference
 - AISC Section F4
 """
-function flexure_capacity_f4(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
+function flexure_capacity_f4(E, F_y, Z_x, S_x, S_xc, S_xt, b_fc, t_fc, h, h_c, t_w, J, h_0, I_y, I_yc, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b)
 
-    C_b=1
-
-    M_p = min(F_y*Z_x, 1.6*F_y*S_x)
-
-    R_pc = _calc_Rpc(I_yc, I_y, h_c, t_w, λ_f, λ_pw, λ_rw, M_p, M_yc) 
+    (;M_p, M_yc, M_yt, k_c, F_cr, F_L, L_p, L_r, R_pc, R_pt) = flexure_capacity_f4_variables(E, F_y, Z_x, S_x, S_xc, S_xt, b_fc, t_fc, h, h_c, t_w, J, h_0, I_y, I_yc, λ_w, λ_pw, λ_rw, L_b, C_b)
 
     # 1. Compression Flange Yielding
-    M_n1 = R_pc*M_yc
-
+    M_n1 = flexure_capacity_f4_1(R_pc, M_yc)
 
     # 2. Lateral Torsional Buckling
-    # (1) M_yc
-    M_yc = F_y*S_xc
-
-    # (2) F_cr
-    # TODO: I_yc, h_c, b_fc, t_fc
-    c = 1
-    a_w = _calc_aw(h_c, t_w, b_fc, t_fc)
-    r_t = _calc_rt(b_fc, a_w)
-    J = if I_yc/I_y <= 0.23
-            0
-        else
-            J
-        end
-    
-    F_cr = _calc_Fcr(C_b, E, L_b, r_t, J, c, S_xc, h_0)
-
-    # (3) F_L
-    F_L = _calc_FL(S_xt, S_xc, F_y) 
-
-    # (4) L_p
-    L_p = 1.1*r_t*sqrt(E/F_y)
-
-    # (5) L_r
-    L_r = 1.95*r_t*(E/(F_L))*sqrt((J)/(S_xc*h_0) + sqrt(((J)/(S_xc*h_0))^2 + 6.76*((F_L)/E)^2))
-
-    # (6) R_pc
-    
-
-    M_n2 =  if L_b <= L_p
-                M_p
-            elseif L_p < L_b <= L_r
-                C_b*(R_pc*M_yc - (R_pc*M_yc - F_L*S_xc)*((L_b - L_p)/(L_r - L_p)))
-            else
-                F_cr*S_xc
-            end
+    M_n2 =  flexure_capacity_f4_2(M_p, R_pc, M_yc, F_L, S_xc, F_cr, C_b, L_b, L_p, L_r)
 
     # 3. Compression Flange Local Buckling
-    M_n3 =  if λ_fclass == :compact
-                M_p
-            elseif λ_fclass == :noncompact
-                R_pc*M_yc - (R_pc*M_yc - F_L*S_xc) * ((λ_f - λ_pf)/(λ_rf - λ_pf))
-            else
-                (0.9*E*k_c*S_xc)/λ_f^2
-            end
+    M_n3 =  flexure_capacity_f4_3(M_p, R_pc, M_yc, F_L, S_xc, E, k_c, λ_f, λ_pf, λ_rf, λ_fclass)
 
     # 4. Tension Flange Yielding
-    R_pt = _calc_Rpt(I_yc, I_y, h_c, t_w, λ_f, λ_pw, λ_rw, M_p, M_yt) 
-    M_n4 =  if S_xt >= S_xc
-                M_p
-            else
-                R_pt*M_yt
-            end
+    M_n4 =  flexure_capacity_f4_4(M_p, R_pt, M_yt, S_xc, S_xt)
 
     M_n = min(M_n1, M_n2, M_n3, M_n4)
 

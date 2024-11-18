@@ -7,35 +7,35 @@ Base.@kwdef struct WShape
     weight
     area
     d
-    bf
-    tw
-    tf
+    b_f
+    t_w
+    t_f
     k
-    k1
+    k_1
     h
-    Ix
-    Zx
-    Sx
-    rx
-    Iy
-    Zy
-    Sy
-    ry
+    I_x
+    Z_x
+    S_x
+    r_x
+    I_y
+    Z_y
+    S_y
+    r_y
     J
-    Cw
-    Wno
-    Sw1
-    Qf
-    Qw
-    rts
-    ho
+    C_w
+    W_no
+    S_w1
+    Q_f
+    Q_w
+    r_ts
+    h_0
     PA
     PB
     PC
     PD
     T
-    WGi
-    WGo
+    WG_i
+    WG_0
     E = 29000ksi
     F_y = 60ksi
     C_b = 1
@@ -88,21 +88,21 @@ function WShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
     )
 end
 
-function classify_flange_for_flexure((;bf, tf, E, F_y)::WShape)
+function classify_flange_for_flexure((;b_f, t_f, E, F_y)::WShape)
 
-    b = bf/2
-    t = tf
+    b = b_f/2
+    t = t_f
     λ_fvariabels = classify_section_for_lb_case10(b, t, E, F_y)
 
     return λ_fvariabels
 
 end
 
-function classify_web_for_flexure((;h, tw, E, F_y)::WShape)
+function classify_web_for_flexure((;h, t_w, E, F_y)::WShape)
 
     h = h
-    tw = tw
-    λ_wvariables = classify_section_for_lb_case15(h, tw, E, F_y)
+    t_w = t_w
+    λ_wvariables = classify_section_for_lb_case15(h, t_w, E, F_y)
 
     return λ_wvariables
 
@@ -112,41 +112,41 @@ end
 # Design of members for flexure - Section F2
 ##########################################################################################
 
-function flexure_capacity_f2_1((;Zx, F_y)::WShape)
+function flexure_capacity_f2_1((;Z_x, F_y)::WShape)
 
     M_n1 = flexure_capacity_f2_1(F_y, Z_x)
 
     return M_n1
 end
 
-function flexure_capacity_f2_2((;Zx, Sx, ry, ho, J, rts, E, F_y,)::WShape, M_p, L_b)
+function flexure_capacity_f2_2((;S_x, r_y, h_0, J, r_ts, E, F_y,)::WShape, M_p, L_b)
     M_n2 = flexure_capacity_f2_2(
         M_p,
         E,
         F_y,
-        Sx,
-        ry,
-        ho,
+        S_x,
+        r_y,
+        h_0,
         J,
         1,
-        rts,
+        r_ts,
         L_b,
     )
 
     return M_n2
 end
 
-function flexure_capacity_f2((;Zx, Sx, ry, ho, J, rts, E, F_y,)::WShape, L_b)
+function flexure_capacity_f2((;Z_x, S_x, r_y, h_0, J, r_ts, E, F_y,)::WShape, L_b)
     M_n = flexure_capacity_f2(
         E,
         F_y,
-        Zx,
-        Sx,
-        ry,
-        ho,
+        Z_x,
+        S_x,
+        r_y,
+        h_0,
         J,
         1,
-        rts,
+        r_ts,
         L_b,
     )
 
@@ -157,32 +157,32 @@ end
 # Design of members for flexure - Section F3
 ##########################################################################################
 
-function flexure_capacity_f3_1((;Zx, Sx, ry, ho, J, rts, E, F_y)::WShape, L_b)
+function flexure_capacity_f3_1((;Z_x, S_x, r_y, h_0, J, r_ts, E, F_y)::WShape, L_b)
 
-    M_n1 = flexure_capacity_f3_1(E, F_y, Zx, Sx, ry, ho, J, 1, rts, L_b)
+    M_n1 = flexure_capacity_f3_1(E, F_y, Z_x, S_x, r_y, h_0, J, 1, r_ts, L_b)
 
     return M
 end
 
-function flexure_capacity_f3_2((;E, F_y, Zx, Sx, h, tw)::WShape, λ_f, λ_pf, λ_rf, λ_fclass)
+function flexure_capacity_f3_2((;E, F_y, Z_x, S_x, h, t_w)::WShape, λ_f, λ_pf, λ_rf, λ_fclass)
 
-    M_n2 = flexure_capacity_f3_2(E, F_y, Zx, Sx, h, tw, λ_f, λ_pf, λ_rf, λ_fclass)
+    M_n2 = flexure_capacity_f3_2(E, F_y, Z_x, S_x, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
 
     return M_n2
 end
 
-function flexure_capacity_f3((;Zx, Sx, ry, ho, J, rts, h, tw, E, F_y)::WShape, L_b)
+function flexure_capacity_f3((;Z_x, S_x, r_y, h_0, J, r_ts, h, t_w, E, F_y)::WShape, L_b)
 
     λ_fvariabels = classify_section_for_lb_case10(b, t, E, F_y)
 
-    M_n = flexure_capacity_f3(E, F_y, Zx, Sx, ry, ho, J, c, rts, L_b, h, t_w, λ_fvariabels...)
+    M_n = flexure_capacity_f3(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, λ_fvariabels...)
 
     return M_n
 end
 
-function flexure_capacity_f3((;Zx, Sx, ry, ho, J, rts, h, tw, E, F_y)::WShape, L_b, λ_f, λ_pf, λ_rf, λ_fclass)
+function flexure_capacity_f3((;Z_x, S_x, r_y, h_0, J, r_ts, h, t_w, E, F_y)::WShape, L_b, λ_f, λ_pf, λ_rf, λ_fclass)
 
-    M_n = flexure_capacity_f3(E, F_y, Zx, Sx, ry, ho, J, 1, rts, L_b, h, tw, λ_f, λ_pf, λ_rf, λ_fclass)
+    M_n = flexure_capacity_f3(E, F_y, Z_x, S_x, r_y, h_0, J, 1, r_ts, L_b, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
 
     return M_n
 end
@@ -190,6 +190,30 @@ end
 ##########################################################################################
 # Design of members for flexure - Section F4
 ##########################################################################################
+
+calc_Sxc((;S_x)::WShape) = S_xc = S_x
+calc_Sxt((;S_x)::WShape) = S_xt = S_x
+calc_Iyc((;b_f, t_f)::WShape) = I_yc = (b_f * t_f^3)/12 
+calc_hc((;h)::WShape) = h_c = h
+
+function flexure_capacity_f4_variables((;E, F_y, Z_x, S_x, b_f, t_f, h, t_w, J, h_0, I_y)::WShape, L_b, C_b, λ_w, λ_pw, λ_rw)
+
+    I_yc = (b_f * t_f^3)/12 
+    
+    t = flexure_capacity_f4_variables(E, F_y, Z_x, S_x, S_x, S_x, b_f, t_f, h, h, t_w, J, h_0, I_y, I_yc, λ_w, λ_pw, λ_rw, L_b, C_b)
+
+    return t
+end
+
+
+function flexure_capacity_f4((;E, F_y, Z_x, S_x, b_f, t_f, h, t_w, J, h_0, I_y)::WShape, L_b, C_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass)
+
+    I_yc = (b_f * t_f^3)/12 
+    
+    M_n = flexure_capacity_f4(E, F_y, Z_x, S_x, S_x, S_x, b_f, t_f, h, h, t_w, J, h_0, I_y, I_yc, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b)
+
+    return M_n
+end
 
 ##########################################################################################
 # Design of members for flexure - Section F5
@@ -211,10 +235,10 @@ function flexure_capacity(w::WShape, L_b)
         if λ_fclass == :compact
             M_n = flexure_capacity_f2(w, L_b)
         else
-            M_n = flexure_capacity_f3(w, L_b, λ_f, λ_pf, λ_rf, λ_fclass)
+            M_n = flexure_capacity_f3(w, L_b, λ_fvariabels...)
         end
     elseif λ_wclass == :noncompact
-        error("not implemented")
+        flexure_capacity_f4(w, L_b, C_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass)
     else
         error("not implemented")
     end
