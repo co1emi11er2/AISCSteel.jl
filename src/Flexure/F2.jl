@@ -13,44 +13,30 @@ function _calc_Fcr(C_b, E, L_b, r_ts, J, c, S_x, h_0)
     F_cr = ((C_b*π^2*E)/(L_b/r_ts)^2)*sqrt(1 + 0.078*((J*c)/(S_x*h_0))*(L_b/r_ts)^2) |> ksi
 end
 
-
-# Lateral Torsionsal Buckling
-function _calc_ltb(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=1)
-    # 1. Yielding 
-    M_p = _calc_Mp(F_y, Z_x)
-
-    # 2. Lateral-Torsional Buckling
-    L_p = 1.76*r_y*sqrt(E/F_y)
-    L_r = 1.95*r_ts*(E/(0.7*F_y))*sqrt((J*c)/(S_x*h_0) + sqrt(((J*c)/(S_x*h_0))^2 + 6.76*((0.7*F_y)/E)^2))
-    F_cr = _calc_Fcr(C_b, E, L_b, r_ts, J, c, S_x, h_0)
-
-    M_n =   if L_b <= L_p
-                M_p
-            elseif L_p < L_b <= L_r
-                C_b*(M_p - (M_p-0.7*F_y*S_x)*((L_b-L_p)/(L_r-L_p)))
-            else
-                F_cr*S_x
-            end
-
-    M_n = min(M_n, M_p)
-end
-
 ##########################################################################################
 # Design of members for flexure - Section F2
 ##########################################################################################
 
-function flexure_capacity_f2_1(F_y, Z_x)
-    # 1. Yielding 
-    M_p = _calc_Mp(F_y, Z_x) |> kip*ft
-end
+function flexure_capacity_f2_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=1)
 
-function flexure_capacity_f2_2(M_p, E, F_y, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=1)
-    # 2. Lateral-Torsional Buckling
+    M_p = _calc_Mp(F_y, Z_x) 
+
     L_p = 1.76*r_y*sqrt(E/F_y)
     L_r = 1.95*r_ts*(E/(0.7*F_y))*sqrt((J*c)/(S_x*h_0) + sqrt(((J*c)/(S_x*h_0))^2 + 6.76*((0.7*F_y)/E)^2))
     F_cr = _calc_Fcr(C_b, E, L_b, r_ts, J, c, S_x, h_0)
 
-    M_n2 =   if L_b <= L_p
+    return (;M_p, L_p, L_r, F_cr)
+end
+
+function flexure_capacity_f2_1(M_p)
+    # 1. Yielding 
+    M_nFY = M_p
+end
+
+function flexure_capacity_f2_2(M_p, F_y, S_x, F_cr, L_b, L_p, L_r, C_b=1)
+
+    # 2. Lateral-Torsional Buckling
+    M_nLTB =   if L_b <= L_p
                 M_p
             elseif L_p < L_b <= L_r
                 C_b*(M_p - (M_p-0.7*F_y*S_x)*((L_b-L_p)/(L_r-L_p)))
@@ -87,13 +73,15 @@ Description of applicable member: Doubly symmetric compact I-shaped members and 
 """
 function flexure_capacity_f2(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=1)
 
+    (;M_p, L_p, L_r, F_cr) = flexure_capacity_f2_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b)
+
     # 1. Yielding 
-    M_p = flexure_capacity_f2_1(F_y, Z_x)
+    M_nFY = flexure_capacity_f2_1(M_p)
 
     # 2. Lateral-Torsional Buckling
-    M_n2 = flexure_capacity_f2_2(M_p, E, F_y, S_x, r_y, h_0, J, c, r_ts, L_b, C_b)
+    M_nLTB = flexure_capacity_f2_2(M_p, F_y, S_x, F_cr, L_b, L_p, L_r, C_b)
 
-    M_n = min(M_n2, M_p)
+    M_n = min(M_nFY, M_nLTB)
 
     return M_n
 end
@@ -101,46 +89,33 @@ end
 ##########################################################################################
 # Design of members for flexure - Section F3
 ##########################################################################################
-function flexure_capacity_f3_1(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b)
+function flexure_capacity_f3_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, C_b=1)
 
-    # 1. Lateral Torsional Buckling from F2
-    C_b = 1
+    (;M_p, L_p, L_r, F_cr) = flexure_capacity_f2_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b)
 
-    # Plastic Moment
-    M_p = _calc_Mp(F_y, Z_x)
-
-    # Lateral Torsional Buckling
-    L_p = 1.76*r_y*sqrt(E/F_y)
-    L_r = 1.95*r_ts*(E/(0.7*F_y))*sqrt((J*c)/(S_x*h_0) + sqrt(((J*c)/(S_x*h_0))^2 + 6.76*((0.7*F_y)/E)^2))
-    F_cr = _calc_Fcr(C_b, E, L_b, r_ts, J, c, S_x, h_0)
-
-    M_n1 =   if L_b <= L_p
-                M_p
-            elseif L_p < L_b <= L_r
-                C_b*(M_p - (M_p-0.7*F_y*S_x)*((L_b-L_p)/(L_r-L_p)))
-            else
-                F_cr*S_x
-            end
-end
-
-function flexure_capacity_f3_2(E, F_y, Z_x, S_x, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
-
-    # Plastic Moment
-    M_p = _calc_Mp(F_y, Z_x)
-
-    # 2. Compression Flange Local Buckling
     k_c = 4/sqrt(h/t_w)
     k_c = max(min(k_c, 0.76), 0.35)
 
-    M_n2 =  if λ_fclass == :noncompact
-                M_p - (M_p - 0.7*F_y*S_x)*((λ_f - λ_pf)/(λ_rf - λ_pf))
-            elseif λ_fclass == :slender
-                (0.9*E*k_c*S_x)/(λ_f^2)
-            else
-                M_p
-            end
+    return (;M_p, L_p, L_r, F_cr, k_c)
+end
 
-    return M_n2
+function flexure_capacity_f3_1(M_p, F_y, S_x, F_cr, L_b, L_p, L_r, C_b=1)
+
+    # 1. Lateral-Torsional Buckling
+    M_nLTB = flexure_capacity_f2_2(M_p, F_y, S_x, F_cr, L_b, L_p, L_r, C_b)
+end
+
+function flexure_capacity_f3_2(M_p, E, F_y, S_x, k_c, λ_f, λ_pf, λ_rf, λ_fclass)
+
+    # 2. Compression Flange Local Buckling
+    M_nCFLB =  if λ_fclass == :noncompact
+                    M_p - (M_p - 0.7*F_y*S_x)*((λ_f - λ_pf)/(λ_rf - λ_pf))
+                elseif λ_fclass == :slender
+                    (0.9*E*k_c*S_x)/(λ_f^2)
+                else
+                    M_p
+                end
+
 end
 
 
@@ -175,13 +150,15 @@ Description of applicable member: Doubly symmetric I-shaped members with compact
 # Reference
 - AISC Section F3
 """
-function flexure_capacity_f3(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
+function flexure_capacity_f3(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1)
+
+    (;M_p, L_p, L_r, F_cr, k_c) = flexure_capacity_f3_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, C_b)
 
     # 1. Lateral Torsional Buckling from F2
-    M_n1 = flexure_capacity_f3_1(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b)
+    M_n1 = flexure_capacity_f3_1(M_p, F_y, S_x, F_cr, L_b, L_p, L_r, C_b)
 
     # 2. Compression Flange Local Buckling
-    M_n2 =  flexure_capacity_f3_2(E, F_y, Z_x, S_x, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass)
+    M_n2 = flexure_capacity_f3_2(M_p, E, F_y, S_x, k_c, λ_f, λ_pf, λ_rf, λ_fclass)
 
     M_n = min(M_n1, M_n2)
 
