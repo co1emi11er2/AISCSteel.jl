@@ -228,6 +228,20 @@ end
 ##########################################################################################
 # Design of members for flexure - Section F5
 ##########################################################################################
+function flexure_capacity_f5_variables((;E, F_y, S_x, b_f, t_f, h, t_w)::WShape, L_b, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1)
+    
+    t = flexure_capacity_f5_variables(E, F_y, S_x, b_f, t_f, h, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b)
+
+    return t
+end
+
+
+function flexure_capacity_f5((;E, F_y, Z_x, S_x, b_f, t_f, h, t_w, J, h_0, I_y)::WShape, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1)
+    
+    M_n = flexure_capacity_f5(E, F_y, S_x, S_x, b_f, t_f, h, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b)
+
+    return M_n
+end
 
 ##########################################################################################
 # Design of members for flexure
@@ -250,7 +264,7 @@ function flexure_capacity(w::WShape, L_b, C_b=1)
     elseif λ_wclass == :noncompact
         M_n = flexure_capacity_f4(w, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b)
     else
-        error("not implemented")
+        M_n = flexure_capacity_f5(w, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b)
     end
 
     return M_n
