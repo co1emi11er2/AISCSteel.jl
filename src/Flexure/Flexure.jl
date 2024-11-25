@@ -190,7 +190,7 @@ Description of applicable member: Doubly symmetric I-shaped members with compact
 - `M_nCFLB`: moment capacity of the section for compression flange local buckling.
 
 # Reference
-- AISC Section F2.2
+- AISC Section F3.2
 """
 function flexure_capacity_f3_2(M_p, E, F_y, S_x, k_c, λ_f, λ_pf, λ_rf, λ_fclass)
 

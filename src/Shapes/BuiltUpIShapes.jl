@@ -1,5 +1,6 @@
 ##########################################################################################
 # BuiltUpIShape struct and initialization methods
+# NOTE: This is not usable currently
 ##########################################################################################
 
 struct BuiltUpIShape{T, S} <: AbstractBuiltUpIShapes

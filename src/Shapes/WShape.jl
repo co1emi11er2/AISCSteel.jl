@@ -2,7 +2,7 @@
 # WShape struct and initialization methods
 ##########################################################################################
 
-Base.@kwdef struct WShape
+Base.@kwdef struct WShape <: AbstractSteelShapes
     shape
     weight
     area

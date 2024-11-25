@@ -1,3 +1,8 @@
+##########################################################################################
+# I-Shapes
+# NOTE: This is not usable
+##########################################################################################
+
 abstract type AbstractIShapes <: AbstractSteelShapes end 
 
 abstract type AbstractBuiltUpIShapes <: AbstractIShapes end 
