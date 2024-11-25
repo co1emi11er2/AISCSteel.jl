@@ -1,6 +1,10 @@
-using AISCSteel
-using Test
+using TestItems, TestItemRunner
 
-@testset "AISCSteel.jl" begin
-    # Write your tests here.
+if isdefined(@__MODULE__,:LanguageServer)
+    include("../src/AISCSteel.jl")
 end
+@testitem "Flexure - F2" begin
+    include("Flexure/F2.jl")
+end
+
+@run_package_tests verbose=true
