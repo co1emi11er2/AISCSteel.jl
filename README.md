@@ -36,7 +36,7 @@ Pkg.add("AISCSteel")
   - [x] HSS Shapes
   - [x] HSS_R Shapes
   - [x] PIPE Shapes
-  - [x] DBL_L Shapes
+  - [x] 2L Shapes
 - **Structs**
   - [x] WShape
   - [ ] BuiltUpIShape
@@ -52,7 +52,7 @@ Pkg.add("AISCSteel")
   - [ ] HSS Shape
   - [ ] HSS_R Shape
   - [ ] PIPE Shape
-  - [ ] DBL_L Shape
+  - [ ] 2L Shape
 - **Compression Design** (Chapter E)
   - [ ] Calculate based on E2
   - [ ] Calculate based on E3

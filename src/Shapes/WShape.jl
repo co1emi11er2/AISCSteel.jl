@@ -2,43 +2,43 @@
 # WShape struct and initialization methods
 ##########################################################################################
 
-Base.@kwdef struct WShape <: AbstractSteelShapes
-    shape
-    weight
-    area
-    d
-    b_f
-    t_w
-    t_f
-    k
-    k_1
-    h
-    I_x
-    Z_x
-    S_x
-    r_x
-    I_y
-    Z_y
-    S_y
-    r_y
-    J
-    C_w
-    W_no
-    S_w1
-    Q_f
-    Q_w
-    r_ts
-    h_0
-    PA
-    PB
-    PC
-    PD
-    T
-    WG_i
-    WG_0
-    E = 29000ksi
-    F_y = 60ksi
-    C_b = 1
+Base.@kwdef struct WShape <: AbstractRolledIShapes
+    shape::String
+    weight::float_plf
+    area::float_inch2
+    d::float_inch
+    b_f::float_inch
+    t_w::float_inch
+    t_f::float_inch
+    k::float_inch
+    k_1::float_inch
+    h::float_inch
+    I_x::float_inch4
+    Z_x::float_inch3
+    S_x::float_inch3
+    r_x::float_inch
+    I_y::float_inch4
+    Z_y::float_inch3
+    S_y::float_inch3
+    r_y::float_inch
+    J::float_inch4
+    C_w::float_inch6
+    W_no::float_inch2
+    S_w1::float_inch4
+    Q_f::float_inch3
+    Q_w::float_inch3
+    r_ts::float_inch
+    h_0::float_inch
+    PA::float_inch
+    PB::float_inch
+    PC::float_inch
+    PD::float_inch
+    T::float_inch
+    WG_i::float_inch
+    WG_0#::Union{float_inch, Missing}
+    E::float_ksi = 29000ksi
+    F_y::float_ksi = 60ksi
+    C_b::Float64 = 1.0
 end
 
 function WShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
@@ -88,7 +88,7 @@ function WShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
     )
 end
 
-function classify_flange_for_flexure((;b_f, t_f, E, F_y)::WShape)
+function classify_flange_for_flexure((;b_f, t_f, E, F_y)::T) where T <: AbstractRolledIShapes
 
     b = b_f/2
     t = t_f
