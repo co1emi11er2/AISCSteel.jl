@@ -83,6 +83,42 @@ function classify_section_for_lb_case10(b, t, E, F_y)
 end
 
 """
+    classify_section_for_lb_case11(b, t, E, F_L, k_c)
+
+Classifies the compressive elements of a member subject to flexural. 
+
+Description of applicable member: Flanges of built-up I-shaped sections (singly or doubly symmetric). 
+
+# Arguments
+- `b`: width of the plate or half the width of the flange.
+- `t`: thickness of the flange.
+- `E`: elastic section modulous.
+- `F_L`: nominal compression flange stress above which the inelastic buckling limit states apply (ksi)
+- `k_c`: 
+
+# Returns
+- `FlexureBucklingType` enum whose value is either `Compact`, `Noncompact`, or `Slender`
+
+# Reference
+- AISC Table B4.1b
+"""
+function classify_section_for_lb_case11(b, t, E, F_L, k_c)
+    λ = b/t
+    λ_p = 0.38*sqrt(E/F_y)
+    λ_r = 0.95*sqrt(k_c*E/F_L)
+
+    class = if λ <= λ_p
+                :compact
+            elseif λ_p < λ <= λ_r
+                :noncompact
+            else
+                :slender
+            end
+    
+    return λ, λ_p, λ_r, class
+end
+
+"""
     classify_section_for_lb_case13(b, t, E, F_y)
 
 Classifies the compressive elements of a member subject to flexural. 
