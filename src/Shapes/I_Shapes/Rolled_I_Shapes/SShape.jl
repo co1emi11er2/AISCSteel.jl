@@ -35,7 +35,7 @@ Base.@kwdef struct SShape <: AbstractRolledIShapes
     PD::float_inch
     T::float_inch
     WG_i::float_inch
-    WG_0::Union{float_inch, Missing}
+    WG_0::float_inch
     E::float_ksi = 29000ksi
     F_y::float_ksi = 60ksi
     C_b::Float64 = 1.0
@@ -48,6 +48,8 @@ function SShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
     lookup_value = uppercase(shape)
     ishape = import_data(lookup_value, lookup_col_name, csv_file_path)
     
+    WGo = ismissing(ishape.WGo) ? 0*inch : ishape.WGo*inch
+
     SShape(
         ishape.shape,
         ishape.weight * plf,
@@ -81,7 +83,7 @@ function SShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
         ishape.PD * inch,
         ishape.T * inch,
         ishape.WGi * inch,
-        ishape.WGo,
+        WGo,
         E,
         F_y,
         C_b

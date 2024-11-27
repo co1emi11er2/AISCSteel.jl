@@ -11,7 +11,7 @@ using CSV, DataFramesMeta, EnumX, StructuralUnits
 
 # Shape exports
 export DoublySymmetricBuiltUpIShape, flange_slenderness_flexure, web_slenderness_flexure
-export classify_section_for_lb_case13, classify_section_for_lb_case15
+export classify_section_for_lb_case10, classify_section_for_lb_case13, classify_section_for_lb_case15
 export WShape
 
 # Flexure exports
