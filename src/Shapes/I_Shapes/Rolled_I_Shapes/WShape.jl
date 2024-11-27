@@ -38,7 +38,6 @@ Base.@kwdef struct WShape <: AbstractRolledIShapes
     WG_0::float_inch
     E::float_ksi = 29000ksi
     F_y::float_ksi = 60ksi
-    C_b::Float64 = 1.0
 end
 
 function WShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
@@ -85,8 +84,7 @@ function WShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
         wshape.WGi * inch,
         WGo,
         E,
-        F_y,
-        C_b
+        F_y
     )
 end
 

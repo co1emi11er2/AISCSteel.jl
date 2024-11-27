@@ -45,7 +45,6 @@ Base.@kwdef struct CShape <: AbstractCShapes
     WG_i::float_inch
     E::float_ksi = 29000ksi
     F_y::float_ksi = 60ksi
-    C_b::Float64 = 1.0
 end
 
 function CShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
@@ -98,8 +97,7 @@ function CShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
         cshape.T * inch,
         WGi * inch,
         E,
-        F_y,
-        C_b
+        F_y
     )
 end
 
@@ -144,7 +142,6 @@ Base.@kwdef struct MCShape <: AbstractCShapes
     WG_i::float_inch
     E::float_ksi = 29000ksi
     F_y::float_ksi = 60ksi
-    C_b::Float64 = 1.0
 end
 
 function MCShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
@@ -197,8 +194,7 @@ function MCShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
         cshape.T * inch,
         WGi * inch,
         E,
-        F_y,
-        C_b
+        F_y
     )
 end
 ##########################################################################################
@@ -214,7 +210,7 @@ function flexure_capacity_f2_variables((;E, F_y, Z_x, S_x, I_y, r_y, C_w, r_ts, 
     return t
 end
 
-function flexure_capacity_f2((;E, F_y, Z_x, S_x, I_y, r_y, C_w, r_ts, J, h_0) where T <: AbstractCShapes
+function flexure_capacity_f2((;E, F_y, Z_x, S_x, I_y, r_y, C_w, r_ts, J, h_0)::T, L_b, C_b=1) where T <: AbstractCShapes
 
     c = h_0/2*sqrt(I_y/C_w)
 
