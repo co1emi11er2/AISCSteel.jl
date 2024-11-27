@@ -40,11 +40,11 @@ Pkg.add("AISCSteel")
 - **Structs**
   - [x] WShape
   - [ ] BuiltUpIShape
-  - [ ] M Shape
-  - [ ] S Shape
-  - [ ] HP Shape
-  - [ ] C Shape
-  - [ ] MC Shape
+  - [x] M Shape
+  - [x] S Shape
+  - [x] HP Shape
+  - [x] C Shape
+  - [x] MC Shape
   - [ ] L Shape
   - [ ] WT Shape
   - [ ] MT Shape

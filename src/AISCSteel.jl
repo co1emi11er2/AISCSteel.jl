@@ -12,7 +12,8 @@ using CSV, DataFramesMeta, EnumX, StructuralUnits
 # Shape exports
 export DoublySymmetricBuiltUpIShape, flange_slenderness_flexure, web_slenderness_flexure
 export classify_section_for_lb_case10, classify_section_for_lb_case13, classify_section_for_lb_case15
-export WShape
+export WShape, SShape, MShape, HPShape
+export CShape, MCShape
 
 # Flexure exports
 export classify_flange_for_flexure, classify_web_for_flexure, classify_section_for_flexure, flexure_capacity
@@ -69,6 +70,9 @@ include("Shapes/I_Shapes/Rolled_I_Shapes/WShape.jl")
 include("Shapes/I_Shapes/Rolled_I_Shapes/SShape.jl")
 include("Shapes/I_Shapes/Rolled_I_Shapes/MShape.jl")
 include("Shapes/I_Shapes/Rolled_I_Shapes/HPShape.jl")
+
+# include cshape members
+include("Shapes/C_Shapes/C_Shapes.jl")
 
 # include Flexure
 include("Flexure/Flexure.jl")
