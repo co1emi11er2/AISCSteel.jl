@@ -35,7 +35,7 @@ Base.@kwdef struct WShape <: AbstractRolledIShapes
     PD::float_inch
     T::float_inch
     WG_i::float_inch
-    WG_0#::Union{float_inch, Missing}
+    WG_0::Union{float_inch, Missing}
     E::float_ksi = 29000ksi
     F_y::float_ksi = 60ksi
     C_b::Float64 = 1.0
@@ -98,7 +98,7 @@ function classify_flange_for_flexure((;b_f, t_f, E, F_y)::T) where T <: Abstract
 
 end
 
-function classify_web_for_flexure((;h, t_w, E, F_y)::WShape)
+function classify_web_for_flexure((;h, t_w, E, F_y)::T) where T <: AbstractRolledIShapes
 
     h = h
     t_w = t_w
@@ -108,7 +108,7 @@ function classify_web_for_flexure((;h, t_w, E, F_y)::WShape)
 
 end
 
-function classify_section_for_flexure(w::WShape)
+function classify_section_for_flexure(w::T) where T <: AbstractRolledIShapes
 
     _, _, _, λ_fclass = classify_flange_for_flexure(w)
     _, _, _, λ_wclass = classify_web_for_flexure(w)
@@ -134,7 +134,7 @@ end
 # Design of members for flexure - Section F2
 ##########################################################################################
 
-function flexure_capacity_f2_variables((;E, F_y, Z_x, S_x, r_y, r_ts, J, h_0)::WShape, L_b, C_b=1)
+function flexure_capacity_f2_variables((;E, F_y, Z_x, S_x, r_y, r_ts, J, h_0)::T, L_b, C_b=1) where T <: AbstractRolledIShapes
 
     c = 1
     
@@ -143,7 +143,7 @@ function flexure_capacity_f2_variables((;E, F_y, Z_x, S_x, r_y, r_ts, J, h_0)::W
     return t
 end
 
-function flexure_capacity_f2((;Z_x, S_x, r_y, h_0, J, r_ts, E, F_y,)::WShape, L_b, C_b=1)
+function flexure_capacity_f2((;Z_x, S_x, r_y, h_0, J, r_ts, E, F_y,)::T, L_b, C_b=1) where T <: AbstractRolledIShapes
 
     c = 1
 
@@ -168,7 +168,7 @@ end
 # Design of members for flexure - Section F3
 ##########################################################################################
 
-function flexure_capacity_f3_variables((;E, F_y, Z_x, S_x, r_y, r_ts, J, h_0, h, t_w)::WShape, L_b, C_b=1)
+function flexure_capacity_f3_variables((;E, F_y, Z_x, S_x, r_y, r_ts, J, h_0, h, t_w)::T, L_b, C_b=1) where T <: AbstractRolledIShapes
 
     c = 1
     
@@ -177,7 +177,7 @@ function flexure_capacity_f3_variables((;E, F_y, Z_x, S_x, r_y, r_ts, J, h_0, h,
     return t
 end
 
-function flexure_capacity_f3((;Z_x, S_x, r_y, h_0, J, r_ts, h, t_w, E, F_y)::WShape, L_b, C_b=1)
+function flexure_capacity_f3((;Z_x, S_x, r_y, h_0, J, r_ts, h, t_w, E, F_y)::T, L_b, C_b=1) where T <: AbstractRolledIShapes
 
     λ_fvariabels = classify_section_for_lb_case10(b, t, E, F_y)
 
@@ -188,7 +188,7 @@ function flexure_capacity_f3((;Z_x, S_x, r_y, h_0, J, r_ts, h, t_w, E, F_y)::WSh
     return M_n
 end
 
-function flexure_capacity_f3((;Z_x, S_x, r_y, h_0, J, r_ts, h, t_w, E, F_y)::WShape, L_b, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1)
+function flexure_capacity_f3((;Z_x, S_x, r_y, h_0, J, r_ts, h, t_w, E, F_y)::T, L_b, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1) where T <: AbstractRolledIShapes
 
     c = 1
 
@@ -206,7 +206,7 @@ calc_Sxt((;S_x)::WShape) = S_xt = S_x
 calc_Iyc((;b_f, t_f)::WShape) = I_yc = (b_f * t_f^3)/12 
 calc_hc((;h)::WShape) = h_c = h
 
-function flexure_capacity_f4_variables((;E, F_y, Z_x, S_x, b_f, t_f, h, t_w, J, h_0, I_y)::WShape, L_b, λ_w, λ_pw, λ_rw, C_b=1)
+function flexure_capacity_f4_variables((;E, F_y, Z_x, S_x, b_f, t_f, h, t_w, J, h_0, I_y)::T, L_b, λ_w, λ_pw, λ_rw, C_b=1) where T <: AbstractRolledIShapes
 
     I_yc = (b_f * t_f^3)/12 
     
@@ -216,7 +216,7 @@ function flexure_capacity_f4_variables((;E, F_y, Z_x, S_x, b_f, t_f, h, t_w, J, 
 end
 
 
-function flexure_capacity_f4((;E, F_y, Z_x, S_x, b_f, t_f, h, t_w, J, h_0, I_y)::WShape, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1)
+function flexure_capacity_f4((;E, F_y, Z_x, S_x, b_f, t_f, h, t_w, J, h_0, I_y)::T, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1) where T <: AbstractRolledIShapes
 
     I_yc = (b_f * t_f^3)/12 
     
@@ -228,7 +228,7 @@ end
 ##########################################################################################
 # Design of members for flexure - Section F5
 ##########################################################################################
-function flexure_capacity_f5_variables((;E, F_y, S_x, b_f, t_f, h, t_w)::WShape, L_b, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1)
+function flexure_capacity_f5_variables((;E, F_y, S_x, b_f, t_f, h, t_w)::T, L_b, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1) where T <: AbstractRolledIShapes
     
     t = flexure_capacity_f5_variables(E, F_y, S_x, b_f, t_f, h, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b)
 
@@ -236,7 +236,7 @@ function flexure_capacity_f5_variables((;E, F_y, S_x, b_f, t_f, h, t_w)::WShape,
 end
 
 
-function flexure_capacity_f5((;E, F_y, Z_x, S_x, b_f, t_f, h, t_w, J, h_0, I_y)::WShape, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1)
+function flexure_capacity_f5((;E, F_y, Z_x, S_x, b_f, t_f, h, t_w, J, h_0, I_y)::T, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1) where T <: AbstractRolledIShapes
     
     M_n = flexure_capacity_f5(E, F_y, S_x, S_x, b_f, t_f, h, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b)
 
@@ -247,7 +247,7 @@ end
 # Design of members for flexure
 ##########################################################################################
 
-function flexure_capacity(w::WShape, L_b, C_b=1)
+function flexure_capacity(w::T, L_b, C_b=1) where T <: AbstractRolledIShapes
     
     λ_fvariabels = classify_flange_for_flexure(w)
     λ_wvariabels = classify_web_for_flexure(w)

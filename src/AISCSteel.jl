@@ -63,9 +63,12 @@ include("Classifications.jl")
 include("Shapes/Steel_Shapes.jl")
 
 # include ishape members
-include("Shapes/I_Shapes.jl")
-include("Shapes/BuiltUpIShapes.jl")
-include("Shapes/WShape.jl")
+include("Shapes/I_Shapes/I_Shapes.jl")
+include("Shapes/I_Shapes/Builtup_I_Shapes/BuiltUpIShapes.jl")
+include("Shapes/I_Shapes/Rolled_I_Shapes/WShape.jl")
+include("Shapes/I_Shapes/Rolled_I_Shapes/SShape.jl")
+include("Shapes/I_Shapes/Rolled_I_Shapes/MShape.jl")
+include("Shapes/I_Shapes/Rolled_I_Shapes/HPShape.jl")
 
 # include Flexure
 include("Flexure/Flexure.jl")
