@@ -102,40 +102,50 @@ function _calc_ishape_Zx(t_fbot, h, t_w, a_ftop, a_fbot, y_ftop, y_fbot, y_p)
     Z_x = Z_xftop + Z_xfbot + Z_xw1 + Z_xw2
 end
 
-function _calc_ishape_xbar((; h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)::T) where {T<:AbstractBuiltUpIShapes}
-    nothing
+function _calc_ishape_xbar(b_ftop, b_fbot)
+    x_bar = max(b_ftop, b_fbot) / 2
 end
 
-function _calc_Iy((; h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)::T) where {T<:AbstractBuiltUpIShapes}
-    nothing
+function _calc_ishape_Iy((; h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)::T) where {T<:AbstractBuiltUpIShapes}
+    I_yftop = t_ftop * b_ftop^3 / 12
+    I_yfbot = t_fbot * b_fbot^3 / 12
+    I_yw = h * t_w^3 / 12
+
+    I_y = I_yftop + I_yfbot + I_yw
+
 end
 
-function _calc_Sy((; h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)::T) where {T<:AbstractBuiltUpIShapes}
-    nothing
+function _calc_ishape_Sy(I_y, x_bar)
+    S_y = I_y / x_bar
 end
 
-function _calc_Zy((; h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)::T) where {T<:AbstractBuiltUpIShapes}
-    nothing
+function _calc_ishape_Zy(h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)
+    Z_yfbot = (t_fbot * b_fbot^2) / 6
+    Z_yftop = (t_ftop * b_ftop^2) / 6
+    Z_yw = (h * t_w^2) / 6
+
+    Z_x = Z_yftop + Z_yfbot + Z_yw
 end
 
-function _calc_ry((; h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)::T) where {T<:AbstractBuiltUpIShapes}
-    nothing
+function _calc_ry(I_y, a)
+    r_y = sqrt(I_y / a)
 end
 
-function _calc_J((; h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)::T) where {T<:AbstractBuiltUpIShapes}
-    nothing
+function _calc_J(h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)
+    J = ((b_ftop * t_ftop^3) + (b_fbot * t_fbot^3) + (h * t_w^3)) / 3
 end
 
-function _calc_Cw((; h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)::T) where {T<:AbstractBuiltUpIShapes}
-    nothing
+function _calc_Cw(I_y, h_0, S_x)
+    C_w = (I_y * h_0) / (2 * S_x)
 end
 
-function _calc_rts((; h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)::T) where {T<:AbstractBuiltUpIShapes}
-    nothing
+function _calc_rts(I_y, C_w, S_x)
+    rts_squared = sqrt(I_y * C_w) / S_x
+    r_ts = sqrt(rts_squared)
 end
 
-function _calc_h_0((; h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)::T) where {T<:AbstractBuiltUpIShapes}
-    nothing
+function _calc_h_0(t_ftop, h, t_fbot)
+    h_0 = t_ftop + h + t_fbot
 end
 ##########################################################################################
 # BuiltUpIShape classification
