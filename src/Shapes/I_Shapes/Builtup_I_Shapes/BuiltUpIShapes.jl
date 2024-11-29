@@ -127,24 +127,24 @@ function _calc_ishape_Zy(h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)
     Z_x = Z_yftop + Z_yfbot + Z_yw
 end
 
-function _calc_ry(I_y, a)
+function _calc_ishape_ry(I_y, a)
     r_y = sqrt(I_y / a)
 end
 
-function _calc_J(h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)
+function _calc_ishape_J(h, t_w, b_ftop, t_ftop, b_fbot, t_fbot)
     J = ((b_ftop * t_ftop^3) + (b_fbot * t_fbot^3) + (h * t_w^3)) / 3
 end
 
-function _calc_Cw(I_y, h_0, S_x)
+function _calc_ishape_Cw(I_y, h_0, S_x)
     C_w = (I_y * h_0) / (2 * S_x)
 end
 
-function _calc_rts(I_y, C_w, S_x)
+function _calc_ishape_rts(I_y, C_w, S_x)
     rts_squared = sqrt(I_y * C_w) / S_x
     r_ts = sqrt(rts_squared)
 end
 
-function _calc_h_0(t_ftop, h, t_fbot)
+function _calc_ishape_h0(t_ftop, h, t_fbot)
     h_0 = t_ftop + h + t_fbot
 end
 ##########################################################################################
