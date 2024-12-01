@@ -3,6 +3,13 @@
 # Design of members for flexure
 ##########################################################################################
 ##########################################################################################
+module ChapterFFlexure
+
+# Section 1
+include("Section1.jl")
+
+# Section 2
+include("Section2.jl")
 
 # Plastic moment 
 function _calc_Mp(F_y, Z_x) 
@@ -713,4 +720,6 @@ function flexure_capacity_f5(E, F_y, S_xc, S_xt, b_fc, t_fc, h, h_c, t_w, λ_f, 
     M_n = min(M_nCFY, M_nLTB, M_nCFLB, M_nTFY)
 
     return M_n
+end
+
 end

@@ -75,6 +75,10 @@ include("Shapes/I_Shapes/Rolled_I_Shapes/HPShape.jl")
 include("Shapes/C_Shapes/C_Shapes.jl")
 
 # include Flexure
-include("Flexure/Flexure.jl")
+include("Chapter F - Flexure/ChapterFFlexure.jl")
+
+function EqF1(M_A, M_B, M_C, M_max)
+    C_b = 12.5*M_max/(2.5*M_max + 3*M_A + 4*M_B + 3*M_C)
+end
 
 end
