@@ -5,14 +5,20 @@
 ##########################################################################################
 module ChapterFFlexure
 
-# Section 1
-include("Section1.jl")
+# Section F1
+include("F1/F1.jl")
 
-# Section 2
-include("Section2.jl")
+# Section F2
+include("F2/F2.jl")
 
-# Section 3
-include("Section3.jl")
+# Section F3
+include("F3/F3.jl")
+
+# Section F4
+include("F4/F4.jl")
+
+# Section F5
+include("F5/F5.jl")
 
 # Plastic moment 
 function _calc_Mp(F_y, Z_x) 

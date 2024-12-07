@@ -1,4 +1,4 @@
-module Section2
+module Equations
 
 export EqF2▬1, EqF2▬2, EqF2▬3, EqF2▬4, EqF2▬5, EqF2▬6, EqF2▬7, EqF2▬8a, EqF2▬8b
 
@@ -38,4 +38,4 @@ function EqF2▬8b(h_0, I_y, C_w)
     c = (h_0/2)*sqrt(I_y/C_w)
 end
 
-end
+end # module

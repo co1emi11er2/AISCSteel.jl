@@ -1,4 +1,4 @@
-module Section1
+module Equations
 
 export EqF1▬1
 
