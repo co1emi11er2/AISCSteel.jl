@@ -11,6 +11,9 @@ include("Section1.jl")
 # Section 2
 include("Section2.jl")
 
+# Section 3
+include("Section3.jl")
+
 # Plastic moment 
 function _calc_Mp(F_y, Z_x) 
     M_p = F_y * Z_x |> kip*ft
