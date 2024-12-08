@@ -2,7 +2,7 @@
 # SShape struct and initialization methods
 ##########################################################################################
 
-Base.@kwdef struct SShape <: AbstractRolledIShapes
+Base.@kwdef struct MShape <: AISCSteel.Shapes.IShape.AbstractRolledIShapes
     shape::String
     weight::float_plf
     area::float_inch2
@@ -40,16 +40,17 @@ Base.@kwdef struct SShape <: AbstractRolledIShapes
     F_y::float_ksi = 60ksi
 end
 
-function SShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
-    csv_file_name = "S_shapes.csv"
+function MShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
+    csv_file_name = "M_shapes.csv"
     csv_file_path = joinpath("shape files", csv_file_name)
     lookup_col_name = :shape
     lookup_value = uppercase(shape)
-    ishape = import_data(lookup_value, lookup_col_name, csv_file_path)
+    ishape = AISCSteel.Utils.import_data(lookup_value, lookup_col_name, csv_file_path)
     
     WGo = ismissing(ishape.WGo) ? 0*inch : ishape.WGo*inch
 
-    SShape(
+
+    MShape(
         ishape.shape,
         ishape.weight * plf,
         ishape.area * inch^2,

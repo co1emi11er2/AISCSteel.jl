@@ -2,6 +2,9 @@
 # I-Shapes
 # NOTE: This is not usable
 ##########################################################################################
+module IShapes
+
+import AISCSteel: AbstractSteelShapes
 
 abstract type AbstractIShapes <: AbstractSteelShapes end 
 
@@ -9,6 +12,8 @@ abstract type AbstractRolledIShapes <: AbstractIShapes end
 
 abstract type AbstractBuiltUpIShapes <: AbstractIShapes end 
 
+include("RolledIShapes/RolledIShapes.jl")
+end # module
 # struct DoublySymmetricBuiltUpIShape{T, S, F, W} <: AbstractBuiltUpIShapes
 #     dw::T
 #     tw::T

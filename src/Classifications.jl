@@ -3,17 +3,18 @@
 # Classifications of Sections for Local Buckling - AISC Section B4
 ##########################################################################################
 ##########################################################################################
+module Classifications
 
-@enumx CommpressionBucklingType begin
-    Nonslender
-    Slender
-end
+# @enumx CommpressionBucklingType begin
+#     Nonslender
+#     Slender
+# end
 
-@enumx FlexuralBucklingType begin
-    Compact
-    Noncompact
-    Slender
-end
+# @enumx FlexuralBucklingType begin
+#     Compact
+#     Noncompact
+#     Slender
+# end
 
 """
     classify_section_for_lb_case1(b, t, E, F_y)
@@ -190,3 +191,5 @@ function classify_section_for_lb_case15(h, t_w, E, F_y)
     
     return λ, λ_p, λ_r, class
 end
+
+end # module

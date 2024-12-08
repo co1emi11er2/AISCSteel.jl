@@ -9,19 +9,19 @@ using CSV, DataFramesMeta, EnumX, StructuralUnits
 # Exports
 ##########################################################################################
 
-# Shape exports
-export DoublySymmetricBuiltUpIShape, flange_slenderness_flexure, web_slenderness_flexure
-export classify_section_for_lb_case10, classify_section_for_lb_case13, classify_section_for_lb_case15
-export WShape, SShape, MShape, HPShape
-export CShape, MCShape
+# # Shape exports
+# export DoublySymmetricBuiltUpIShape, flange_slenderness_flexure, web_slenderness_flexure
+# export classify_section_for_lb_case10, classify_section_for_lb_case13, classify_section_for_lb_case15
+# export WShape, SShape, MShape, HPShape
+# export CShape, MCShape
 
-# Flexure exports
-export classify_flange_for_flexure, classify_web_for_flexure, classify_section_for_flexure, flexure_capacity
+# # Flexure exports
+# export classify_flange_for_flexure, classify_web_for_flexure, classify_section_for_flexure, flexure_capacity
 
-export flexure_capacity_f2_variables, flexure_capacity_f2_1, flexure_capacity_f2_2, flexure_capacity_f2, _calc_Mp
-export flexure_capacity_f3_variables, flexure_capacity_f3_1, flexure_capacity_f3_2, flexure_capacity_f3, _calc_Fcr
-export flexure_capacity_f4_variables, flexure_capacity_f4, flexure_capacity_f4_1, flexure_capacity_f4_2, flexure_capacity_f4_3, flexure_capacity_f4_4, _calc_aw, _calc_rt, _calc_FL, _calc_Rpc, _calc_Rpt
-export flexure_capacity_f5_variables, flexure_capacity_f5, flexure_capacity_f5_1, flexure_capacity_f5_2, flexure_capacity_f5_3, flexure_capacity_f5_4
+# export flexure_capacity_f2_variables, flexure_capacity_f2_1, flexure_capacity_f2_2, flexure_capacity_f2, _calc_Mp
+# export flexure_capacity_f3_variables, flexure_capacity_f3_1, flexure_capacity_f3_2, flexure_capacity_f3, _calc_Fcr
+# export flexure_capacity_f4_variables, flexure_capacity_f4, flexure_capacity_f4_1, flexure_capacity_f4_2, flexure_capacity_f4_3, flexure_capacity_f4_4, _calc_aw, _calc_rt, _calc_FL, _calc_Rpc, _calc_Rpt
+# export flexure_capacity_f5_variables, flexure_capacity_f5, flexure_capacity_f5_1, flexure_capacity_f5_2, flexure_capacity_f5_3, flexure_capacity_f5_4
 
 
 ##########################################################################################
@@ -59,26 +59,18 @@ const float_inch6 = typeof(1.0inch^6)
 include("Utils.jl")
 include("Classifications.jl")
 
+# include Flexure
+include("Chapter F - Flexure/ChapterFFlexure.jl")
+
 
 # include steel shapes
 include("Shapes/Steel_Shapes.jl")
 
-# include ishape members
-include("Shapes/I_Shapes/I_Shapes.jl")
-include("Shapes/I_Shapes/Builtup_I_Shapes/BuiltUpIShapes.jl")
-include("Shapes/I_Shapes/Rolled_I_Shapes/WShape.jl")
-include("Shapes/I_Shapes/Rolled_I_Shapes/SShape.jl")
-include("Shapes/I_Shapes/Rolled_I_Shapes/MShape.jl")
-include("Shapes/I_Shapes/Rolled_I_Shapes/HPShape.jl")
+# include Shapes
+include("Shapes/Shapes.jl")
 
-# include cshape members
-include("Shapes/C_Shapes/C_Shapes.jl")
+# # include cshape members
+# include("Shapes/C_Shapes/C_Shapes.jl")
 
-# include Flexure
-include("Chapter F - Flexure/ChapterFFlexure.jl")
-
-function EqF1(M_A, M_B, M_C, M_max)
-    C_b = 12.5*M_max/(2.5*M_max + 3*M_A + 4*M_B + 3*M_C)
-end
 
 end

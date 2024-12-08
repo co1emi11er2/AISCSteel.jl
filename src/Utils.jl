@@ -1,3 +1,6 @@
+module Utils
+using CSV, DataFramesMeta
+import AISCSteel
 """
     import_data(lookup_value, lookup_col_name::Symbol, data_location::String)
 
@@ -10,8 +13,10 @@ the value in the column specified is equal to the lookup value.
 - `csv_file_path`::String - The name of csv file in the data directory
 """
 function import_data(lookup_value, lookup_col_name::Symbol, csv_file_path::String)
-    df = CSV.read(datadir(csv_file_path), DataFrame)
+    df = CSV.read(AISCSteel.datadir(csv_file_path), DataFrame)
 
     @subset!(df, $lookup_col_name .== lookup_value)
     return first(df)
 end
+
+end # module
