@@ -2,42 +2,42 @@
 # SShape struct and initialization methods
 ##########################################################################################
 
-Base.@kwdef struct HPShape <: AISCSteel.Shapes.IShape.AbstractRolledIShapes
+Base.@kwdef struct HPShape <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
     shape::String
-    weight::float_plf
-    area::float_inch2
-    d::float_inch
-    b_f::float_inch
-    t_w::float_inch
-    t_f::float_inch
-    k::float_inch
-    k_1::float_inch
-    h::float_inch
-    I_x::float_inch4
-    Z_x::float_inch3
-    S_x::float_inch3
-    r_x::float_inch
-    I_y::float_inch4
-    Z_y::float_inch3
-    S_y::float_inch3
-    r_y::float_inch
-    J::float_inch4
-    C_w::float_inch6
-    W_no::float_inch2
-    S_w1::float_inch4
-    Q_f::float_inch3
-    Q_w::float_inch3
-    r_ts::float_inch
-    h_0::float_inch
-    PA::float_inch
-    PB::float_inch
-    PC::float_inch
-    PD::float_inch
-    T::float_inch
-    WG_i::float_inch
-    WG_0::float_inch
-    E::float_ksi = 29000ksi
-    F_y::float_ksi = 60ksi
+    weight::AISCSteel.Units.float_plf
+    area::AISCSteel.Units.float_inch2
+    d::AISCSteel.Units.float_inch
+    b_f::AISCSteel.Units.float_inch
+    t_w::AISCSteel.Units.float_inch
+    t_f::AISCSteel.Units.float_inch
+    k::AISCSteel.Units.float_inch
+    k_1::AISCSteel.Units.float_inch
+    h::AISCSteel.Units.float_inch
+    I_x::AISCSteel.Units.float_inch4
+    Z_x::AISCSteel.Units.float_inch3
+    S_x::AISCSteel.Units.float_inch3
+    r_x::AISCSteel.Units.float_inch
+    I_y::AISCSteel.Units.float_inch4
+    Z_y::AISCSteel.Units.float_inch3
+    S_y::AISCSteel.Units.float_inch3
+    r_y::AISCSteel.Units.float_inch
+    J::AISCSteel.Units.float_inch4
+    C_w::AISCSteel.Units.float_inch6
+    W_no::AISCSteel.Units.float_inch2
+    S_w1::AISCSteel.Units.float_inch4
+    Q_f::AISCSteel.Units.float_inch3
+    Q_w::AISCSteel.Units.float_inch3
+    r_ts::AISCSteel.Units.float_inch
+    h_0::AISCSteel.Units.float_inch
+    PA::AISCSteel.Units.float_inch
+    PB::AISCSteel.Units.float_inch
+    PC::AISCSteel.Units.float_inch
+    PD::AISCSteel.Units.float_inch
+    T::AISCSteel.Units.float_inch
+    WG_i::AISCSteel.Units.float_inch
+    WG_0::AISCSteel.Units.float_inch
+    E::AISCSteel.Units.float_ksi = 29000ksi
+    F_y::AISCSteel.Units.float_ksi = 60ksi
 end
 
 function HPShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
@@ -46,8 +46,8 @@ function HPShape(shape; E=29000ksi, F_y=60ksi, C_b=1)
     lookup_col_name = :shape
     lookup_value = uppercase(shape)
     ishape = AISCSteel.Utils.import_data(lookup_value, lookup_col_name, csv_file_path)
-    
-    WGo = ismissing(ishape.WGo) ? 0*inch : ishape.WGo*inch
+
+    WGo = ismissing(ishape.WGo) ? 0 * inch : ishape.WGo * inch
 
 
     HPShape(

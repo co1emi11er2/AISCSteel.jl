@@ -2,44 +2,50 @@
 # BuiltUpIShape struct and initialization methods
 # NOTE: This is not usable currently
 ##########################################################################################
+module BuiltUpIShapes
+
+using StructuralUnits
+using EnumX
+import AISCSteel.Shapes.IShapes: AbstractBuiltUpIShapes
+import AISCSteel
 
 Base.@kwdef struct BuiltUpIShape <: AbstractBuiltUpIShapes
-    h::float_inch
-    t_w::float_inch
-    b_ftop::float_inch
-    t_ftop::float_inch
-    b_fbot::float_inch
-    t_fbot::float_inch
-    d::float_inch
-    I_x::float_inch4
-    Z_x::float_inch3
-    S_x::float_inch3
-    r_x::float_inch
-    I_y::float_inch4
-    Z_y::float_inch3
-    S_y::float_inch3
-    r_y::float_inch
-    J::float_inch4
-    C_w::float_inch6
-    r_ts::float_inch
-    h_0::float_inch
-    area::float_inch2
-    weight::float_plf
-    E::float_ksi = 29000ksi
-    F_y::float_ksi = 60ksi
+    h::AISCSteel.Units.float_inch
+    t_w::AISCSteel.Units.float_inch
+    b_ftop::AISCSteel.Units.float_inch
+    t_ftop::AISCSteel.Units.float_inch
+    b_fbot::AISCSteel.Units.float_inch
+    t_fbot::AISCSteel.Units.float_inch
+    d::AISCSteel.Units.float_inch
+    I_x::AISCSteel.Units.float_inch4
+    Z_x::AISCSteel.Units.float_inch3
+    S_x::AISCSteel.Units.float_inch3
+    r_x::AISCSteel.Units.float_inch
+    I_y::AISCSteel.Units.float_inch4
+    Z_y::AISCSteel.Units.float_inch3
+    S_y::AISCSteel.Units.float_inch3
+    r_y::AISCSteel.Units.float_inch
+    J::AISCSteel.Units.float_inch4
+    C_w::AISCSteel.Units.float_inch6
+    r_ts::AISCSteel.Units.float_inch
+    h_0::AISCSteel.Units.float_inch
+    area::AISCSteel.Units.float_inch2
+    weight::AISCSteel.Units.float_plf
+    E::AISCSteel.Units.float_ksi = 29000ksi
+    F_y::AISCSteel.Units.float_ksi = 60ksi
 
 end
 
 # struct to help with
 Base.@kwdef struct InitBuiltUpIShape <: AbstractBuiltUpIShapes
-    h::float_inch
-    t_w::float_inch
-    b_ftop::float_inch
-    t_ftop::float_inch
-    b_fbot::float_inch
-    t_fbot::float_inch
-    E::float_ksi
-    F_y::float_ksi
+    h::AISCSteel.Units.float_inch
+    t_w::AISCSteel.Units.float_inch
+    b_ftop::AISCSteel.Units.float_inch
+    t_ftop::AISCSteel.Units.float_inch
+    b_fbot::AISCSteel.Units.float_inch
+    t_fbot::AISCSteel.Units.float_inch
+    E::AISCSteel.Units.float_ksi
+    F_y::AISCSteel.Units.float_ksi
 end
 
 function section_properties()
@@ -157,8 +163,6 @@ end
     SinglySymmetric
 end
 
-
-
 function _classify_flange_flexure_doublysymmetric((; dw, tw, bf, tf, E, F_y)::BuiltUpIShape)
     λ_p = 0.38 * sqrt(E / F_y)
     k_c = min(max(4 / (sqrt(dw / tw)), 0.35), 0.76)
@@ -188,3 +192,5 @@ function _classify_flange_flexure_singlysymmetric((; dw, tw, bf, tf, E, F_y)::Bu
         :slender
     end
 end
+
+end # module
