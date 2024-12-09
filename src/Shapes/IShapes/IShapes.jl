@@ -2,13 +2,23 @@
 # I-Shapes
 # NOTE: This is not usable
 ##########################################################################################
+module IShapes
 
-abstract type AbstractIShapes <: AbstractSteelShapes end 
+import AISCSteel.Shapes: AbstractSteelShapes
 
-abstract type AbstractRolledIShapes <: AbstractIShapes end 
+abstract type AbstractIShapes <: AbstractSteelShapes end
 
-abstract type AbstractBuiltUpIShapes <: AbstractIShapes end 
+abstract type AbstractRolledIShapes <: AbstractIShapes end
 
+abstract type AbstractBuiltUpIShapes <: AbstractIShapes end
+
+# Rolled I-Shapes
+include("RolledIShapes/RolledIShapes.jl")
+
+# Built-Up I-Shapes
+include("Builtup_I_Shapes/BuiltUpIShapes.jl")
+
+end # module
 # struct DoublySymmetricBuiltUpIShape{T, S, F, W} <: AbstractBuiltUpIShapes
 #     dw::T
 #     tw::T

@@ -7,4 +7,8 @@ end
     include("Flexure/Flexure.jl")
 end
 
+@testitem "Flexure" begin
+    
+end
+
 @run_package_tests verbose=true
