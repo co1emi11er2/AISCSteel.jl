@@ -6,7 +6,7 @@ function calc_variables((;E, F_y, Z_x, S_x, r_y, r_ts, J, h_0)::T, L_b, C_b=1) w
 
     c = 1
     
-    t = calc_variables(E, F_y, Z_x, S_x, r_y, r_ts, J, c, h_0, L_b, C_b)
+    t = calc_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b)
 
     return t
 end

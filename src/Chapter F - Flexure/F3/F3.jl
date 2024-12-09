@@ -77,7 +77,7 @@ function calc_MnCFLB(M_p, E, F_y, S_x, k_c, λ_f, λ_pf, λ_rf, λ_fclass)
     M_nCFLB =  if λ_fclass == :noncompact
                     M_p - (M_p - 0.7*F_y*S_x)*((λ_f - λ_pf)/(λ_rf - λ_pf))
                 elseif λ_fclass == :slender
-                    (0.9*E*k_c*S_x)/(λ_f^2)
+                    (0.9*E*k_c*S_x)/(λ_f^2) 
                 else
                     M_p
                 end
