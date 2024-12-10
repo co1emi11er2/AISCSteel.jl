@@ -2,4 +2,4 @@
 
 This chapter applies to members subject to axial tension.
 
-*not implemented*
+This section is *not implemented*.
