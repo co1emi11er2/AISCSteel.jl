@@ -1,7 +1,7 @@
 using AISCSteel
 using Documenter
 
-DocMeta.setdocmeta!(AISCSteel, :DocTestSetup, :(using AISCSteel); recursive=true)
+DocMeta.setdocmeta!(AISCSteel, :DocTestSetup, :(using AISCSteel); recursive=false)
 
 makedocs(;
     modules=[AISCSteel],
@@ -14,6 +14,12 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
+        "Chapter D - Tension" => "ChapterDTension.md",
+        "Chapter E - Compression" => "ChapterECompression.md",
+        "Chapter F - Flexure" => "ChapterFFlexure.md",
+        "Chapter G - Shear" => "ChapterGShear.md",
+        "Classifications" => "Classifications.md",
+        "Utils" => "Utils.md",
     ],
 )
 
