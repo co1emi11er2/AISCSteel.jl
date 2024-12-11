@@ -12,5 +12,6 @@ StructuralUnits = "ec81c399-378c-4a82-baa1-80fb2fc85b6c"
 [compat]
 julia = "1.10"
 CSV = "0.10.15"
+DataFramesMeta = "0.15"
 EnumX = "1.0.4"
 StructuralUnits = "0.2.0"
