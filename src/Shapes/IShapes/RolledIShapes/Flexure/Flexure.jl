@@ -12,6 +12,21 @@ include("F4.jl")
 # Extend F5 functions
 include("F5.jl")
 
+"""
+    classify_flange(shape::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+
+This function classifies flange for flexure for the shape.
+
+# Arguments
+- `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
+
+# Returns
+    (λ_f, λ_pf, λ_rf, λ_fclass)
+- `λ_f`: slenderness ratio of the flange
+- `λ_pf`: compact slenderness ratio limit of the flange
+- `λ_rf`: noncompact slenderness ratio limit of the flange
+- `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
+"""
 function classify_flange((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
     b = b_f/2
@@ -22,6 +37,21 @@ function classify_flange((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.ISh
 
 end
 
+"""
+    classify_web(shape::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+
+This function classifies web for flexure for the shape.
+
+# Arguments
+- `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
+
+# Returns
+    (λ_w, λ_pw, λ_rw, λ_wclass)
+- `λ_w`: slenderness ratio of the web
+- `λ_pw`: compact slenderness ratio limit of the web
+- `λ_rw`: noncompact slenderness ratio limit of the web
+- `λ_wclass`: `compact` `noncompact` or `slender` classification for the web
+"""
 function classify_web((;h, t_w, E, F_y)::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
     h = h
@@ -32,6 +62,17 @@ function classify_web((;h, t_w, E, F_y)::T) where T <: AISCSteel.Shapes.IShapes.
 
 end
 
+"""
+    classify_section(w::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+
+This function classifies section for flexure for the shape.
+
+# Arguments
+- `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
+
+# Returns
+- `section_class`: `F2`, `F3`, `F4`, or `F5`
+"""
 function classify_section(w::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
     _, _, _, λ_fclass = classify_flange(w)
@@ -54,6 +95,22 @@ function classify_section(w::T) where T <: AISCSteel.Shapes.IShapes.AbstractRoll
 
 end
 
+"""
+    calc_Mn(shape::T, L_b, C_b=1) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+
+This function calculates Mn of the shape.
+
+# Arguments
+- `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
+- `L_b`: unbraced length (inch)
+- `C_b`: lateral torsional buckling modification factor (default = 1)
+
+# Returns
+- `M_n`: nominal moment of the section (kip-ft)
+
+# Reference
+- AISC Section F2-F5
+"""
 function calc_Mn(w::T, L_b, C_b=1) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
     
     λ_fvariabels = classify_flange(w)
