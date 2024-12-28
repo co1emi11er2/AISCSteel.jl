@@ -32,6 +32,7 @@ include("Units.jl")
 # include utilities
 include("Utils.jl")
 include("Classifications.jl")
+include("Conversions.jl")
 
 # include Flexure
 include("Chapter F - Flexure/ChapterFFlexure.jl")

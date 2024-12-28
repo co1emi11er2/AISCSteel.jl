@@ -1,10 +1,11 @@
 module Equations
 using StructuralUnits
+import AISCSteel.Conversions as cnv
 
 export EqD3▬1
 
 function EqD3▬1(A_n, U)
-    A_e = A_n * U
+    A_e = A_n * U |> cnv.to_L²
 end
 
 module TblD3⬝1
