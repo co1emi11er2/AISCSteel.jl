@@ -16,7 +16,16 @@ using Plots
 # ╔═╡ 9079136f-ecd9-4d44-ae24-755e35e984a0
 @fromparent import *
 
+# ╔═╡ 15bcdb8a-8d7b-4500-b6af-e3bc28be0bdd
+
+
 # ╔═╡ ab974e09-d2fd-499d-a6cf-7331f17324c5
+w = AISCSteel.Shapes.IShapes.RolledIShapes.WShape("w10x12", F_y=500ksi)
+
+# ╔═╡ 7352d53f-bd9b-45fa-945f-ea82206edcc3
+AISCSteel.Shapes.IShapes.RolledIShapes.Flexure.calc_Mn(w, 2ft) |> kip*ft
+
+# ╔═╡ ca374218-5a44-441c-9479-cb6ff6e47fde
 
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1197,6 +1206,9 @@ version = "1.4.1+2"
 # ╠═0864532b-a840-4d7d-b8bd-88511d082ace
 # ╠═c53b03aa-1e19-469f-bb8c-59eb0137c75d
 # ╠═9079136f-ecd9-4d44-ae24-755e35e984a0
+# ╠═15bcdb8a-8d7b-4500-b6af-e3bc28be0bdd
 # ╠═ab974e09-d2fd-499d-a6cf-7331f17324c5
+# ╠═7352d53f-bd9b-45fa-945f-ea82206edcc3
+# ╠═ca374218-5a44-441c-9479-cb6ff6e47fde
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
