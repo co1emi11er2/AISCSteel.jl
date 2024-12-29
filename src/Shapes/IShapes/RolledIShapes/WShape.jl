@@ -7,6 +7,7 @@ WShape in the AISC steel database.
 # Fields
 
 - `shape`: name of the WShape
+- `weight`: weight of section (plf)
 - `area`: area of wshape (inch2)
 - `d`: depth of wshape (inch)
 - `b_f`: width of flange (inch)
