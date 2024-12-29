@@ -57,9 +57,9 @@ Base.@kwdef struct MCShape <: AbstractCShapes
     t_f::AISCSteel.Units.float_inch
     k::AISCSteel.Units.float_inch
     h::AISCSteel.Units.float_inch
-    x::AISCSteel.Units.float_inch4
-    e_0::AISCSteel.Units.float_inch4
-    x_p::AISCSteel.Units.float_inch4
+    x::AISCSteel.Units.float_inch
+    e_0::AISCSteel.Units.float_inch
+    x_p::AISCSteel.Units.float_inch
     I_x::AISCSteel.Units.float_inch4
     Z_x::AISCSteel.Units.float_inch3
     S_x::AISCSteel.Units.float_inch3
@@ -102,7 +102,7 @@ function MCShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
     lookup_value = uppercase(shape)
     cshape = AISCSteel.Utils.import_data(lookup_value, lookup_col_name, csv_file_path)
 
-    WGi = ismissing(cshape.WGi) ? 0 * inch : cshape.WGi * inch
+    WGi = ismissing(cshape.WGi) ? 0 * inch : parse(Float64, cshape.WGi) * inch
 
     MCShape(
         cshape.shape,
@@ -113,7 +113,6 @@ function MCShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
         cshape.tw * inch,
         cshape.tf * inch,
         cshape.k * inch,
-        cshape.k1 * inch,
         cshape.h * inch,
         cshape.x * inch,
         cshape.eo * inch,
@@ -134,7 +133,7 @@ function MCShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
         cshape.Sw3 * inch^6,
         cshape.Qf * inch^3,
         cshape.Qw * inch^3,
-        cshape.r_0 * inch,
+        cshape.ro * inch,
         cshape.H,
         cshape.rts * inch,
         cshape.ho * inch,
@@ -143,7 +142,7 @@ function MCShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
         cshape.PC * inch,
         cshape.PD * inch,
         cshape.T * inch,
-        WGi * inch,
+        WGi,
         E,
         F_y
     )
