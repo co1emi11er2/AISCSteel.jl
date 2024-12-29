@@ -3,12 +3,14 @@ using TestItems, TestItemRunner
 if isdefined(@__MODULE__,:LanguageServer)
     include("../src/AISCSteel.jl")
 end
-@testitem "Flexure - F2" begin
-    include("Flexure/Flexure.jl")
+
+@testitem "Flexure - IShapes" begin
+    include("Flexure/IShapes.jl")
 end
 
-@testitem "Flexure" begin
-    
+@testitem "Flexure - CShapes" begin
+    include("Flexure/CShapes.jl")
 end
+
 
 @run_package_tests verbose=true

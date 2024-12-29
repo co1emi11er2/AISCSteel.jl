@@ -8,15 +8,15 @@ include("Equations.jl")
 # Equations below are the public API for F2
 ##########################################################################################
 calc_Mp(F_y, Z_x) = M_p = Equations.EqF2▬1(F_y, Z_x)
-calc_L_p(E, F_y, r_y) = L_p = Equations.EqF2▬5(E, F_y, r_y)
-calc_L_r(r_ts, E, F_y, J, c, S_x, h_0) = L_r = Equations.EqF2▬6(r_ts, E, F_y, J, c, S_x, h_0)
+calc_Lp(E, F_y, r_y) = L_p = Equations.EqF2▬5(E, F_y, r_y)
+calc_Lr(r_ts, E, F_y, J, c, S_x, h_0) = L_r = Equations.EqF2▬6(r_ts, E, F_y, J, c, S_x, h_0)
 calc_Fcr(C_b, E, L_b, r_ts, J, c, S_x, h_0) = F_cr = Equations.EqF2▬4(C_b, E, L_b, r_ts, J, c, S_x, h_0)
 
 function calc_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b=1)
 
     M_p = calc_Mp(F_y, Z_x)
-    L_p = calc_L_p(E, F_y, r_y)
-    L_r = calc_L_r(r_ts, E, F_y, J, c, S_x, h_0)
+    L_p = calc_Lp(E, F_y, r_y)
+    L_r = calc_Lr(r_ts, E, F_y, J, c, S_x, h_0)
     F_cr = calc_Fcr(C_b, E, L_b, r_ts, J, c, S_x, h_0)
 
     return (;M_p, L_p, L_r, F_cr)
