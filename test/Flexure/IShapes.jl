@@ -1,12 +1,12 @@
 using StructuralUnits
 import AISCSteel.Shapes.IShapes.RolledIShapes: WShape
-import AISCSteel.Shapes.IShapes.RolledIShapes.Flexure: calc_Mn
+import AISCSteel.Shapes.IShapes.RolledIShapes.Flexure: calc_Mnx
 
 function test_w_flexure(;w_name, L_b, F_y=50ksi)
     w = WShape(w_name, F_y=F_y)
     ϕ_b = 0.9
 
-    ϕM_n = calc_Mn(w, L_b) * ϕ_b
+    ϕM_n = calc_Mnx(w, L_b) * ϕ_b
     ϕM_n = round(kip*ft, ϕM_n, sigdigits=3)
 end
 

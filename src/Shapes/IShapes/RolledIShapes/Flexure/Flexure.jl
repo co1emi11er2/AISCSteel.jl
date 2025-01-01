@@ -12,6 +12,9 @@ include("F4.jl")
 # Extend F5 functions
 include("F5.jl")
 
+# Extend F6 functions
+include("F6.jl")
+
 """
     classify_flange(shape::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
@@ -96,9 +99,9 @@ function classify_section(w::T) where T <: AISCSteel.Shapes.IShapes.AbstractRoll
 end
 
 """
-    calc_Mn(shape::T, L_b, C_b=1) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+    calc_Mnx(shape::T, L_b, C_b=1) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
-This function calculates Mn of the shape.
+This function calculates Mnx of the shape.
 
 # Arguments
 - `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
@@ -106,12 +109,12 @@ This function calculates Mn of the shape.
 - `C_b`: lateral torsional buckling modification factor (default = 1)
 
 # Returns
-- `M_n`: nominal moment of the section (kip-ft)
+- `M_nx`: nominal moment of the section (kip-ft)
 
 # Reference
 - AISC Section F2-F5
 """
-function calc_Mn(w::T, L_b, C_b=1) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+function calc_Mnx(w::T, L_b, C_b=1) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
     
     λ_fvariabels = classify_flange(w)
     λ_wvariabels = classify_web(w)
@@ -121,17 +124,40 @@ function calc_Mn(w::T, L_b, C_b=1) where T <: AISCSteel.Shapes.IShapes.AbstractR
 
     if λ_wclass == :compact
         if λ_fclass == :compact
-            M_n = F2.calc_Mn(w, L_b, C_b)
+            M_nx = F2.calc_Mn(w, L_b, C_b)
         else
-            M_n = F3.calc_Mn(w, L_b, λ_fvariabels..., C_b)
+            M_nx = F3.calc_Mn(w, L_b, λ_fvariabels..., C_b)
         end
     elseif λ_wclass == :noncompact
-        M_n = F4.calc_Mn(w, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b)
+        M_nx = F4.calc_Mn(w, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b)
     else
-        M_n = F5.calc_Mn(w, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b)
+        M_nx = F5.calc_Mn(w, L_b, λ_w, λ_pw, λ_rw, λ_f, λ_pf, λ_rf, λ_fclass, C_b)
     end
 
-    return M_n
+    return M_nx
+end
+
+"""
+    calc_Mny(shape::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+
+This function calculates Mny of the shape.
+
+# Arguments
+- `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
+
+# Returns
+- `M_ny`: nominal moment of the section (kip-ft)
+
+# Reference
+- AISC Section F6
+"""
+function calc_Mny(w::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+    
+    λ_fvariabels = classify_flange(w)
+
+    M_ny = F6.calc_Mn(w, λ_fvariabels...)
+
+    return M_ny
 end
 
 end # module

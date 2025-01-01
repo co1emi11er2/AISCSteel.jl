@@ -1,6 +1,6 @@
 using StructuralUnits
 import AISCSteel.Shapes.CShapes: CShape, MCShape
-import AISCSteel.Shapes.CShapes.Flexure: calc_Mn
+import AISCSteel.Shapes.CShapes.Flexure: calc_Mnx
 
 function test_flexure(;c_name, L_b, F_y=50ksi)
     if startswith(c_name, "c")
@@ -10,7 +10,7 @@ function test_flexure(;c_name, L_b, F_y=50ksi)
     end
     ϕ_b = 0.9
 
-    ϕM_n = calc_Mn(c, L_b) * ϕ_b
+    ϕM_n = calc_Mnx(c, L_b) * ϕ_b
     ϕM_n = round(kip*ft, ϕM_n, sigdigits=3)
 end
 

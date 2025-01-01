@@ -8,7 +8,7 @@ import AISCSteel.ChapterFFlexure.F2: calc_variables, calc_Mn
 This function calculates the following miscellaneous variables that are used to calculate Mn of the shape for AISC Section F2. 
 
 # Arguments
-- `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
+- `shape`: rolled C-Shape section (`CShape`, `MCShape`)
 - `L_b`: unbraced length (inch)
 - `C_b`: lateral torsional buckling modification factor (default = 1)
 
@@ -37,7 +37,7 @@ end
 This function calculates Mn of the shape for AISC Section F2.
 
 # Arguments
-- `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
+- `shape`: rolled C-Shape section (`CShape`, `MCShape`)
 - `L_b`: unbraced length (inch)
 - `C_b`: lateral torsional buckling modification factor (default = 1)
 
