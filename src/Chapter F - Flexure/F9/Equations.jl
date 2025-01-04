@@ -20,7 +20,7 @@ function EqF9▬4(M_y)
     M_p = M_y |> cnv.to_moment
 end
 
-function EqF9▬5(t_f, E, F_y, b)
+function EqF9▬5(M_y)
     M_p = 1.5 * M_y |> cnv.to_moment
 end
 

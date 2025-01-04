@@ -16,7 +16,7 @@ include("F5.jl")
 include("F6.jl")
 
 """
-    classify_flange(shape::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+    classify_flange_major_axis(shape::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
 This function classifies flange for flexure for the shape.
 
@@ -30,11 +30,36 @@ This function classifies flange for flexure for the shape.
 - `λ_rf`: noncompact slenderness ratio limit of the flange
 - `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
 """
-function classify_flange((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+function classify_flange_major_axis((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
     b = b_f/2
     t = t_f
     λ_fvariabels = AISCSteel.Classifications.classify_section_for_lb_case10(b, t, E, F_y)
+
+    return λ_fvariabels
+
+end
+
+"""
+    classify_flange_minor_axis(shape::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+
+This function classifies flange for flexure for the shape in minor axis bending.
+
+# Arguments
+- `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
+
+# Returns
+    (λ_f, λ_pf, λ_rf, λ_fclass)
+- `λ_f`: slenderness ratio of the flange
+- `λ_pf`: compact slenderness ratio limit of the flange
+- `λ_rf`: noncompact slenderness ratio limit of the flange
+- `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
+"""
+function classify_flange_minor_axis((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+
+    b = b_f/2
+    t = t_f
+    λ_fvariabels = AISCSteel.Classifications.classify_section_for_lb_case13(b, t, E, F_y)
 
     return λ_fvariabels
 
@@ -78,7 +103,7 @@ This function classifies section for flexure for the shape.
 """
 function classify_section(w::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
-    _, _, _, λ_fclass = classify_flange(w)
+    _, _, _, λ_fclass = classify_flange_major_axis(w)
     _, _, _, λ_wclass = classify_web(w)
 
     if λ_wclass == :compact
@@ -116,7 +141,7 @@ This function calculates Mnx of the shape.
 """
 function calc_Mnx(w::T, L_b, C_b=1) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
     
-    λ_fvariabels = classify_flange(w)
+    λ_fvariabels = classify_flange_major_axis(w)
     λ_wvariabels = classify_web(w)
 
     λ_f, λ_pf, λ_rf, λ_fclass = λ_fvariabels
@@ -153,7 +178,7 @@ This function calculates Mny of the shape.
 """
 function calc_Mny(w::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
     
-    λ_fvariabels = classify_flange(w)
+    λ_fvariabels = classify_flange_minor_axis(w)
 
     M_ny = F6.calc_Mn(w, λ_fvariabels...)
 
