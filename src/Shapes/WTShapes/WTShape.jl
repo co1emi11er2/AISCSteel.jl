@@ -79,7 +79,7 @@ function WTShape(shape; E=29000ksi, F_y=50ksi)
     lookup_col_name = :shape
     lookup_value = uppercase(shape)
     wt_shape = AISCSteel.Utils.import_data(lookup_value, lookup_col_name, csv_file_path)
-    WGo = ismissing(wt_shape.WGo) ? 0 * inch : parse(Float64, wt_shape.WGo) * inch
+    WGo = wt_shape.WGo == "–" ? 0 * inch : parse(Float64, wt_shape.WGo) * inch
 
     WTShape(
         wt_shape.shape,
