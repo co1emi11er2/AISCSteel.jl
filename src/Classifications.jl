@@ -154,6 +154,41 @@ function classify_section_for_lb_case13(b, t, E, F_y)
     return λ, λ_p, λ_r, class
 end
 
+"""
+    classify_section_for_lb_case14(d, t, E, F_y)
+
+Classifies the compressive elements of a member subject to flexure.
+
+Description of applicable member: Webs of doubly-symmetric I-shaped sections and channels.
+
+# Arguments
+- `d`: depth of the WT section
+- `t_w`: thickness of the web.
+- `E`: elastic section modulous.
+- `F_y`: yield strength of steel.
+
+# Returns
+- `FlexureBucklingType` enum whose value is either `Compact`, `Noncompact`, or `Slender`
+
+# Reference
+- AISC Table B4.1b
+"""
+function classify_section_for_lb_case14(d, t_w, E, F_y)
+    λ = d / t_w
+    λ_p = 0.84 * sqrt(E / F_y)
+    λ_r = 1.52 * sqrt(E / F_y)
+
+    class = if λ <= λ_p
+        :compact
+    elseif λ_p < λ <= λ_r
+        :noncompact
+    else
+        :slender
+    end
+
+    return λ, λ_p, λ_r, class
+end
+
 
 """
     classify_section_for_lb_case15(b, t, E, F_y)

@@ -7,4 +7,7 @@ include("IShapes/IShapes.jl")
 
 # include CShapes
 include("CShapes/CShapes.jl")
+
+# include WTShapes
+include("WTShapes/WTShapes.jl")
 end # module

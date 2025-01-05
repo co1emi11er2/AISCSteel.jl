@@ -68,7 +68,7 @@ function EqF9▬15(E, S_xc, b_f, t_f)
 end
 
 function EqF9▬16(F_cr, S_x)
-    M_nLB = F_cr, S_x |> cnv.to_moment
+    M_nLB = F_cr * S_x |> cnv.to_moment
 end
 
 function EqF9▬17(F_y)
