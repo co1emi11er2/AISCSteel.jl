@@ -1,6 +1,5 @@
 module F9
-import AISCSteel
-import AISCSteel.ChapterFFlexure.F9 
+
 
 # include negative bending
 include("NegativeBending.jl")
