@@ -1,5 +1,5 @@
 module Equations
-import AISCSteel.Utils.UnitsConversions as cnv
+import AISCSteel.Utils.UnitConversions as cnv
 export EqF3▬1, EqF3▬2
 
 function EqF3▬1(M_p, F_y, S_x, λ_f, λ_pf, λ_rf)

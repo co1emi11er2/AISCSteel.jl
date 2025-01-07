@@ -1,6 +1,6 @@
 module Equations
 using StructuralUnits
-import AISCSteel.Utils.UnitsConversions as cnv
+import AISCSteel.Utils.UnitConversions as cnv
 
 export EqF2▬1, EqF2▬2, EqF2▬3, EqF2▬4, EqF2▬5, EqF2▬6, EqF2▬7, EqF2▬8a, EqF2▬8b
 
@@ -9,7 +9,7 @@ function EqF2▬1(F_y, Z_x)
 end
 
 function EqF2▬2(M_p, F_y, S_x, L_b, L_p, L_r, C_b=1)
-    M_nLTB = C_b*(M_p - (M_p-0.7*F_y*S_x)*((L_b-L_p)/(L_r-L_p)) |> cnv.to_moment)
+    M_nLTB = C_b*(M_p - (M_p-0.7*F_y*S_x)*((L_b-L_p)/(L_r-L_p))) |> cnv.to_moment
 end
 
 function EqF2▬3(F_cr, S_x)
