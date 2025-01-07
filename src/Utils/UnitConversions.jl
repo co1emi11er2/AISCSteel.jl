@@ -1,8 +1,4 @@
-##########################################################################################
-# Conversion functions for proper units
-##########################################################################################
-
-module Conversions
+module UnitConversions
 using StructuralUnits
 
 # preferred L (distance)
@@ -33,5 +29,4 @@ to_moment(x::Quantity) = x |> kip*ft
 to_stress(x::Real) = x # do nothing if type real
 to_stress(x::Quantity) = x |> ksi
 
-end # module
-    
+end

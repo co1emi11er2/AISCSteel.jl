@@ -1,5 +1,5 @@
 module Equations
-import AISCSteel.Conversions as cnv
+import AISCSteel.Utils.UnitsConversions as cnv
 
 export EqF5▬1, EqF5▬2, EqF5▬3, EqF5▬4, EqF5▬5, EqF5▬6, EqF5▬7, EqF5▬8, EqF5▬9, EqF5▬10
 

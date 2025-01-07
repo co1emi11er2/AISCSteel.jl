@@ -30,8 +30,7 @@ include("Units.jl")
 ##########################################################################################
 
 # include utilities
-include("Utils.jl")
-include("Conversions.jl")
+include("Utils/Utils.jl")
 
 #include Chapter B - Design Requirements
 include("Chapter B - Design Requirements/ChapterBDesignRequirements.jl")

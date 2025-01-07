@@ -66,7 +66,7 @@ function STShape(shape; E=29000ksi, F_y=50ksi)
     csv_file_path = joinpath("shape files", csv_file_name)
     lookup_col_name = :shape
     lookup_value = uppercase(shape)
-    wt_shape = AISCSteel.Utils.import_data(lookup_value, lookup_col_name, csv_file_path)
+    wt_shape = AISCSteel.Utils.DatabaseUtils.import_data(lookup_value, lookup_col_name, csv_file_path)
 
     STShape(
         wt_shape.shape,

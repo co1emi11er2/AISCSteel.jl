@@ -1,6 +1,6 @@
 module Equations
 using StructuralUnits
-import AISCSteel.Conversions as cnv
+import AISCSteel.Utils.UnitsConversions as cnv
 
 export EqF2▬1, EqF2▬2, EqF2▬3, EqF2▬4, EqF2▬5, EqF2▬6, EqF2▬7, EqF2▬8a, EqF2▬8b
 

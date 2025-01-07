@@ -100,7 +100,7 @@ function MCShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
     csv_file_path = joinpath("shape files", csv_file_name)
     lookup_col_name = :shape
     lookup_value = uppercase(shape)
-    cshape = AISCSteel.Utils.import_data(lookup_value, lookup_col_name, csv_file_path)
+    cshape = AISCSteel.Utils.DatabaseUtils.import_data(lookup_value, lookup_col_name, csv_file_path)
 
     WGi = ismissing(cshape.WGi) ? 0 * inch : parse(Float64, cshape.WGi) * inch
 

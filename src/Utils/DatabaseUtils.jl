@@ -1,4 +1,4 @@
-module Utils
+module DatabaseUtils
 using CSV, DataFramesMeta
 import AISCSteel
 """
@@ -19,4 +19,4 @@ function import_data(lookup_value, lookup_col_name::Symbol, csv_file_path::Strin
     return first(df)
 end
 
-end # module
+end
