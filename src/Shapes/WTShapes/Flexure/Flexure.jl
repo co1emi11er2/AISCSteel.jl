@@ -1,5 +1,6 @@
 module Flexure
 import AISCSteel
+import AISCSteel.ChapterBDesignRequirements.B4.TableB4⬝1a as TableB4⬝1a
 
 # Extend F9 functions
 include("F9/F9.jl")
@@ -24,7 +25,7 @@ function classify_flange((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.WTS
 
     b = b_f
     t = t_f
-    λ_fvariabels = AISCSteel.Classifications.classify_section_for_lb_case10(b, t, E, F_y)
+    λ_fvariabels = TableB4⬝1a.case10(b, t, E, F_y)
 
     return λ_fvariabels
 
