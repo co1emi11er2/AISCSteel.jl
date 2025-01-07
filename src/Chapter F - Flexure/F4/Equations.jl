@@ -1,42 +1,43 @@
 module Equations
+import AISCSteel.Utils.UnitsConversions as cnv
 
 export EqF4▬1, EqF4▬2, EqF4▬3, EqF4▬4, EqF4▬5, EqF4▬6a, EqF4▬6b, EqF4▬7, EqF4▬8, EqF4▬9a, EqF4▬9b
 export EqF4▬10, EqF4▬11, EqF4▬12, EqF4▬13, EqF4▬14, EqF4▬15, EqF4▬16a, EqF4▬16b, EqF4▬17
 
 function EqF4▬1(R_pc, M_yc)
-    M_nCFY = R_pc * M_yc
+    M_nCFY = R_pc * M_yc |> cnv.to_moment
 end
 
 function EqF4▬2(C_b, R_pc, M_yc, F_L, S_xc, L_b, L_p, L_r)
-    M_nLTB = C_b * (R_pc * M_yc - (R_pc * M_yc - F_L * S_xc) * ((L_b - L_p) / (L_r - L_p)))
+    M_nLTB = C_b * (R_pc * M_yc - (R_pc * M_yc - F_L * S_xc) * ((L_b - L_p) / (L_r - L_p))) |> cnv.to_moment
 end
 
 function EqF4▬3(F_cr, S_xc)
-    M_nLTB = F_cr * S_xc
+    M_nLTB = F_cr * S_xc |> cnv.to_moment
 end
 
 function EqF4▬4(F_y, S_xc)
-    M_yc = F_y * S_xc
+    M_yc = F_y * S_xc |> cnv.to_moment
 end
 
 function EqF4▬5(C_b, E, L_b, r_t, J, S_xc, h_0)
-    F_cr = ((C_b * π^2 * E) / (L_b / r_t)^2) * sqrt(1 + 0.078 * ((J) / (S_xc * h_0)) * (L_b / r_t)^2)
+    F_cr = ((C_b * π^2 * E) / (L_b / r_t)^2) * sqrt(1 + 0.078 * ((J) / (S_xc * h_0)) * (L_b / r_t)^2) |> cnv.to_stress
 end
 
 function EqF4▬6a(F_y)
-    F_L = 0.7 * F_y
+    F_L = 0.7 * F_y |> cnv.to_stress
 end
 
 function EqF4▬6b(F_y, S_xt, S_xc)
-    F_L = F_y * (S_xt / S_xc)
+    F_L = F_y * (S_xt / S_xc) |> cnv.to_stress
 end
 
 function EqF4▬7(r_t, E, F_y)
-    L_p = 1.1 * r_t * sqrt(E / F_y)
+    L_p = 1.1 * r_t * sqrt(E / F_y) |> cnv.to_large_L
 end
 
 function EqF4▬8(r_t, E, F_L, J, S_xc, h_0)
-    L_p = 1.95 * r_t * (E / (F_L)) * sqrt((J) / (S_xc * h_0) + sqrt(((J) / (S_xc * h_0))^2 + 6.76 * ((F_L) / E)^2))
+    L_p = 1.95 * r_t * (E / (F_L)) * sqrt((J) / (S_xc * h_0) + sqrt(((J) / (S_xc * h_0))^2 + 6.76 * ((F_L) / E)^2)) |> cnv.to_large_L
 end
 
 function EqF4▬9a(M_p, M_yc)
@@ -52,7 +53,7 @@ function EqF4▬10()
 end
 
 function EqF4▬11(b_fc, a_w)
-    r_t = b_fc / sqrt(12 * (1 + (1 / 6) * a_w))
+    r_t = b_fc / sqrt(12 * (1 + (1 / 6) * a_w)) |> cnv.to_L
 end
 
 function EqF4▬12(h_c, t_w, b_fc, t_fc)
@@ -60,15 +61,15 @@ function EqF4▬12(h_c, t_w, b_fc, t_fc)
 end
 
 function EqF4▬13(R_pc, M_yc, F_L, S_xc, λ_f, λ_pf, λ_rf)
-    M_nCFLB = R_pc * M_yc - (R_pc * M_yc - F_L * S_xc) * ((λ_f - λ_pf) / (λ_rf - λ_pf))
+    M_nCFLB = R_pc * M_yc - (R_pc * M_yc - F_L * S_xc) * ((λ_f - λ_pf) / (λ_rf - λ_pf)) |> cnv.to_moment
 end
 
 function EqF4▬14(E, k_c, S_xc, λ_f)
-    M_nCFLB = (0.9 * E * k_c * S_xc) / λ_f^2
+    M_nCFLB = (0.9 * E * k_c * S_xc) / λ_f^2 |> cnv.to_moment
 end
 
 function EqF4▬15(R_pt, M_yt)
-    M_nTFY = R_pt * M_yt
+    M_nTFY = R_pt * M_yt |> cnv.to_moment
 end
 
 function EqF4▬16a(M_p, M_yt)

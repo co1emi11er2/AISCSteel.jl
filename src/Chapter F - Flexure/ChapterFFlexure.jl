@@ -45,4 +45,15 @@ include("F12/F12.jl")
 # Section F13
 include("F13/F13.jl")
 
+# classification functions
+function classify_flange_major_axis end
+function classify_flange_minor_axis end
+function classify_web end
+function classify_section end
+
+# moment functions
+function calc_positive_Mnx end
+function calc_negative_Mnx end
+function calc_Mny end
+
 end

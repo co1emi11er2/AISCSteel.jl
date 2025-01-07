@@ -1,23 +1,7 @@
-##########################################################################################
-##########################################################################################
-# Classifications of Sections for Local Buckling - AISC Section B4
-##########################################################################################
-##########################################################################################
-module Classifications
-
-# @enumx CommpressionBucklingType begin
-#     Nonslender
-#     Slender
-# end
-
-# @enumx FlexuralBucklingType begin
-#     Compact
-#     Noncompact
-#     Slender
-# end
+module TableB4⬝1a
 
 """
-    classify_section_for_lb_case1(b, t, E, F_y)
+    case1(b, t, E, F_y)
 
 Classifies the section of a member subject to axial compression.
 
@@ -35,7 +19,7 @@ Description of applicable member: Flanges of rolled I-shaped sections, plates pr
 # Reference
 - AISC Table B4.1a
 """
-function classify_section_for_lb_case1(b, t, E, F_y)
+function case1(b, t, E, F_y)
     λ = b / t
     λ_r = 0.56 * sqrt(E / F_y)
 
@@ -49,7 +33,7 @@ function classify_section_for_lb_case1(b, t, E, F_y)
 end
 
 """
-    classify_section_for_lb_case10(b, t, E, F_y)
+    case10(b, t, E, F_y)
 
 Classifies the compressive elements of a member subject to flexural.
 
@@ -67,7 +51,7 @@ Description of applicable member: Flanges of rolled I-shaped sections, channels,
 # Reference
 - AISC Table B4.1b
 """
-function classify_section_for_lb_case10(b, t, E, F_y)
+function case10(b, t, E, F_y)
     λ = b / t
     λ_p = 0.38 * sqrt(E / F_y)
     λ_r = 1.0 * sqrt(E / F_y)
@@ -84,7 +68,7 @@ function classify_section_for_lb_case10(b, t, E, F_y)
 end
 
 """
-    classify_section_for_lb_case11(b, t, E, F_L, k_c)
+    case11(b, t, E, F_L, k_c)
 
 Classifies the compressive elements of a member subject to flexural.
 
@@ -103,7 +87,7 @@ Description of applicable member: Flanges of built-up I-shaped sections (singly 
 # Reference
 - AISC Table B4.1b
 """
-function classify_section_for_lb_case11(b, t, E, F_y, F_L, k_c)
+function case11(b, t, E, F_y, F_L, k_c)
     λ = b / t
     λ_p = 0.38 * sqrt(E / F_y)
     λ_r = 0.95 * sqrt(k_c * E / F_L)
@@ -120,7 +104,7 @@ function classify_section_for_lb_case11(b, t, E, F_y, F_L, k_c)
 end
 
 """
-    classify_section_for_lb_case13(b, t, E, F_y)
+    case13(b, t, E, F_y)
 
 Classifies the compressive elements of a member subject to flexural.
 
@@ -138,7 +122,7 @@ Description of applicable member: Flanges of all I-shaped sections and channels 
 # Reference
 - AISC Table B4.1b
 """
-function classify_section_for_lb_case13(b, t, E, F_y)
+function case13(b, t, E, F_y)
     λ = b / t
     λ_p = 0.38 * sqrt(E / F_y)
     λ_r = 1.0 * sqrt(E / F_y)
@@ -154,9 +138,44 @@ function classify_section_for_lb_case13(b, t, E, F_y)
     return λ, λ_p, λ_r, class
 end
 
+"""
+    case14(d, t, E, F_y)
+
+Classifies the compressive elements of a member subject to flexure.
+
+Description of applicable member: Webs of doubly-symmetric I-shaped sections and channels.
+
+# Arguments
+- `d`: depth of the WT section
+- `t_w`: thickness of the web.
+- `E`: elastic section modulous.
+- `F_y`: yield strength of steel.
+
+# Returns
+- `FlexureBucklingType` enum whose value is either `Compact`, `Noncompact`, or `Slender`
+
+# Reference
+- AISC Table B4.1b
+"""
+function case14(d, t_w, E, F_y)
+    λ = d / t_w
+    λ_p = 0.84 * sqrt(E / F_y)
+    λ_r = 1.52 * sqrt(E / F_y)
+
+    class = if λ <= λ_p
+        :compact
+    elseif λ_p < λ <= λ_r
+        :noncompact
+    else
+        :slender
+    end
+
+    return λ, λ_p, λ_r, class
+end
+
 
 """
-    classify_section_for_lb_case15(b, t, E, F_y)
+    case15(b, t, E, F_y)
 
 Classifies the compressive elements of a member subject to flexural.
 
@@ -176,7 +195,7 @@ Description of applicable member: Webs of doubly-symmetric I-shaped sections and
 # Reference
 - AISC Table B4.1b
 """
-function classify_section_for_lb_case15(h, t_w, E, F_y)
+function case15(h, t_w, E, F_y)
     λ = h / t_w
     λ_p = 3.76 * sqrt(E / F_y)
     λ_r = 5.7 * sqrt(E / F_y)
@@ -192,4 +211,5 @@ function classify_section_for_lb_case15(h, t_w, E, F_y)
     return λ, λ_p, λ_r, class
 end
 
-end # module
+
+end

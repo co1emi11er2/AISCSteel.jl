@@ -30,10 +30,12 @@ include("Units.jl")
 ##########################################################################################
 
 # include utilities
-include("Utils.jl")
-include("Classifications.jl")
+include("Utils/Utils.jl")
 
-# include Flexure
+#include Chapter B - Design Requirements
+include("Chapter B - Design Requirements/ChapterBDesignRequirements.jl")
+
+# include Chapter F - Flexure
 include("Chapter F - Flexure/ChapterFFlexure.jl")
 
 # include Shapes
