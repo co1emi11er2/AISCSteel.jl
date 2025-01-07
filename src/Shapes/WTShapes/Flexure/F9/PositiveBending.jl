@@ -47,9 +47,9 @@ This function calculates Mn of the shape for AISC Section F6.
 # Reference
 - AISC Section F9
 """
-function calc_Mn((; r_y, E, F_y, I_y, J, S_x, Z_x, d, b_f, t_f)::T, L_b, λ_f, λ_pf, λ_rf, λ_fclass) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
+function calc_Mn((; r_y, E, F_y, I_y, J, S_x, Z_x, d, b_f, t_f, I_x, ȳ)::T, L_b, λ_f, λ_pf, λ_rf, λ_fclass) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
 
-    S_xc = S_x # TODO: verify
+    S_xc = I_x/ȳ
     M_n = calc_Mn(r_y, E, F_y, I_y, J, S_x, Z_x, d, L_b, S_xc, λ_f, λ_pf, λ_rf, λ_fclass, b_f, t_f)
     
     return M_n

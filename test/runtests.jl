@@ -12,5 +12,8 @@ end
     include("Flexure/CShapes.jl")
 end
 
+@testitem "Flexure - WTShapes" begin
+    include("Flexure/WTShapes.jl")
+end
 
 @run_package_tests verbose=true

@@ -1,7 +1,7 @@
 """
-    struct WTShape <: AbstractWTShapes
+    struct MTShape <: AbstractWTShapes
 
-WTShape in the AISC steel database.
+MTShape in the AISC steel database.
 
 # Fields
 - `shape`: name of the WShape
@@ -26,16 +26,10 @@ WTShape in the AISC steel database.
 - `C_w`: Warping constant (inch6)
 - `r_0`:
 - `H`:
-- `PA`: Shape perimeter minus one flange surface (or short leg surface for a single angle), as used in Design Guide 19 (inch)
-- `PB`: Shape perimeter, as used in AISC Design Guide 19 (inch)
-- `PC`: Box perimeter minus one flange surface, as used in Design Guide 19 (inch)
-- `PD`: Box perimeter, as used in AISC Design Guide 19 (inch)
-- `WG_i`: The workable gage for the inner fastener holes in the flange that provides for entering and tightening clearances and edge distance and spacing requirements. The actual size, combination, and orientation of fastener components should be compared with the geometry of the cross section to ensure compatibility. See AISC Manual Part 1 for additional information (inch)
-- `WG_0`: The bolt spacing between inner and outer fastener holes when the workable gage is compatible with four holes across the flange. See AISC Manual Part 1 for additional information (inch)
 - `E`: Elastic section modulus (ksi) = 29000ksi
 - `F_y`: Yield strength(ksi) = 50ksi
 """
-Base.@kwdef struct WTShape <: AbstractWTShapes
+Base.@kwdef struct MTShape <: AbstractWTShapes
     shape::String
     weight::AISCSteel.Units.float_plf
     area::AISCSteel.Units.float_inch2
@@ -58,30 +52,23 @@ Base.@kwdef struct WTShape <: AbstractWTShapes
     C_w::AISCSteel.Units.float_inch6
     r_0::AISCSteel.Units.float_inch
     H::Float64
-    PA::AISCSteel.Units.float_inch
-    PB::AISCSteel.Units.float_inch
-    PC::AISCSteel.Units.float_inch
-    PD::AISCSteel.Units.float_inch
-    WG_i::AISCSteel.Units.float_inch
-    WG_0::AISCSteel.Units.float_inch
     E::AISCSteel.Units.float_ksi = 29000ksi
     F_y::AISCSteel.Units.float_ksi = 50ksi
 end
 
 """
-    WTShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
+    MTShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
 
-Constructor for `WTShape`.
+Constructor for `MTShape`.
 """
-function WTShape(shape; E=29000ksi, F_y=50ksi)
-    csv_file_name = "WT_shapes.csv"
+function MTShape(shape; E=29000ksi, F_y=50ksi)
+    csv_file_name = "MT_shapes.csv"
     csv_file_path = joinpath("shape files", csv_file_name)
     lookup_col_name = :shape
     lookup_value = uppercase(shape)
     wt_shape = AISCSteel.Utils.import_data(lookup_value, lookup_col_name, csv_file_path)
-    WGo = wt_shape.WGo == "–" ? 0 * inch : parse(Float64, wt_shape.WGo) * inch
 
-    WTShape(
+    MTShape(
         wt_shape.shape,
         wt_shape.weight * plf,
         wt_shape.area * inch^2,
@@ -104,12 +91,6 @@ function WTShape(shape; E=29000ksi, F_y=50ksi)
         wt_shape.Cw * inch^6,
         wt_shape.ro * inch,
         wt_shape.H,
-        wt_shape.PA * inch,
-        wt_shape.PB * inch,
-        wt_shape.PC * inch,
-        wt_shape.PD * inch,
-        wt_shape.WGi * inch,
-        WGo,
         E,
         F_y
     )

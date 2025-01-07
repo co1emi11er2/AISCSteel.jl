@@ -11,6 +11,11 @@ abstract type AbstractWTShapes <: AbstractSteelShapes end
 # include shapes
 include("WTShape.jl")
 
+# include shapes
+include("MTShape.jl")
+
+# include shapes
+include("STShape.jl")
 
 # Include Flexure
 include("Flexure/Flexure.jl")

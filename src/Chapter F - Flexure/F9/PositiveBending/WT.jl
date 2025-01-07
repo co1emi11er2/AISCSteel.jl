@@ -38,5 +38,7 @@ function calc_Mn(r_y, E, F_y, I_y, J, S_x, Z_x, d, L_b, S_xc, λ_f, λ_pf, λ_rf
 
     # 3. Flange Local Buckling
     M_nFLB = calc_MnFLB(M_p, F_y, S_xc, λ_f, λ_pf, λ_rf, λ_fclass, M_y, E, b_f, t_f)
+
+    M_n = min(M_nY, M_nLTB, M_nFLB)
 end
 end
