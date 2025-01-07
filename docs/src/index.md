@@ -57,9 +57,9 @@ Modules = [AISCSteel]
   - [x] C Shape
   - [x] MC Shape
   - [ ] L Shape
-  - [ ] WT Shape
-  - [ ] MT Shape
-  - [ ] ST Shape
+  - [x] WT Shape
+  - [x] MT Shape
+  - [x] ST Shape
   - [ ] HSS Shape
   - [ ] HSS_R Shape
   - [ ] PIPE Shape

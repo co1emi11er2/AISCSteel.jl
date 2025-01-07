@@ -63,7 +63,9 @@ Modules = [AISCSteel.ChapterFFlexure.F5]
 
 ## F6. I-Shaped Members and Channels Bent about Their Minor Axis
 
-This section is *not implemented*.
+```@autodocs
+Modules = [AISCSteel.ChapterFFlexure.F6]
+```
 
 ## F7. Square and Rectangular HSS and Box Sections
 

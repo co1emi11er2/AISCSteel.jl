@@ -14,11 +14,12 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
+        "Chapter B - Design Requirements" => "ChapterBDesignRequirements.md",
         "Chapter D - Tension" => "ChapterDTension.md",
         "Chapter E - Compression" => "ChapterECompression.md",
         "Chapter F - Flexure" => "ChapterFFlexure.md",
         "Chapter G - Shear" => "ChapterGShear.md",
-        "Classifications" => "Classifications.md",
+        "AISC Steel Shapes" => "Shapes.md",
         "Utils" => "Utils.md",
     ],
 )
