@@ -1,6 +1,7 @@
 module F6
 import AISCSteel
 import AISCSteel.ChapterFFlexure.F6: calc_variables, calc_Mn
+export calc_variables, calc_Mn
 
 """
     calc_variables(shape::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
