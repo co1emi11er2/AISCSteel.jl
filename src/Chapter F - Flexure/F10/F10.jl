@@ -6,10 +6,7 @@ include("Equations.jl")
 ##########################################################################################
 # Equations below are the public API for F10
 ##########################################################################################
-function calc_Mcr(E, A_g, r_z, t, C_b, L_b, B_w)
-    C_b = max(C_b, 1.5)
-    M_cr = Equations.EqF10▬4(E, A_g, r_z, t, C_b, L_b, B_w)
-end
+
 
 calc_MnY(M_y) = M_nY = Equations.EqF10▬1(M_y)
 
