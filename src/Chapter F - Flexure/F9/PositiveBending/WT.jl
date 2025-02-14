@@ -16,13 +16,15 @@ end
 function calc_MnFLB(M_p, F_y, S_xc, λ_f, λ_pf, λ_rf, λ_fclass, M_y, E, b_f, t_f)
 
     # 3. Flange Local Buckling
-    M_nFLB =  if λ_fclass == :noncompact
-                    Equations.EqF9▬14(M_p, F_y, S_xc, λ_f, λ_pf, λ_rf, M_y)
-                elseif λ_fclass == :slender
-                    Equations.EqF9▬15(E, S_xc, b_f, t_f)
-                else
-                    M_p
-                end
+    if λ_fclass == :noncompact
+        M_nFLB = Equations.EqF9▬14(M_p, F_y, S_xc, λ_f, λ_pf, λ_rf, M_y)
+    elseif λ_fclass == :slender
+        M_nFLB = Equations.EqF9▬15(E, S_xc, b_f, t_f)
+    else
+        M_nFLB = M_p
+    end
+
+    return M_p
 
 end
 

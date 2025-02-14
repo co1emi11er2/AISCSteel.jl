@@ -23,7 +23,7 @@ This function classifies flange for flexure for the shape.
 """
 function classify_flange((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
 
-    b = b_f
+    b = b_f/2
     t = t_f
     λ_fvariabels = TableB4⬝1a.case10(b, t, E, F_y)
 
