@@ -7,8 +7,10 @@ include("Equations.jl")
 ##########################################################################################
 # Equations below are the public API for F4
 ##########################################################################################
-calc_aw(h_c, t_w, b_fc, t_fc) = a_w = Equations.EqF4▬12(h_c, t_w, b_fc, t_fc)
-calc_rt(b_fc, a_w) = r_t = Equations.EqF4▬11(b_fc, a_w)
+calc_Myc(F_y, S_xc) = M_yc = Equations.EqF4▬4(F_y, S_xc)
+calc_Fcr(C_b, E, L_b, r_t, J, S_xc, h_0) = F_cr = Equations.EqF4▬5(C_b, E, L_b, r_t, J, S_xc, h_0)
+
+
 function calc_FL(S_xt, S_xc, F_y) 
 
     F_L_min = 0.5 * F_y
@@ -23,6 +25,10 @@ function calc_FL(S_xt, S_xc, F_y)
 
     return F_L
 end
+
+calc_Lp(r_t, E, F_y)= L_p = Equations.EqF4▬7(r_t, E, F_y)
+calc_Lr(r_t, E, F_L, J, S_xc, h_0) = L_r = Equations.EqF4▬8(r_t, E, F_L, J, S_xc, h_0)
+
 
 function calc_Rpc(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yc) 
 
@@ -39,6 +45,9 @@ function calc_Rpc(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yc)
     return R_pc
     
 end
+
+calc_rt(b_fc, a_w) = r_t = Equations.EqF4▬11(b_fc, a_w)
+calc_aw(h_c, t_w, b_fc, t_fc) = a_w = Equations.EqF4▬12(h_c, t_w, b_fc, t_fc)
 
 function calc_Rpt(I_yc, I_y, h_c, t_w, λ, λ_pw, λ_rw, M_p, M_yt) 
 
@@ -58,10 +67,10 @@ end
 
 function calc_variables(E, F_y, Z_x, S_x, S_xc, S_xt, b_fc, t_fc, h, h_c, t_w, J, h_0, I_y, I_yc, λ_w, λ_pw, λ_rw, L_b, C_b)
 
-    M_p = min(F_y*Z_x, 1.6*F_y*S_x)
+    M_p = min(F_y*Z_x, 1.6*F_y*S_x) # no reference equation (in section F4.2.6)
 
-    M_yc = Equations.EqF4▬4(F_y, S_xc)
-    M_yt = F_y*S_xt
+    M_yc = calc_Myc(F_y, S_xc)
+    M_yt = F_y*S_xt # no reference equation (in section F4.4)
 
     # (2) F_cr
     a_w = calc_aw(h_c, t_w, b_fc, t_fc)
@@ -73,19 +82,19 @@ function calc_variables(E, F_y, Z_x, S_x, S_xc, S_xt, b_fc, t_fc, h, h_c, t_w, J
         J = J
     end
 
-    k_c = 4/sqrt(h/t_w)
+    k_c = 4/sqrt(h/t_w) # no reference equation (in section F4.3)
     k_c = max(min(k_c, 0.76), 0.35)
 
-    F_cr = Equations.EqF4▬5(C_b, E, L_b, r_t, J, S_xc, h_0)
+    F_cr = calc_Fcr(C_b, E, L_b, r_t, J, S_xc, h_0)
 
     # (3) F_L
     F_L = calc_FL(S_xt, S_xc, F_y) 
 
     # (4) L_p
-    L_p = Equations.EqF4▬7(r_t, E, F_y)
+    L_p = calc_Lp(r_t, E, F_y)
 
     # (5) L_r
-    L_r = Equations.EqF4▬8(r_t, E, F_L, J, S_xc, h_0)
+    L_r = calc_Lr(r_t, E, F_L, J, S_xc, h_0)
 
     R_pc = calc_Rpc(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yc) 
     R_pt = calc_Rpt(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yt) 
