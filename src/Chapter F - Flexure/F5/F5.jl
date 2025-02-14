@@ -8,7 +8,6 @@ include("Equations.jl")
 ##########################################################################################
 # Equations below are the public API for F5
 ##########################################################################################
-import AISCSteel.ChapterFFlexure.F4: calc_aw, calc_rt, calc_Lp
 
 calc_Mp(R_pg, F_y, S_xc) = M_p = Equations.EqF5▬1(R_pg, F_y, S_xc)
 
@@ -48,7 +47,7 @@ end
 
 function calc_variables(E, F_y, S_xc, b_fc, t_fc, h, h_c, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b=1)
 
-    a_w = calc_aw(h_c, t_w, b_fc, t_fc)
+    a_w = F4.calc_aw(h_c, t_w, b_fc, t_fc)
     a_w = min(a_w, 10.0)
 
     R_pg = Equations.EqF5▬6(a_w, h_c, t_w, E, F_y)
@@ -56,7 +55,7 @@ function calc_variables(E, F_y, S_xc, b_fc, t_fc, h, h_c, t_w, λ_f, λ_pf, λ_r
     
     M_p = calc_Mp(R_pg, F_y, S_xc)
 
-    r_t = calc_rt(b_fc, a_w)
+    r_t = F4.calc_rt(b_fc, a_w)
 
     L_p = F4.calc_Lp(r_t, E, F_y)
     L_r = calc_Lr(r_t, E, F_y)
