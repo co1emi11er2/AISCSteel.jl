@@ -7,15 +7,17 @@ include("Equations.jl")
 ##########################################################################################
 # Equations below are the public API for F4
 ##########################################################################################
-calc_aw(h_c, t_w, b_fc, t_fc) = a_w = (h_c*t_w)/(b_fc*t_fc)
-calc_rt(b_fc, a_w) = r_t = b_fc/sqrt(12*(1 + (1/6)*a_w))
+calc_aw(h_c, t_w, b_fc, t_fc) = a_w = Equations.EqF4▬12(h_c, t_w, b_fc, t_fc)
+calc_rt(b_fc, a_w) = r_t = Equations.EqF4▬11(b_fc, a_w)
 function calc_FL(S_xt, S_xc, F_y) 
+
     F_L_min = 0.5 * F_y
-    F_L =   if S_xt/S_xc >= 0.7
-                0.7*F_y
-            else
-                F_y*(S_xt/S_xc)
-            end
+
+    if S_xt/S_xc >= 0.7
+        F_L = Equations.EqF4▬6a(F_y)
+    else
+        F_L = Equations.EqF4▬6b(F_y, S_xt, S_xc)
+    end
     
     F_L = max(F_L_min, F_L)
 
@@ -23,15 +25,16 @@ function calc_FL(S_xt, S_xc, F_y)
 end
 
 function calc_Rpc(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yc) 
-    R_pc =  if I_yc/I_y > 0.23
-                if h_c/t_w <= λ_pw
-                    M_p/M_yc
-                else
-                    min((M_p/M_yc) - (M_p/M_yc - 1)*((λ_w - λ_pw)/(λ_rw - λ_pw)), M_p/M_yc)
-                end
-            else
-                1.0
-            end
+
+    if I_yc/I_y > 0.23
+        if h_c/t_w <= λ_pw
+            R_pc = Equations.EqF4▬9a(M_p, M_yc)
+        else
+            R_pc = Equations.EqF4▬9b(M_p, M_yt, λ, λ_pw, λ_rw)
+        end
+    else
+        R_pc = 1.0
+    end
 
     return R_pc
     
@@ -39,14 +42,14 @@ end
 
 function calc_Rpt(I_yc, I_y, h_c, t_w, λ, λ_pw, λ_rw, M_p, M_yt) 
 
-    R_pt =  if I_yc/I_y > 0.23
+    if I_yc/I_y > 0.23
         if h_c/t_w <= λ_pw
-            M_p/M_yt
+            R_pt = Equations.EqF4▬16a(M_p, M_yt)
         else
-            min((M_p/M_yt) - (M_p/M_yt - 1)*((λ - λ_pw)/(λ_rw - λ_pw)), M_p/M_yt)
+            R_pt = Equations.EqF4▬16b(M_p, M_yc, λ_w, λ_pw, λ_rw)
         end
     else
-        1.0
+        R_pt = 1.0
     end
 
     return R_pt
@@ -57,31 +60,32 @@ function calc_variables(E, F_y, Z_x, S_x, S_xc, S_xt, b_fc, t_fc, h, h_c, t_w, J
 
     M_p = min(F_y*Z_x, 1.6*F_y*S_x)
 
-    M_yc = F_y*S_xc
+    M_yc = Equations.EqF4▬4(F_y, S_xc)
     M_yt = F_y*S_xt
 
     # (2) F_cr
     a_w = calc_aw(h_c, t_w, b_fc, t_fc)
     r_t = calc_rt(b_fc, a_w)
-    J = if I_yc/I_y <= 0.23
-            zero(typeof(J))
-        else
-            J
-        end
+
+    if I_yc/I_y <= 0.23
+        J = zero(typeof(J))
+    else
+        J = J
+    end
 
     k_c = 4/sqrt(h/t_w)
     k_c = max(min(k_c, 0.76), 0.35)
 
-    F_cr = ((C_b*π^2*E)/(L_b/r_t)^2)*sqrt(1 + 0.078*((J)/(S_xc*h_0))*(L_b/r_t)^2) |> ksi
+    F_cr = Equations.EqF4▬5(C_b, E, L_b, r_t, J, S_xc, h_0)
 
     # (3) F_L
     F_L = calc_FL(S_xt, S_xc, F_y) 
 
     # (4) L_p
-    L_p = 1.1*r_t*sqrt(E/F_y)
+    L_p = Equations.EqF4▬7(r_t, E, F_y)
 
     # (5) L_r
-    L_r = 1.95*r_t*(E/(F_L))*sqrt((J)/(S_xc*h_0) + sqrt(((J)/(S_xc*h_0))^2 + 6.76*((F_L)/E)^2))
+    L_r = Equations.EqF4▬8(r_t, E, F_L, J, S_xc, h_0)
 
     R_pc = calc_Rpc(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yc) 
     R_pt = calc_Rpt(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yt) 
@@ -108,7 +112,7 @@ Description of applicable member: Other I-shaped members with compact webs or no
 """
 function calc_MnCFY(R_pc, M_yc)
     # 1. Compression Flange Yielding
-    M_nCFY = R_pc*M_yc
+    M_nCFY = Equations.EqF4▬1(R_pc, M_yc)
 
     return M_nCFY
 end
@@ -140,12 +144,12 @@ Description of applicable member: Other I-shaped members with compact webs or no
 """
 function calc_MnLTB(M_p, R_pc, M_yc, F_L, S_xc, F_cr, L_b, L_p, L_r, C_b=1)
     # 2. Lateral Torsional Buckling
-    M_nLTB =  if L_b <= L_p
-        M_p
+    if L_b <= L_p
+        M_nLTB = M_p
     elseif L_p < L_b <= L_r
-        C_b*(R_pc*M_yc - (R_pc*M_yc - F_L*S_xc)*((L_b - L_p)/(L_r - L_p)))
+        M_nLTB = Equations.EqF4▬2(C_b, R_pc, M_yc, F_L, S_xc, L_b, L_p, L_r)
     else
-        F_cr*S_xc
+        M_nLTB = Equations.EqF4▬3(F_cr, S_xc)
     end
 
     return M_nLTB
@@ -179,12 +183,12 @@ Description of applicable member: Other I-shaped members with compact webs or no
 """
 function calc_MnCFLB(M_p, R_pc, M_yc, F_L, S_xc, E, k_c, λ_f, λ_pf, λ_rf, λ_fclass)
     # 3. Compression Flange Local Buckling
-    M_nCFLB =  if λ_fclass == :compact
-        M_p
+    if λ_fclass == :compact
+        M_nCFLB = M_p
     elseif λ_fclass == :noncompact
-        R_pc*M_yc - (R_pc*M_yc - F_L*S_xc) * ((λ_f - λ_pf)/(λ_rf - λ_pf))
+        M_nCFLB = Equations.EqF4▬13(R_pc, M_yc, F_L, S_xc, λ_f, λ_pf, λ_rf)
     else
-        (0.9*E*k_c*S_xc)/λ_f^2
+        M_nCFLB = Equations.EqF4▬14(E, k_c, S_xc, λ_f)
     end
 
     return M_nCFLB
@@ -212,10 +216,10 @@ Description of applicable member: Other I-shaped members with compact webs or no
 """
 function calc_MnTFY(M_p, R_pt, M_yt, S_xc, S_xt)
     # 4. Tension Flange Yielding
-    M_nTFY =  if S_xt >= S_xc
-        M_p
+    if S_xt >= S_xc
+        M_nTFY = M_p
     else
-        R_pt*M_yt
+        M_nTFY = Equations.EqF4▬15(R_pt, M_yt)
     end
 
     return M_nTFY

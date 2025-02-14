@@ -74,14 +74,15 @@ Description of applicable member: Doubly symmetric I-shaped members with compact
 function calc_MnCFLB(M_p, E, F_y, S_x, k_c, λ_f, λ_pf, λ_rf, λ_fclass)
 
     # 2. Compression Flange Local Buckling
-    M_nCFLB =  if λ_fclass == :noncompact
-                    M_p - (M_p - 0.7*F_y*S_x)*((λ_f - λ_pf)/(λ_rf - λ_pf))
-                elseif λ_fclass == :slender
-                    (0.9*E*k_c*S_x)/(λ_f^2) 
-                else
-                    M_p
-                end
+    if λ_fclass == :noncompact
+        M_nCFLB = Equations.EqF3▬1(M_p, F_y, S_x, λ_f, λ_pf, λ_rf)
+    elseif λ_fclass == :slender
+        M_nCFLB = Equations.EqF3▬2(E, k_c, S_x, λ_f)
+    else
+        M_nCFLB = M_p
+    end
 
+    return M_nCFLB
 end
 
 """

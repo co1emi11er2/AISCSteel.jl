@@ -23,10 +23,10 @@ function case1(b, t, E, F_y)
     λ = b / t
     λ_r = 0.56 * sqrt(E / F_y)
 
-    class = if λ <= λ_r
-        :nonslender
+    if λ <= λ_r
+        class = :nonslender
     else
-        :slender
+        class = :slender
     end
 
     return class
@@ -56,12 +56,12 @@ function case10(b, t, E, F_y)
     λ_p = 0.38 * sqrt(E / F_y)
     λ_r = 1.0 * sqrt(E / F_y)
 
-    class = if λ <= λ_p
-        :compact
+    if λ <= λ_p
+        class = :compact
     elseif λ_p < λ <= λ_r
-        :noncompact
+        class = :noncompact
     else
-        :slender
+        class = :slender
     end
 
     return λ, λ_p, λ_r, class
@@ -92,12 +92,12 @@ function case11(b, t, E, F_y, F_L, k_c)
     λ_p = 0.38 * sqrt(E / F_y)
     λ_r = 0.95 * sqrt(k_c * E / F_L)
 
-    class = if λ <= λ_p
-        :compact
+    if λ <= λ_p
+        class = :compact
     elseif λ_p < λ <= λ_r
-        :noncompact
+        class = :noncompact
     else
-        :slender
+        class = :slender
     end
 
     return λ, λ_p, λ_r, class
@@ -127,12 +127,12 @@ function case13(b, t, E, F_y)
     λ_p = 0.38 * sqrt(E / F_y)
     λ_r = 1.0 * sqrt(E / F_y)
 
-    class = if λ <= λ_p
-        :compact
+    if λ <= λ_p
+        class = :compact
     elseif λ_p < λ <= λ_r
-        :noncompact
+        class = :noncompact
     else
-        :slender
+        class = :slender
     end
 
     return λ, λ_p, λ_r, class
@@ -162,12 +162,12 @@ function case14(d, t_w, E, F_y)
     λ_p = 0.84 * sqrt(E / F_y)
     λ_r = 1.52 * sqrt(E / F_y)
 
-    class = if λ <= λ_p
-        :compact
+    if λ <= λ_p
+        class = :compact
     elseif λ_p < λ <= λ_r
-        :noncompact
+        class = :noncompact
     else
-        :slender
+        class = :slender
     end
 
     return λ, λ_p, λ_r, class
@@ -200,12 +200,12 @@ function case15(h, t_w, E, F_y)
     λ_p = 3.76 * sqrt(E / F_y)
     λ_r = 5.7 * sqrt(E / F_y)
 
-    class = if λ <= λ_p
-        :compact
+    if λ <= λ_p
+        class = :compact
     elseif λ_p < λ <= λ_r
-        :noncompact
+        class = :noncompact
     else
-        :slender
+        class = :slender
     end
 
     return λ, λ_p, λ_r, class

@@ -64,13 +64,15 @@ Description of applicable member: Doubly symmetric compact I-shaped members and 
 - AISC Section F2.2
 """
 function calc_MnLTB(M_p, F_y, S_x, F_cr, L_b, L_p, L_r, C_b=1)
-    M_nLTB = if L_b <= L_p
-        M_p
+    if L_b <= L_p
+        M_nLTB = M_p
     elseif L_p < L_b <= L_r
-        C_b*(M_p - (M_p-0.7*F_y*S_x)*((L_b-L_p)/(L_r-L_p)))
+        M_nLTB = Equations.EqF2▬2(M_p, F_y, S_x, L_b, L_p, L_r, C_b)
     else
-        F_cr*S_x
-    end |> kip*ft
+        M_nLTB = Equations.EqF2▬3(F_cr, S_x)
+    end
+
+    return M_nLTB
 end
 
 """
