@@ -42,6 +42,8 @@ function calc_FcrCFLB(E, F_y, k_c, b_fc, t_fc, λ_f, λ_pf, λ_rf, λ_fclass)
     else
         F_crCFLB = Equations.EqF5▬9(E, k_c, b_fc, t_fc)
     end
+
+    return F_crCFLB
 end
 
 function calc_variables(E, F_y, S_xc, b_fc, t_fc, h, h_c, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b=1)
