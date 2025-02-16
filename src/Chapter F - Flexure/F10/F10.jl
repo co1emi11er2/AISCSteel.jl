@@ -20,7 +20,7 @@ function calc_MnLTB(M_y, M_cr)
     return M_nLTB
 end
 
-function calc_MnLLB(λ_class, M_y, F_y, S_c, b, t, E)
+function calc_MnLLB(λ_class, M_y, F_y, S_c, b, t, E, F_cr)
     
     if λ_class == :compact
         M_nLLB = Equations.EqF10▬1(M_y)
