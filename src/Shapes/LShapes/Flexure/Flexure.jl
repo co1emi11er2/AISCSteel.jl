@@ -28,8 +28,10 @@ function classify_leg((;b, t, E, F_y)::T) where T <: AISCSteel.Shapes.LShapes.Ab
 
 end
 
-function calc_positive_principal_Mn end
-function calc_negative_principal_Mn end
+function calc_positive_Mnw end
+function calc_negative_Mnw end
+function calc_positive_Mnz end
+function calc_negative_Mnz end
 function calc_positive_Mnx end
 function calc_negative_Mnx end
 function calc_positive_Mny end
