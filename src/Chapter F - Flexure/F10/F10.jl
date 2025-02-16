@@ -11,11 +11,30 @@ include("Equations.jl")
 calc_MnY(M_y) = M_nY = Equations.EqF10▬1(M_y)
 
 function calc_MnLTB(M_y, M_cr)
-    M_nLTB = if M_y/M_cr <= 1.0
-        Equations.EqF10▬2(M_y, M_cr)
+    if M_y/M_cr <= 1.0
+        M_nLTB = Equations.EqF10▬2(M_y, M_cr)
     else
-        Equations.EqF10▬3(M_cr, M_y)
+        M_nLTB = Equations.EqF10▬3(M_cr, M_y)
     end
+
+    return M_nLTB
+end
+
+function calc_MnLLB(λ_class, M_y, F_y, S_c, b, t, E)
+    
+    if λ_class == :compact
+        M_nLLB = Equations.EqF10▬1(M_y)
+    elseif λ_class == :noncompact
+        M_nLLB = Equations.EqF10▬6(F_y, S_c, b, t, E)
+    else
+        M_nLLB = Equations.EqF10▬7(F_cr, S_c)
+    end
+
+    return M_nLLB
+end
+
+function calc_Fcr(E, b, t)
+    F_cr = Equations.EqF10▬8(E, b, t)
 end
 
 
