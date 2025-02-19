@@ -1,4 +1,24 @@
+"""
+    module Flexure
+
+This module includes useful functions to calculate bending capacity of LShapes.
+
+# Functions
+- `classify_leg`
+- `calc_positive_Mnw` - moment capacity about w-axis when compression is in the short leg.
+- `calc_negative_Mnw` - moment capacity about w-axis when compression is in the long leg.
+- `calc_positive_Mnz` - moment capacity about z-axis when compression is in the toe of the legs.
+- `calc_negative_Mnz` - moment capacity about z-axis when tension is in the toe of the legs.
+- `calc_positive_Mnx` - moment capacity about x-axis when compression is in the toe of the leg.
+- `calc_positive_Mny` - moment capacity about y-axis when compression is in the toe of the leg.
+- `calc_negative_Mnx` - moment capacity about x-axis when tension is in the toe of the leg.
+- `calc_negative_Mny` - moment capacity about y-axis when tension is in the toe of the leg.
+
+# Modules
+- `F10` - module where functions are exported from. No need to step into this module
+"""
 module Flexure
+
 import AISCSteel
 import AISCSteel.ChapterBDesignRequirements.B4.TableB4⬝1a as TableB4⬝1a
 import AISCSteel.ChapterFFlexure.F10.PrincipalAxisBending.MajorAxis.PositiveBending: calc_positive_Mnw

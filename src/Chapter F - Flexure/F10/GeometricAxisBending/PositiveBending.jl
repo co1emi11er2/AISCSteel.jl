@@ -6,6 +6,26 @@ LShapes bent about their geometric axis (x-axis, y-axis) when compression is in 
 module PositiveBending
 import AISCSteel.ChapterFFlexure.F10 as F10
 
+"""
+    calc_Mcr(E, b, t, C_b, L_b)
+
+Calculates the elastic lateral-torsional buckling moment of the section bent about the respective axis (kip-ft)
+
+Description of applicable member: L-shaped members bent about their geometric axis. For the geometric axis, it is assumed the legs are of equal length.
+
+# Arguments
+- `E`: modulous of elasticity (ksi)
+- `b`: length of leg (inch)
+- `t`: thickness of leg (inch)
+- `C_b`: lateral torsional buckling modification factor (default = 1)
+- `L_b`: unbraced length (inch)
+
+# Returns 
+- `M_cr`: elastic lateral-torsional buckling moment of the section bent about the respective axis (kip-ft)
+
+# Reference
+- AISC Section F10 (F10-5aS)
+"""
 function calc_Mcr(E, b, t, C_b, L_b)
     C_b = min(C_b, 1.5)
     M_cr = F10.Equations.EqF10▬5a(E, b, t, C_b, L_b)
