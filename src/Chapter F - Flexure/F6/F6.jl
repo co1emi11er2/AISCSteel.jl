@@ -6,13 +6,14 @@ include("Equations.jl")
 ##########################################################################################
 # Equations below are the public API for F6
 ##########################################################################################
-
+calc_Mp(F_y, Z_y, S_y) = M_p = Equations.EqF6▬1(F_y, Z_y, S_y)
+calc_Fcr(E, b, t_f) = F_cr = Equations.EqF6▬4(E, b, t_f)
 function calc_variables(E, F_y, Z_y, S_y, b, t_f)
 
     
-    M_p = Equations.EqF6▬1(F_y, Z_y, S_y)
+    M_p = calc_Mp(F_y, Z_y, S_y)
 
-    F_cr = Equations.EqF6▬4(E, b, t_f)
+    F_cr = calc_Fcr(E, b, t_f)
 
     return (;M_p, F_cr)
 end
@@ -63,12 +64,12 @@ Description of applicable member: I-shaped members or C-shaped members bent abou
 """
 function calc_MnFLB(M_p, F_y, S_y, λ_f, λ_pf, λ_rf, λ_fclass, F_cr)
 
-    M_nFLB =  if λ_fclass == :compact
-        M_p
+    if λ_fclass == :compact
+        M_nFLB = M_p
     elseif λ_fclass == :noncompact
-        Equations.EqF6▬2(M_p, F_y, S_y, λ_f, λ_pf, λ_rf)
+        M_nFLB = Equations.EqF6▬2(M_p, F_y, S_y, λ_f, λ_pf, λ_rf)
     else
-        Equations.EqF6▬3(F_cr, S_y)
+        M_nFLB = Equations.EqF6▬3(F_cr, S_y)
     end
 
     return M_nFLB

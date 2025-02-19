@@ -23,7 +23,7 @@ This function calculates the following miscellaneous variables that are used to 
 """
 function calc_variables((; r_y, E, F_y, I_y, J, S_x, Z_x, d)::T, L_b) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
     
-    t = calc_variables(r_y, E, F_y, I_y, J, S_x, Z_x, d)
+    t = calc_variables(r_y, E, F_y, I_y, J, S_x, Z_x, d, L_b)
 
     return t
 end

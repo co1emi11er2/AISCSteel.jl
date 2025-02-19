@@ -10,12 +10,12 @@ function calc_Fcr(d, t_w, E, F_y)
     dtw_ratio = d/t_w
     limit_1 = 0.84*sqrt(E/F_y)
     limit_2 = 1.52*sqrt(E/F_y)
-    F_cr = if dtw_ratio <= limit_1
-        F_y
+    if dtw_ratio <= limit_1
+        F_cr = F_y
     elseif limit_1 < dtw_ratio <= limit_2
-        Equations.EqF9▬18(d, t_w, F_y, E)
+        F_cr = Equations.EqF9▬18(d, t_w, F_y, E)
     else
-        Equations.EqF9▬19(E, d, t_w)
+        F_cr = Equations.EqF9▬19(E, d, t_w)
     end
 
     return F_cr

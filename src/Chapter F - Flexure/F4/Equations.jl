@@ -37,7 +37,7 @@ function EqF4▬7(r_t, E, F_y)
 end
 
 function EqF4▬8(r_t, E, F_L, J, S_xc, h_0)
-    L_p = 1.95 * r_t * (E / (F_L)) * sqrt((J) / (S_xc * h_0) + sqrt(((J) / (S_xc * h_0))^2 + 6.76 * ((F_L) / E)^2)) |> cnv.to_large_L
+    L_r = 1.95 * r_t * (E / (F_L)) * sqrt((J) / (S_xc * h_0) + sqrt(((J) / (S_xc * h_0))^2 + 6.76 * ((F_L) / E)^2)) |> cnv.to_large_L
 end
 
 function EqF4▬9a(M_p, M_yc)

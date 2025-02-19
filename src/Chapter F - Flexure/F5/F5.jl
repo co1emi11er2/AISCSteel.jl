@@ -1,5 +1,6 @@
 module F5
 using StructuralUnits
+import AISCSteel.ChapterFFlexure.F4 as F4
 
 # include equations
 include("Equations.jl")
@@ -7,43 +8,64 @@ include("Equations.jl")
 ##########################################################################################
 # Equations below are the public API for F5
 ##########################################################################################
-import AISCSteel.ChapterFFlexure.F4: calc_aw, calc_rt
 
-function calc_variables(E, F_y, S_xc, b_fc, t_fc, h, h_c, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b=1)
+calc_Mp(R_pg, F_y, S_xc) = M_p = Equations.EqF5▬1(R_pg, F_y, S_xc)
 
-    a_w = calc_aw(h_c, t_w, b_fc, t_fc)
-    a_w = min(a_w, 10.0)
 
-    R_pg = 1 - a_w/(1200 + 300*a_w) * (h_c/t_w - 5.7*sqrt(E/F_y))
-    R_pg = min(R_pg, 1.0)
-    
-    M_p = R_pg*F_y*S_xc
-
-    r_t = calc_rt(b_fc, a_w)
-
-    L_p = 1.1*r_t*sqrt(E/F_y)
-    L_r = π*r_t*sqrt(E/(0.7*F_y))
-
-    F_crLTB =   if L_b <= L_p
-                    F_y
-                elseif L_p < L_b <= L_r
-                    C_b*(F_y - 0.3*F_y*((L_b-L_p)/(L_r-L_p)))
-                else
-                    (C_b*π^2*E)/(L_b/r_t)^2
-                end
+function calc_FcrLTB(E, F_y, C_b, L_b, L_p, L_r, r_t)
+    if L_b <= L_p
+        F_crLTB = F_y
+    elseif L_p < L_b <= L_r
+        F_crLTB = Equations.EqF5▬3(C_b, F_y, L_b, L_p, L_r)
+    else
+        F_crLTB = Equations.EqF5▬4(C_b, E, L_b, r_t)
+    end
 
     F_crLTB = min(F_crLTB, F_y)
 
-    k_c = 4/sqrt(h/t_w)
+    return F_crLTB
+end
+
+calc_Lr(r_t, E, F_y) = L_r = Equations.EqF5▬5(r_t, E, F_y)
+
+function calc_Rpg(a_w, h_c, t_w, E, F_y)
+    R_pg = Equations.EqF5▬6(a_w, h_c, t_w, E, F_y)
+    R_pg = min(R_pg, 1.0)
+end
+
+function calc_FcrCFLB(E, F_y, k_c, b_fc, t_fc, λ_f, λ_pf, λ_rf, λ_fclass)
+    if λ_fclass == :compact
+        F_crCFLB = F_y
+    elseif λ_fclass == :noncompact
+        F_crCFLB = Equations.EqF5▬8(F_y, λ_f, λ_pf, λ_rf)
+    else
+        F_crCFLB = Equations.EqF5▬9(E, k_c, b_fc, t_fc)
+    end
+
+    return F_crCFLB
+end
+
+function calc_variables(E, F_y, S_xc, b_fc, t_fc, h, h_c, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b=1)
+
+    a_w = F4.calc_aw(h_c, t_w, b_fc, t_fc)
+    a_w = min(a_w, 10.0)
+
+    R_pg = Equations.EqF5▬6(a_w, h_c, t_w, E, F_y)
+    R_pg = min(R_pg, 1.0)
+    
+    M_p = calc_Mp(R_pg, F_y, S_xc)
+
+    r_t = F4.calc_rt(b_fc, a_w)
+
+    L_p = F4.calc_Lp(r_t, E, F_y)
+    L_r = calc_Lr(r_t, E, F_y)
+
+    F_crLTB = calc_FcrLTB(E, F_y, C_b, L_b, L_p, L_r, r_t)
+
+    k_c = 4/sqrt(h/t_w) # no reference equation (in section F5.3)
     k_c = max(min(k_c, 0.76), 0.35)
 
-    F_crCFLB =  if λ_fclass == :compact
-                    F_y
-                elseif λ_fclass == :noncompact
-                    F_y - 0.3*F_y*((λ_f-λ_pf)/(λ_rf-λ_pf))
-                else
-                    (0.9*E*k_c)/(b_fc/(2*t_fc))^2
-                end
+    F_crCFLB = calc_FcrCFLB(E, F_y, k_c, b_fc, t_fc, λ_f, λ_pf, λ_rf, λ_fclass)
 
     return (;M_p, R_pg, F_crLTB, F_crCFLB)
 end
