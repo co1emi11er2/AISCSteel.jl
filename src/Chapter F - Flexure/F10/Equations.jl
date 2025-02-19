@@ -31,11 +31,11 @@ function EqF10▬5b(E, b, t, C_b, L_b)
 end
 
 function EqF10▬6(F_y, S_c, b, t, E)
-    M_nLB = F_y * S_c * (2.43 - 1.72*(b/t)*sqrt(F_y/E)) |> cnv.to_moment
+    M_nLLB = F_y * S_c * (2.43 - 1.72*(b/t)*sqrt(F_y/E)) |> cnv.to_moment
 end
 
 function EqF10▬7(F_cr, S_c)
-    M_nLB = F_cr * S_c |> cnv.to_moment
+    M_nLLB = F_cr * S_c |> cnv.to_moment
 end
 
 function EqF10▬8(E, b, t)
