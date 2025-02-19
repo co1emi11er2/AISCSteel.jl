@@ -51,7 +51,7 @@ function calc_positive_Mn(F_y, S_min, E, b, t, λ_class, L_b, restraint_type, C_
 
     M_y = F10.calc_My(F_y, S_min)
 
-    if L_b == 0
+    if restraint_type == :fully_restrained
         M_nY = F10.calc_MnY(M_y)
         M_nLTB = M_ny
     else
