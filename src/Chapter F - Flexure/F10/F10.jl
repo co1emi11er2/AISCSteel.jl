@@ -1,5 +1,7 @@
 module F10
 
+import AISCSteel.Utils.UnitConversions as cnv
+
 # include equations
 include("Equations.jl")
 
@@ -35,6 +37,10 @@ end
 
 function calc_Fcr(E, b, t)
     F_cr = Equations.EqF10▬8(E, b, t)
+end
+
+function calc_My(F_y, S_min)
+    M_y = F_y * S_min |> cnv.to_moment # no code reference
 end
 
 

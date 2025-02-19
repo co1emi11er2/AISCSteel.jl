@@ -6,7 +6,7 @@ LShapes bent about their principal major axis (w-axis) when compression is in th
 module NegativeBending
 
 import AISCSteel
-import AISCSteel.ChapterFFlexure.F10.PrincipalAxisBending as PAB
+import AISCSteel.ChapterFFlexure.F10.PrincipalAxisBending.MajorAxis as MA
 import AISCSteel.ChapterFFlexure.F10.PrincipalAxisBending.MajorAxis.NegativeBending: calc_negative_Mnw
 export calc_negative_Mnw, calc_variables
 
@@ -16,7 +16,7 @@ function calc_variables((;F_y, S_wC, E, area, r_z, t, β_w , b)::T, L_b, C_b=1) 
     β_w = -β_w
     A_g = area
 
-    (;M_y, M_cr, F_cr) = PAB.calc_variables(F_y, S_min, E, area, r_z, t, C_b, L_b, β_w, b)
+    (;M_y, M_cr, F_cr) = MA.calc_variables(F_y, S_min, E, area, r_z, t, C_b, L_b, β_w, b)
 
     return (;M_y, M_cr, F_cr)
 end

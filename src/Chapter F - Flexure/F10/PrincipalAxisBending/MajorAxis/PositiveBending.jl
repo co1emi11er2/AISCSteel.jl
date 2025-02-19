@@ -7,7 +7,7 @@ module PositiveBending
 
 import AISCSteel
 import AISCSteel.ChapterFFlexure.F10: calc_MnY, calc_MnLTB, calc_MnLLB
-import AISCSteel.ChapterFFlexure.F10.PrincipalAxisBending: calc_variables
+import AISCSteel.ChapterFFlexure.F10.PrincipalAxisBending.MajorAxis: calc_variables
 
 
 function calc_positive_Mnw(F_y, S_wC, E, A_g, r_z, t, β_w , b, S_c, λ_class, L_b, C_b)
