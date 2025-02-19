@@ -1,9 +1,12 @@
 module Flexure
 import AISCSteel
 import AISCSteel.ChapterBDesignRequirements.B4.TableB4⬝1a as TableB4⬝1a
+import AISCSteel.ChapterFFlexure.F10.PrincipalAxisBending.MajorAxis.PositiveBending: calc_positive_Mnw
+import AISCSteel.ChapterFFlexure.F10.PrincipalAxisBending.MajorAxis.NegativeBending: calc_negative_Mnw
+import AISCSteel.ChapterFFlexure.F10.PrincipalAxisBending.MinorAxis.PositiveBending: calc_positive_Mnz
+import AISCSteel.ChapterFFlexure.F10.PrincipalAxisBending.MinorAxis.NegativeBending: calc_negative_Mnz
 
-# Extend F10 functions
-include("F10/F10.jl")
+export calc_positive_Mnw, calc_negative_Mnw, calc_positive_Mnz, calc_negative_Mnz
 
 """
     classify_leg(shape::T) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
@@ -28,13 +31,13 @@ function classify_leg((;b, t, E, F_y)::T) where T <: AISCSteel.Shapes.LShapes.Ab
 
 end
 
-function calc_positive_Mnw end
-function calc_negative_Mnw end
-function calc_positive_Mnz end
-function calc_negative_Mnz end
-function calc_positive_Mnx end
-function calc_negative_Mnx end
-function calc_positive_Mny end
-function calc_negative_Mny end
+# Extend F10 functions
+include("F10/F10.jl")
+
+import .F10.GeometricAxisBending.PositiveBending: calc_positive_Mnx, calc_positive_Mny
+import .F10.GeometricAxisBending.NegativeBending: calc_negative_Mnx, calc_negative_Mny
+
+export calc_positive_Mnx, calc_positive_Mny, calc_negative_Mnx, calc_negative_Mny
+
 
 end

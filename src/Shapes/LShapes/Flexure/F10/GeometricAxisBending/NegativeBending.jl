@@ -8,6 +8,17 @@ module NegativeBending
 import AISCSteel
 import AISCSteel.ChapterFFlexure.F10.GeometricAxisBending.NegativeBending: calc_negative_Mn
 
+"""
+    calc_negative_Mnx(lshape, L_b, restraint_type, C_b)
+
+Calculates negative moment (when toe of leg is in tension) about geometric axis for an LShape.
+
+# Arguments
+- `lshape`: LShape object
+- `L_b`: unbraced length (inch)
+- `restraint_type`: type of restraint on leg (`:fully_restrained`, `:unrestrained`, or `:at_max_moment_only`)
+- `C_b`: lateral torsional buckling modification factor
+"""
 function calc_negative_Mnx((;F_y, S_x, E, b, d, t)::T, L_b, restraint_type, C_b) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
 
     S_min = S_x
@@ -26,6 +37,17 @@ function calc_negative_Mnx((;F_y, S_x, E, b, d, t)::T, L_b, restraint_type, C_b)
     return M_nx
 end
 
+"""
+    calc_negative_Mny(lshape, L_b, restraint_type, C_b)
+
+Calculates negative moment (when toe of leg is in tension) about geometric axis for an LShape.
+
+# Arguments
+- `lshape`: LShape object
+- `L_b`: unbraced length (inch)
+- `restraint_type`: type of restraint on leg (`:fully_restrained`, `:unrestrained`, or `:at_max_moment_only`)
+- `C_b`: lateral torsional buckling modification factor
+"""
 function calc_negative_Mny((;F_y, S_y, E, b, d, t)::T, L_b, restraint_type, C_b) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
 
     S_min = S_y

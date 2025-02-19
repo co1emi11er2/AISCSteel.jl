@@ -6,9 +6,23 @@ LShapes bent about their geometric axis (x-axis, y-axis) when compression is in 
 module PositiveBending
 
 import AISCSteel
+import AISCSteel.Shapes.LShapes.Flexure: classify_leg
 import AISCSteel.ChapterFFlexure.F10.GeometricAxisBending.PositiveBending: calc_positive_Mn
 
-function calc_positive_Mnx((;F_y, S_x, E, b, d, t)::T, λ_class, L_b, restraint_type, C_b) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+"""
+    calc_positive_Mnx(lshape, λ_class, L_b, restraint_type, C_b)
+    calc_positive_Mnx(lshape, L_b, restraint_type, C_b)
+
+Calculates negative moment (when toe of leg is in tension) about geometric axis for an LShape.
+
+# Arguments
+- `lshape`: LShape object
+- `λ_class`: slenderness classification of angle leg
+- `L_b`: unbraced length (inch)
+- `restraint_type`: type of restraint on leg (`:fully_restrained`, `:unrestrained`, or `:at_max_moment_only`)
+- `C_b`: lateral torsional buckling modification factor
+"""
+function calc_positive_Mnx((;F_y, S_x, E, b, d, t)::T, λ_class::Symbol, L_b, restraint_type, C_b) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
 
     S_min = S_x
 
@@ -26,6 +40,28 @@ function calc_positive_Mnx((;F_y, S_x, E, b, d, t)::T, λ_class, L_b, restraint_
     return M_nx
 end
 
+function calc_positive_Mnx(lshape::T, L_b, restraint_type, C_b) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+
+    _..., λ_class = classify_leg(lshape)
+
+    M_nx = calc_positive_Mnx(lshape, λ_class, L_b, restraint_type, C_b)
+    
+    return M_nx
+end
+
+"""
+    calc_positive_Mny(lshape, λ_class, L_b, restraint_type, C_b)
+    calc_positive_Mny(lshape, L_b, restraint_type, C_b)
+
+Calculates negative moment (when toe of leg is in tension) about geometric axis for an LShape.
+
+# Arguments
+- `lshape`: LShape object
+- `λ_class`: slenderness classification of angle leg
+- `L_b`: unbraced length (inch)
+- `restraint_type`: type of restraint on leg (`:fully_restrained`, `:unrestrained`, or `:at_max_moment_only`)
+- `C_b`: lateral torsional buckling modification factor
+"""
 function calc_positive_Mny((;F_y, S_y, E, b, d, t)::T, λ_class, L_b, restraint_type, C_b) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
 
     S_min = S_y
@@ -41,6 +77,15 @@ function calc_positive_Mny((;F_y, S_y, E, b, d, t)::T, λ_class, L_b, restraint_
         end
     end
 
+    return M_ny
+end
+
+function calc_positive_Mny(lshape::T, L_b, restraint_type, C_b) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+
+    _..., λ_class = classify_leg(lshape)
+
+    M_ny = calc_positive_Mny(lshape, λ_class, L_b, restraint_type, C_b)
+    
     return M_ny
 end
 

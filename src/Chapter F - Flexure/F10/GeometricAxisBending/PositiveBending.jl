@@ -11,6 +11,22 @@ function calc_Mcr(E, b, t, C_b, L_b)
     M_cr = F10.Equations.EqF10▬5a(E, b, t, C_b, L_b)
 end
 
+"""
+    calc_positive_Mn(F_y, S_min, E, b, t, λ_class, L_b, restraint_type, C_b)
+
+Calculates positive moment (when toe of leg is in compression) about geometric axis for an LShape.
+
+# Arguments
+- `F_y`: yield strength of steel (ksi)
+- `S_min`: elastic section modulous for desired axis (x or y) (inch^3)
+- `E`: modulous of elasticity (ksi)
+- `b`: length of leg perpendicular to axis of bending (inch)
+- `t`: thickness of leg (inch)
+- `λ_class`: slenderness classification of angle leg
+- `L_b`: unbraced length (inch)
+- `restraint_type`: type of restraint on leg (`:fully_restrained`, `:unrestrained`, or `:at_max_moment_only`)
+- `C_b`: lateral torsional buckling modification factor
+"""
 function calc_positive_Mn(F_y, S_min, E, b, t, λ_class, L_b, restraint_type, C_b)
 
     M_y = F10.calc_My(F_y, S_min)
