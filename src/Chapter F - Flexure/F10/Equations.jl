@@ -15,11 +15,11 @@ function EqF10▬3(M_cr, M_y)
     M_nLTB = (0.92 - (0.17*M_cr)/M_y)*M_cr |> cnv.to_moment
 end
 
-function EqF10▬4(E, A_g, r_z, t, C_b, L_b, Β_w)
+function EqF10▬4(E, A_g, r_z, t, C_b, L_b, β_w)
 
-    x = (Β_w * r_z)/(L_b*t)
+    x = 4.4*(β_w* r_z)/(L_b*t)
 
-    M_cr = (9 * E * A_g * r_z * t * C_b)/(8* L_b) * (sqrt(1 + (4.4 * x)^2) + 4.4*x) |> cnv.to_moment
+    M_cr = (9 * E * A_g * r_z * t * C_b)/(8* L_b) * (sqrt(1 + x^2) + x) |> cnv.to_moment
 end
 
 function EqF10▬5a(E, b, t, C_b, L_b)

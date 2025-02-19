@@ -27,4 +27,10 @@ end
 # @testset verbose = true "WTShapes" begin
 #     include("WTShapes/WTShapes.jl")
 # end
+
+@testitem "Flexure - LShapes" begin
+    include("Flexure/LShapes.jl")
+end
+
+
 @run_package_tests verbose=true
