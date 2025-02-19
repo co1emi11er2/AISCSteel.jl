@@ -13,7 +13,7 @@ import AISCSteel.ChapterFFlexure.F10.GeometricAxisBending.PositiveBending: calc_
     calc_positive_Mnx(lshape, λ_class, L_b, restraint_type, C_b)
     calc_positive_Mnx(lshape, L_b, restraint_type, C_b)
 
-Calculates negative moment (when toe of leg is in tension) about geometric axis for an LShape.
+Calculates positive moment (when toe of leg is in compression) about geometric axis for an LShape.
 
 # Arguments
 - `lshape`: LShape object
@@ -53,7 +53,7 @@ end
     calc_positive_Mny(lshape, λ_class, L_b, restraint_type, C_b)
     calc_positive_Mny(lshape, L_b, restraint_type, C_b)
 
-Calculates negative moment (when toe of leg is in tension) about geometric axis for an LShape.
+Calculates positive moment (when toe of leg is in compression) about geometric axis for an LShape.
 
 # Arguments
 - `lshape`: LShape object
