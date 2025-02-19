@@ -1,5 +1,12 @@
-# TODO: Move this to LShape - I don't think we need anything here since equations are the same
-# just the section properties change
+"""
+    module PrincipalAxisBending
+
+LShapes bent about their principal axis (w-axis, z-axis).
+
+There are two sections:
+- Major Axis - LShapes bent about their w-axis
+- Minor Axis - LShapes bent about their z-axis
+"""
 module PrincipalAxisBending
 import AISCSteel
 import AISCSteel.ChapterFFlexure.F10 as F10
