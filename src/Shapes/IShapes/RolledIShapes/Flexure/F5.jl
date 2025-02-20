@@ -4,7 +4,7 @@ import AISCSteel.ChapterFFlexure.F5: calc_variables, calc_Mn
 export calc_variables, calc_Mn
 
 """
-    calc_variables(shape::T, L_b, C_b=1) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+    calc_variables(shape::T, L_b, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
 This function calculates the following miscellaneous variables that are used to calculate Mn of the shape for AISC Section F5. 
 
