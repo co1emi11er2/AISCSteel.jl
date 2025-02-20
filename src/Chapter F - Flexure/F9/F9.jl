@@ -75,7 +75,7 @@ Description of applicable member: WT-shaped member loaded in the plane of symmet
 - `B`: see AISC F9
 
 # Returns 
-- `M_cr`: elastic lateral-torsional buckling moment of the section bent about the respective axis (kip-ft)
+- `M_cr`: elastic lateral-torsional buckling moment of the section bent about the respective axis (kip-in)
 
 # Reference
 - AISC Section F2 (F9-10)
@@ -114,7 +114,7 @@ Description of applicable member: WT-shaped member loaded in the plane of symmet
 - `M_p`: plastic moment of the section (kip-in)
 
 # Returns 
-- `M_nY`: moment capacity of the section for yielding.
+- `M_nY`: moment capacity of the section for yielding. (kip-in)
 
 # Reference
 - AISC Section F2 (F9-3)

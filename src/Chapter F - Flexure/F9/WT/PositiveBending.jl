@@ -103,7 +103,7 @@ Description of applicable member: WT-shaped member loaded in the plane of symmet
 - `L_r`: the limiting laterally unbraced length for the limit state of inelastic lateral-torsional buckling (inch)
 
 # Returns 
-- `M_nLTB`: moment capacity of the section for lateral torsional buckling.
+- `M_nLTB`: moment capacity of the section for lateral torsional buckling. (kip-in)
 
 # Reference
 - AISC Section F9 (F9-6 through F97)
@@ -144,7 +144,7 @@ Description of applicable member: WT-shaped member loaded in the plane of symmet
 - `t_f`: thickness of flange (inch)
 
 # Returns 
-- `M_nFLB`: moment capacity of the section for flange local buckling.
+- `M_nFLB`: moment capacity of the section for flange local buckling. (kip-in)
 
 # Reference
 - AISC Section F9 (F9-14 through F915)
@@ -190,7 +190,7 @@ Description of applicable member: WT-shaped member loaded in the plane of symmet
 - `t_f`: thickness of flange (inch)
 
 # Returns 
-- `M_n`: moment capacity of the section.
+- `M_n`: moment capacity of the section. (kip-in)
 
 # Reference
 - AISC Section F9

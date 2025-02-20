@@ -26,7 +26,7 @@ Description of applicable member: Doubly symmetric compact I-shaped members and 
 - `Z_x`: plastic section modulous  (inch^4)
 
 # Returns 
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 
 # Reference
 - AISC Section F2 (F2-1)
@@ -129,7 +129,7 @@ Description of applicable member: Doubly symmetric compact I-shaped members and 
 
 # Returns 
     (;M_p, L_p, L_r, F_cr)
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `L_p`: the limiting laterally unbraced length for the limit state of yielding (inch)
 - `L_r`: the limiting laterally unbraced length for the limit state of inelastic lateral-torsional buckling (inch)
 - `F_cr`: critical stress (ksi)
@@ -156,10 +156,10 @@ Calculates the moment capacity of the applicable section for yielding.
 Description of applicable member: Doubly symmetric compact I-shaped members and channels bent about their major axis. 
 
 # Arguments
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 
 # Returns 
-- `M_nFY`: moment capacity of the section for yielding.
+- `M_nFY`: moment capacity of the section for yielding. (kip-in)
 
 # Reference
 - AISC Section F2.1
@@ -175,7 +175,7 @@ Calculates the moment capacity of the applicable section for lateral torsional b
 Description of applicable member: Doubly symmetric compact I-shaped members and channels bent about their major axis. 
 
 # Arguments
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `F_y`: yield strength of steel (ksi)
 - `S_x`: elastic section modulous (inch^3)
 - `F_cr`: critical stress (ksi)
@@ -185,7 +185,7 @@ Description of applicable member: Doubly symmetric compact I-shaped members and 
 - `C_b`: lateral torsional buckling modification factor (default = 1)
 
 # Returns 
-- `M_nLTB`: moment capacity of the section for lateral torsional buckling.
+- `M_nLTB`: moment capacity of the section for lateral torsional buckling. (kip-in)
 
 # Reference
 - AISC Section F2.2
@@ -224,7 +224,7 @@ Description of applicable member: Doubly symmetric compact I-shaped members and 
 - `C_b`: lateral torsional buckling modification factor (default = 1)
 
 # Returns 
-- `M_n`: moment capacity of the section.
+- `M_n`: moment capacity of the section. (kip-in)
 
 # Reference
 - AISC Section F2

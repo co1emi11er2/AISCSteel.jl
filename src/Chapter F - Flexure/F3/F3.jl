@@ -40,7 +40,7 @@ Description of applicable member: Doubly symmetric I-shaped members with compact
 
 # Returns 
     (;M_p, L_p, L_r, F_cr, k_c)
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `L_p`: the limiting laterally unbraced length for the limit state of yielding (inch)
 - `L_r`: the limiting laterally unbraced length for the limit state of inelastic lateral-torsional buckling (inch)
 - `F_cr`: critical stress (ksi)
@@ -67,7 +67,7 @@ Calculates the moment capacity of the applicable section for yielding.
 Description of applicable member: Doubly symmetric I-shaped members with compact webs and noncompact or slender flanges bent about their major axis. 
 
 # Arguments
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `F_y`: yield strength of steel (ksi)
 - `S_x`: elastic section modulous (inch^3)
 - `F_cr`: critical stress (ksi)
@@ -77,7 +77,7 @@ Description of applicable member: Doubly symmetric I-shaped members with compact
 - `C_b`: lateral torsional buckling modification factor (default = 1)
 
 # Returns 
-- `M_nLTB`: moment capacity of the section for lateral torsional buckling.
+- `M_nLTB`: moment capacity of the section for lateral torsional buckling. (kip-in)
 
 # Reference
 - AISC Section F3.1
@@ -97,7 +97,7 @@ Calculates the moment capacity of the applicable section for compression flange 
 Description of applicable member: Doubly symmetric I-shaped members with compact webs and noncompact or slender flanges bent about their major axis. 
 
 # Arguments
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `E`: modulous of elasticity (ksi)
 - `F_y`: yield strength of steel (ksi)
 - `S_x`: elastic section modulous (inch^3)
@@ -108,7 +108,7 @@ Description of applicable member: Doubly symmetric I-shaped members with compact
 - `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
 
 # Returns 
-- `M_nCFLB`: moment capacity of the section for compression flange local buckling.
+- `M_nCFLB`: moment capacity of the section for compression flange local buckling. (kip-in)
 
 # Reference
 - AISC Section F3.2
@@ -155,7 +155,7 @@ Description of applicable member: Doubly symmetric I-shaped members with compact
 - `C_b`: lateral torsional buckling modification factor (default = 1)
 
 # Returns 
-- `M_n`: moment capacity of the section.
+- `M_n`: moment capacity of the section. (kip-in)
 
 # Reference
 - AISC Section F3

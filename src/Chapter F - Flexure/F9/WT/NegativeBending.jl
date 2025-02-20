@@ -129,7 +129,7 @@ Description of applicable member: WT-shaped member loaded in the plane of symmet
 - `M_y`: yield moment of the section bent about the respective axis (kip-in)
 
 # Returns 
-- `M_nLTB`: moment capacity of the section for lateral torsional buckling.
+- `M_nLTB`: moment capacity of the section for lateral torsional buckling. (kip-in)
 
 # Reference
 - AISC Section F9 (F9-13)
@@ -153,7 +153,7 @@ Description of applicable member: WT-shaped member loaded in the plane of symmet
 - `S_x`: elastic section modulous (inch^3)
 
 # Returns 
-- `M_nLB`: moment capacity of the section for local buckling of tee stems.
+- `M_nLB`: moment capacity of the section for local buckling of tee stems. (kip-in)
 
 # Reference
 - AISC Section F9 (F9-16)
@@ -183,7 +183,7 @@ Description of applicable member: WT-shaped member loaded in the plane of symmet
 - `E`: modulous of elasticity (ksi)
 
 # Returns 
-- `M_n`: moment capacity of the section.
+- `M_n`: moment capacity of the section. (kip-in)
 
 # Reference
 - AISC Section F9

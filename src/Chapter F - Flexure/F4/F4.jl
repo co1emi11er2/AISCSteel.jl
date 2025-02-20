@@ -47,7 +47,7 @@ Description of applicable member: Other I-shaped members with compact webs or no
 - `S_xt`: elastic section modulous referred to tension flange (inch^3)
 
 # Returns 
-- `M_yt`: yield moment in the tension flange (kip-inch)
+- `M_yt`: yield moment in the tension flange (kip-in)
 
 # Reference
 - AISC Section F4
@@ -176,7 +176,7 @@ Description of applicable member: Other I-shaped members with compact webs or no
 - `λ_w`: slenderness ratio of the flange
 - `λ_pw`: compact slenderness ratio limit of the web
 - `λ_rw`: noncompact slenderness ratio limit of the web
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `M_yc`: yield moment in the compression flange (kip-in)
 
 # Returns 
@@ -320,7 +320,7 @@ Description of applicable member: Other I-shaped members with compact webs or no
 
 # Returns 
     (;M_p, M_yc, M_yt, k_c, F_cr, F_L, L_p, L_r, R_pc, R_pt)
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `M_yc`: yield moment in the compression flange (kip-in)
 - `M_yt`: yield moment in the tension flange (kip-inch)
 - `k_c`:
@@ -384,7 +384,7 @@ Description of applicable member: Other I-shaped members with compact webs or no
 - `M_yc`: yield moment in the compression flange 
 
 # Returns 
-- `M_nCFY`: moment capacity of the section for compression flange yielding.
+- `M_nCFY`: moment capacity of the section for compression flange yielding. (kip-in)
 
 # Reference
 - AISC Section F4.1
@@ -405,7 +405,7 @@ Calculates the moment capacity of the applicable section for lateral torsional b
 Description of applicable member: Other I-shaped members with compact webs or noncompact webs bent about their major axis.
 
 # Arguments
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `R_pc`: web plastification factor
 - `M_yc`: yield moment in the compression flange 
 - `F_L`: nominal compression flange stress above which the inelastic buckling limit states apply (ksi)
@@ -417,7 +417,7 @@ Description of applicable member: Other I-shaped members with compact webs or no
 - `C_b`: lateral torsional buckling modification factor (default = 1)
 
 # Returns 
-- `M_nLTB`: moment capacity of the section for lateral torsional buckling.
+- `M_nLTB`: moment capacity of the section for lateral torsional buckling. (kip-in)
 
 # Reference
 - AISC Section F4.2
@@ -444,7 +444,7 @@ Calculates the moment capacity of the applicable section for compression flange 
 Description of applicable member: Other I-shaped members with compact webs or noncompact webs bent about their major axis.
 
 # Arguments
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `R_pc`: web plastification factor
 - `M_yc`: yield moment in the compression flange 
 - `F_L`: nominal compression flange stress above which the inelastic buckling limit states apply (ksi)
@@ -457,7 +457,7 @@ Description of applicable member: Other I-shaped members with compact webs or no
 - `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
 
 # Returns 
-- `M_nCFLB`: moment capacity of the section for compression flange local buckling.
+- `M_nCFLB`: moment capacity of the section for compression flange local buckling. (kip-in)
 
 # Reference
 - AISC Section F4.3
@@ -484,14 +484,14 @@ Calculates the moment capacity of the applicable section for tension flange yiel
 Description of applicable member: Other I-shaped members with compact webs or noncompact webs bent about their major axis.
 
 # Arguments
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `R_pt`: web plastification factor corresponding to the tension flange yielding limit state
 - `M_yt`: yield moment in the tension flange 
 - `S_xc`: elastic section modulous referred to compression flange (inch^3)
 - `S_xt`: elastic section modulous referred to tension flange (inch^3)
 
 # Returns 
-- `M_nTFY`: moment capacity of the section for tension flange yielding.
+- `M_nTFY`: moment capacity of the section for tension flange yielding. (kip-in)
 
 # Reference
 - AISC Section F4.4
@@ -544,7 +544,7 @@ Description of applicable member: Other I-shaped members with compact webs or no
 - `C_b`: lateral torsional buckling modification factor (default = 1)
 
 # Returns 
-- `M_n`: moment capacity of the section.
+- `M_n`: moment capacity of the section. (kip-in)
 
 # Reference
 - AISC Section F4

@@ -1,3 +1,7 @@
+```@meta
+CollapsedDocStrings = true
+```
+
 # AISC Steel Shapes
 
 ## WShapes
@@ -18,4 +22,10 @@ Modules = [AISCSteel.Shapes.CShapes, AISCSteel.Shapes.CShapes.Flexure]
 ```@autodocs
 Modules = [AISCSteel.Shapes.WTShapes, AISCSteel.Shapes.WTShapes.Flexure,
 AISCSteel.Shapes.WTShapes.Flexure.F9.NegativeBending, AISCSteel.Shapes.WTShapes.Flexure.F9.PositiveBending]
+```
+
+## LShapes
+
+```@autodocs
+Modules = [AISCSteel.Shapes.LShapes, AISCSteel.Shapes.LShapes.Flexure]
 ```

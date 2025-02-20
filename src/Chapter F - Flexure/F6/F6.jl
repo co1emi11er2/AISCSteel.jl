@@ -24,7 +24,7 @@ Description of applicable member: I-shaped members or C-shaped members bent abou
 - `S_y`: elastic section modulous about y-axis (inch^3)
 
 # Returns 
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 
 # Reference
 - AISC Section F6 (F6-1)
@@ -74,7 +74,7 @@ Description of applicable member: I-shaped members or C-shaped members bent abou
 
 # Returns 
     (;M_p, F_cr)
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `F_cr`: critical stress (ksi)
 
 # Reference
@@ -99,10 +99,10 @@ Calculates the moment capacity of the applicable section for flange yielding.
 Description of applicable member: I-shaped members or C-shaped members bent about their minor axis.
 
 # Arguments
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 
 # Returns 
-- `M_nFY`: moment capacity of the section for compression flange yielding.
+- `M_nFY`: moment capacity of the section for compression flange yielding. (kip-in)
 
 # Reference
 - AISC Section F6.1
@@ -120,17 +120,17 @@ Calculates the moment capacity of the applicable section for flange lateral buck
 Description of applicable member: I-shaped members or C-shaped members bent about their minor axis.
 
 # Arguments
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `F_y`: yield strength of steel (ksi)
 - `S_y`: elastic section modulous about y-axis (inch^3)
 - `λ_f`: slenderness ratio of the flange
 - `λ_pf`: compact slenderness ratio limit of the flange
 - `λ_rf`: noncompact slenderness ratio limit of the flange
 - `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
-- `F_cr`: critical stress 
+- `F_cr`: critical stress (ksi)
 
 # Returns 
-- `M_nFLB`: moment capacity of the section for flange lateral buckling.
+- `M_nFLB`: moment capacity of the section for flange lateral buckling. (kip-in)
 
 # Reference
 - AISC Section F6.2
@@ -170,7 +170,7 @@ Description of applicable member: I-shaped members or C-shaped members bent abou
 - `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
 
 # Returns 
-- `M_n`: moment capacity of the section.
+- `M_n`: moment capacity of the section. (kip-in)
 
 # Reference
 - AISC Section F6

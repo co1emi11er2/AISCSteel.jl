@@ -28,7 +28,7 @@ Description of applicable member: I-shaped members with slender webs bent about 
 - `S_xc`: elastic section modulous referred to compression flange (inch^3)
 
 # Returns 
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 
 # Reference
 - AISC Section F5 (F5-1)
@@ -137,7 +137,7 @@ Description of applicable member: I-shaped members with slender webs bent about 
 - `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
 
 # Returns 
-- `F_crCFLB`: critical stress relating to compression flange lateral buckling
+- `F_crCFLB`: critical stress relating to compression flange lateral buckling (ksi)
 
 # Reference
 - AISC Section F5 (F5-8 through F5-9)
@@ -182,10 +182,10 @@ Description of applicable member: I-shaped members with slender webs bent about 
 
 # Returns 
     (;M_p, R_pg, F_crLTB, F_crCFLB)
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 - `R_pg`: bending strength reduction factor
 - `F_crLTB`: critical stress relating to lateral torsional buckling (ksi)
-- `F_crCFLB`: critical stress relating to compression flange lateral buckling
+- `F_crCFLB`: critical stress relating to compression flange lateral buckling (ksi)
 
 # Reference
 - AISC Section F5
@@ -224,10 +224,10 @@ Calculates the moment capacity of the applicable section for compression flange 
 Description of applicable member: I-shaped members with slender webs bent about their major axis.
 
 # Arguments
-- `M_p`: plastic moment of the section (kip-ft)
+- `M_p`: plastic moment of the section (kip-in)
 
 # Returns 
-- `M_nCFY`: moment capacity of the section for compression flange yielding.
+- `M_nCFY`: moment capacity of the section for compression flange yielding. (kip-in)
 
 # Reference
 - AISC Section F5.1
@@ -245,11 +245,11 @@ Description of applicable member: I-shaped members with slender webs bent about 
 
 # Arguments
 - `R_pg`: bending strength reduction factor
-- `F_crLTB`: critical stress relating to lateral torsional buckling
+- `F_crLTB`: critical stress relating to lateral torsional buckling (ksi)
 - `S_xc`: elastic section modulous referred to compression flange (inch^3)
 
 # Returns 
-- `M_nLTB`: moment capacity of the section for lateral torsional buckling.
+- `M_nLTB`: moment capacity of the section for lateral torsional buckling. (kip-in)
 
 # Reference
 - AISC Section F5.2
@@ -267,11 +267,11 @@ Description of applicable member: I-shaped members with slender webs bent about 
 
 # Arguments
 - `R_pg`: bending strength reduction factor
-- `F_crCFLB`: critical stress relating to compression flange lateral buckling
+- `F_crCFLB`: critical stress relating to compression flange lateral buckling (ksi)
 - `S_xc`: elastic section modulous referred to compression flange (inch^3)
 
 # Returns 
-- `M_nCFLB`: moment capacity of the section for compression flange lateral buckling.
+- `M_nCFLB`: moment capacity of the section for compression flange lateral buckling. (kip-in)
 
 # Reference
 - AISC Section F5.3
@@ -292,7 +292,7 @@ Description of applicable member: I-shaped members with slender webs bent about 
 - `S_xt`: elastic section modulous referred to tension flange (inch^3)
 
 # Returns 
-- `M_nTFY`: moment capacity of the section for tension flange yielding.
+- `M_nTFY`: moment capacity of the section for tension flange yielding. (kip-in)
 
 # Reference
 - AISC Section F5.4
@@ -329,7 +329,7 @@ Description of applicable member: I-shaped members with slender webs bent about 
 - `C_b`: lateral torsional buckling modification factor (default = 1)
 
 # Returns 
-- `M_n`: moment capacity of the section.
+- `M_n`: moment capacity of the section. (kip-in)
 
 # Reference
 - AISC Section F5
