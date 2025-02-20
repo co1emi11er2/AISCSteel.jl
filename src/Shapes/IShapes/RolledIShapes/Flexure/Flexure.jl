@@ -1,3 +1,22 @@
+"""
+    module Flexure
+
+This module includes useful functions to calculate bending capacity of rolled i-shape sections (`WShape`, `MShape`, `SShape`, `HPShape`).
+
+# Functions
+- `classify_flange_major_axis` - classify flange for slenderness when bent about the x-axis
+- `classify_flange_minor_axis` - classify flange for slenderness when bent about the y-axis
+- `classify_web` - classify web for slnderness
+- `calc_Mnx` - moment capacity about the x-axis
+- `calc_Mny` - moment capacity about the y-axis
+
+# Modules
+- `F2` - includes functions specific for F2 sections
+- `F3` - includes functions specific for F3 sections
+- `F4` - includes functions specific for F4 sections
+- `F5` - includes functions specific for F5 sections
+- `F6` - includes functions specific for F6 sections
+"""
 module Flexure
 import AISCSteel
 import AISCSteel.ChapterBDesignRequirements.B4.TableB4⬝1a as TableB4⬝1a

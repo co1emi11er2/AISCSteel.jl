@@ -1,3 +1,8 @@
+"""
+    module F10
+
+This section applies to single angles with and without continuous lateral restraint along their length.
+"""
 module F10
 
 import AISCSteel.Utils.UnitConversions as cnv
@@ -16,10 +21,10 @@ Calculates the moment capacity of the applicable section for yielding.
 Description of applicable member: L-shaped members bent about their geometric or principal axis. 
 
 # Arguments
-- `M_y`: yield moment of the section bent about the respective axis (kip-ft)
+- `M_y`: yield moment of the section bent about the respective axis (kip-in)
 
 # Returns 
-- `M_nY`: moment capacity of the section for yielding.
+- `M_nY`: moment capacity of the section for yielding. (kip-in)
 
 # Reference
 - AISC Section F10.1
@@ -34,11 +39,11 @@ Calculates the moment capacity of the applicable section for lateral torsional b
 Description of applicable member: L-shaped members bent about their geometric or principal axis. For the geometric axis, it is assumed the legs are of equal length.
 
 # Arguments
-- `M_y`: yield moment of the section bent about the respective axis (kip-ft)
-- `M_cr`: elastic lateral-torsional buckling moment of the section bent about the respective axis (kip-ft)
+- `M_y`: yield moment of the section bent about the respective axis (kip-in)
+- `M_cr`: elastic lateral-torsional buckling moment of the section bent about the respective axis (kip-in)
 
 # Returns 
-- `M_nLTB`: moment capacity of the section for lateral torsional buckling.
+- `M_nLTB`: moment capacity of the section for lateral torsional buckling. (kip-in)
 
 # Reference
 - AISC Section F10.2
@@ -62,7 +67,7 @@ Description of applicable member: L-shaped members bent about their geometric or
 
 # Arguments
 - `λ_class`: slenderness classification of angle leg
-- `M_y`: yield moment of the section bent about the respective axis (kip-ft)
+- `M_y`: yield moment of the section bent about the respective axis (kip-in)
 - `F_y`: yield strength of steel (ksi)
 - `S_c`: elastic section modulous to the toe in compression relative to the axis of bending (inch^3)
 - `b`: length of leg in compression (inch)
@@ -71,7 +76,7 @@ Description of applicable member: L-shaped members bent about their geometric or
 - `F_cr`: critical stress (ksi)
 
 # Returns 
-- `M_nLLB`: moment capacity of the section for local leg buckling.
+- `M_nLLB`: moment capacity of the section for local leg buckling. (kip-in)
 
 # Reference
 - AISC Section F10.3
@@ -123,7 +128,7 @@ Description of applicable member: L-shaped members bent about their geometric or
 - `S_min`: minimum elastic section modulous about respective axis (inch^3)
 
 # Returns 
-- `M_y`: yield moment of the section bent about the respective axis (kip-ft)
+- `M_y`: yield moment of the section bent about the respective axis (kip-in)
 
 # Reference
 - AISC Section F10 (no code reference)

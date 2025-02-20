@@ -22,6 +22,12 @@ Calculates negative moment about the minor principal axis when compression is in
 - `t`: thickness of leg (inch)
 - `S_c`: elastic section modulous to the toe in compression relative to the axis of bending (inch^3)
 - `λ_class`: slenderness classification of angle leg
+
+# Returns
+- `M_nz`: moment capacity of the section about the z-axis. (kip-in)
+
+# Reference
+- AISC Section F10
 """
 function calc_negative_Mnz(F_y, S_min, E, b, t, S_c, λ_class)
 
@@ -31,9 +37,9 @@ function calc_negative_Mnz(F_y, S_min, E, b, t, S_c, λ_class)
     M_nY = calc_MnY(M_y)
     M_nLLB = calc_MnLLB(λ_class, M_y, F_y, S_c, b, t, E, F_cr)
 
-    M_nw = min(M_nY, M_nLLB)
+    M_nz = min(M_nY, M_nLLB)
 
-    return M_nw
+    return M_nz
 end
 
 end

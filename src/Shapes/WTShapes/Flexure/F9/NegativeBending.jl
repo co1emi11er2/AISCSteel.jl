@@ -1,7 +1,7 @@
 module NegativeBending
 
 import AISCSteel
-import AISCSteel.ChapterFFlexure.F9.NegativeBending.WT: calc_variables, calc_Mn
+import AISCSteel.ChapterFFlexure.F9.WT.NegativeBending: calc_variables, calc_Mn
 export calc_variables, calc_Mn
 
 """

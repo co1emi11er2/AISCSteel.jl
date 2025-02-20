@@ -9,7 +9,7 @@ import AISCSteel.ChapterFFlexure.F10 as F10
 """
     calc_Mcr(E, b, t, C_b, L_b)
 
-Calculates the elastic lateral-torsional buckling moment of the section bent about the respective axis (kip-ft)
+Calculates the elastic lateral-torsional buckling moment of the section bent about the respective axis (kip-in)
 
 Description of applicable member: L-shaped members bent about their geometric axis. For the geometric axis, it is assumed the legs are of equal length.
 
@@ -21,7 +21,7 @@ Description of applicable member: L-shaped members bent about their geometric ax
 - `L_b`: unbraced length (inch)
 
 # Returns 
-- `M_cr`: elastic lateral-torsional buckling moment of the section bent about the respective axis (kip-ft)
+- `M_cr`: elastic lateral-torsional buckling moment of the section bent about the respective axis (kip-in)
 
 # Reference
 - AISC Section F10 (F10-5b)
@@ -45,6 +45,12 @@ Calculates negative moment (when toe of leg is in tension) about geometric axis 
 - `L_b`: unbraced length (inch)
 - `restraint_type`: type of restraint on leg (`:fully_restrained`, `:unrestrained`, or `:at_max_moment_only`)
 - `C_b`: lateral torsional buckling modification factor
+
+# Returns 
+- `M_n`: moment capacity of the section. (kip-in)
+
+# Reference
+- AISC Section F10
 """
 function calc_negative_Mn(F_y, S_min, E, b, t, L_b, restraint_type, C_b)
 

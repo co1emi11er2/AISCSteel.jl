@@ -1,3 +1,19 @@
+"""
+    module Flexure
+
+This module includes useful functions to calculate bending capacity of rolled C-Shape sections (`CShape`, `MCShape`).
+
+# Functions
+- `classify_flange_major_axis` - classify flange for slenderness when bent about the x-axis
+- `classify_flange_minor_axis` - classify flange for slenderness when bent about the y-axis
+- `classify_web` - classify web for slnderness
+- `calc_Mnx` - moment capacity about the x-axis
+- `calc_Mny` - moment capacity about the y-axis
+
+# Modules
+- `F2` - includes functions specific for F2 sections
+- `F6` - includes functions specific for F6 sections
+"""
 module Flexure
 import AISCSteel
 import AISCSteel.ChapterBDesignRequirements.B4.TableB4⬝1a as TableB4⬝1a
@@ -9,7 +25,7 @@ include("F6.jl")
 
 
 """
-    classify_flange(shape::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
+    classify_flange_major_axis(shape::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
 
 This function classifies flange for flexure for the shape.
 
@@ -23,7 +39,7 @@ This function classifies flange for flexure for the shape.
 - `λ_rf`: noncompact slenderness ratio limit of the flange
 - `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
 """
-function classify_flange((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
+function classify_flange_major_axis((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
 
     b = b_f
     t = t_f
@@ -32,6 +48,33 @@ function classify_flange((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.CSh
     return λ_fvariabels
 
 end
+
+
+"""
+    classify_flange_minor_axis(shape::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
+
+This function classifies flange for flexure for the shape.
+
+# Arguments
+- `shape`: rolled C-Shape section (`CShape`, `MCShape`)
+
+# Returns
+    (λ_f, λ_pf, λ_rf, λ_fclass)
+- `λ_f`: slenderness ratio of the flange
+- `λ_pf`: compact slenderness ratio limit of the flange
+- `λ_rf`: noncompact slenderness ratio limit of the flange
+- `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
+"""
+function classify_flange_minor_axis((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
+
+    b = b_f
+    t = t_f
+    λ_fvariabels = TableB4⬝1a.case13(b, t, E, F_y)
+
+    return λ_fvariabels
+
+end
+
 
 """
     classify_web(shape::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
@@ -58,6 +101,7 @@ function classify_web((;h, t_w, E, F_y)::T) where T <: AISCSteel.Shapes.CShapes.
 
 end
 
+
 """
     calc_Mnx(shape::T, L_b, C_b=1) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
 
@@ -81,6 +125,7 @@ function calc_Mnx(c::T, L_b, C_b=1) where T <: AISCSteel.Shapes.CShapes.Abstract
     return M_nx
 end
 
+
 """
     calc_Mny(shape::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
 
@@ -97,7 +142,7 @@ This function calculates Mny of the shape.
 """
 function calc_Mny(c::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
     
-    λ_fvariabels = classify_flange(c)
+    λ_fvariabels = classify_flange_minor_axis(c)
 
     M_ny = F6.calc_Mn(c, λ_fvariabels...)
 

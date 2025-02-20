@@ -29,6 +29,12 @@ Calculates negative moment about major principal axis when compression is in the
 - `λ_class`: slenderness classification of angle leg
 - `L_b`: unbraced length (inch)
 - `C_b`: lateral torsional buckling modification factor (default = 1)
+
+# Returns
+- `M_nw`: moment capacity of the section about the w-axis. (kip-in)
+
+# Reference
+- AISC Section F10
 """
 function calc_negative_Mnw(F_y, S_wC, E, A_g, r_z, t, β_w , b, S_c, λ_class, L_b, C_b)
 

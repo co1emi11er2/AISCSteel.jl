@@ -1,3 +1,7 @@
+```@meta
+CollapsedDocStrings = true
+```
+
 # Chapter B - Design Requirements
 
 ## B4. Member Properties

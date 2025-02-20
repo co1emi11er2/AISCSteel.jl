@@ -5,6 +5,7 @@ DocMeta.setdocmeta!(AISCSteel, :DocTestSetup, :(using AISCSteel); recursive=fals
 
 makedocs(;
     modules=[AISCSteel],
+    checkdocs=:none,
     authors="Cole Miller",
     sitename="AISCSteel.jl",
     format=Documenter.HTML(;
