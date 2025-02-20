@@ -40,7 +40,7 @@ This function calculates Mn of the shape for AISC Section F2.
 # Arguments
 - `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
 - `L_b`: unbraced length (inch)
-- `C_b`: lateral torsional buckling modification factor (default = 1)
+- `C_b`: lateral torsional buckling modification factor (default = 1)   
 
 # Returns
 - `M_n`: nominal moment of the section (kip-ft)
