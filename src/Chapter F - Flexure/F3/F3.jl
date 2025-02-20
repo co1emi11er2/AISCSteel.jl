@@ -9,6 +9,39 @@ include("Equations.jl")
 ##########################################################################################
 import AISCSteel.ChapterFFlexure.F2 as F2
 
+"""
+    calc_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, C_b=1)
+
+Calculates the intermediate variables needed to then solve for moment capacities of the applicable section.
+
+Description of applicable member: Doubly symmetric I-shaped members with compact webs and noncompact or slender flanges bent about their major axis.  
+
+# Arguments
+- `E`: modulous of elasticity (ksi)
+- `F_y`: yield strength of steel (ksi)
+- `Z_x`: plastic section modulous  (inch^4)
+- `S_x`: elastic section modulous (inch^3)
+- `r_y`: radius of gyration about the y-axis (inch)
+- `h_0`: distance between the flange centroids (inch)
+- `J`: torsional constant (inch^4)
+- `c`:
+- `r_ts`:
+- `L_b`: unbraced length (inch)
+- `h`: clear distance between flanges less the fillets (inch)
+- `t_w`: thickness of the web (inch)
+- `C_b`: lateral torsional buckling modification factor (default = 1)
+
+# Returns 
+    (;M_p, L_p, L_r, F_cr, k_c)
+- `M_p`: plastic moment of the section (kip-ft)
+- `L_p`: the limiting laterally unbraced length for the limit state of yielding (inch)
+- `L_r`: the limiting laterally unbraced length for the limit state of inelastic lateral-torsional buckling (inch)
+- `F_cr`: critical stress (ksi)
+- `k_c`: 
+
+# Reference
+- AISC Section F3
+"""
 function calc_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, C_b=1)
     (;M_p, L_p, L_r, F_cr) = F2.calc_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, C_b)
 
@@ -17,6 +50,7 @@ function calc_variables(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, C_b
 
     return (;M_p, L_p, L_r, F_cr, k_c)
 end
+
 
 """
     calc_MnLTB(M_p, F_y, S_x, F_cr, L_b, L_p, L_r, C_b=1)
@@ -46,6 +80,7 @@ function calc_MnLTB(M_p, F_y, S_x, F_cr, L_b, L_p, L_r, C_b=1)
     # 1. Lateral-Torsional Buckling
     M_nLTB = F2.calc_MnLTB(M_p, F_y, S_x, F_cr, L_b, L_p, L_r, C_b)
 end
+
 
 """
     calc_MnCFLB(M_p, E, F_y, S_x, k_c, λ_f, λ_pf, λ_rf, λ_fclass)
@@ -84,6 +119,7 @@ function calc_MnCFLB(M_p, E, F_y, S_x, k_c, λ_f, λ_pf, λ_rf, λ_fclass)
 
     return M_nCFLB
 end
+
 
 """
     calc_Mn(E, F_y, Z_x, S_x, r_y, h_0, J, c, r_ts, L_b, h, t_w, λ_f, λ_pf, λ_rf, λ_fclass, C_b=1)
