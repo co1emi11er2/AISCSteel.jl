@@ -8,10 +8,45 @@ include("Equations.jl")
 ##########################################################################################
 # Equations below are the public API for F5
 ##########################################################################################
+"""
+    calc_Mp(R_pg, F_y, S_xc)
 
+Calculates the plastic moment capacity of the applicable section.
+
+Description of applicable member: I-shaped members with slender webs bent about their major axis. 
+
+# Arguments
+- `R_pg`: bending strength reduction factor
+- `F_y`: yield strength of steel (ksi)
+- `S_xc`: elastic section modulous referred to compression flange (inch^3)
+
+# Returns 
+- `M_p`: plastic moment of the section (kip-ft)
+
+# Reference
+- AISC Section F5 (F5-1)
+"""
 calc_Mp(R_pg, F_y, S_xc) = M_p = Equations.EqF5▬1(R_pg, F_y, S_xc)
 
 
+"""
+    calc_FcrLTB(E, F_y, C_b, L_b, L_p, L_r, r_t)
+
+Calculates the plastic moment capacity of the applicable section.
+
+Description of applicable member: I-shaped members with slender webs bent about their major axis. 
+
+# Arguments
+- `R_pg`: bending strength reduction factor
+- `F_y`: yield strength of steel (ksi)
+- `S_xc`: elastic section modulous referred to compression flange (inch^3)
+
+# Returns 
+- `F_crLTB`: critical stress relating to lateral torsional buckling (ksi)
+
+# Reference
+- AISC Section F5 (F5-3 through F5-4)
+"""
 function calc_FcrLTB(E, F_y, C_b, L_b, L_p, L_r, r_t)
     if L_b <= L_p
         F_crLTB = F_y
@@ -26,13 +61,80 @@ function calc_FcrLTB(E, F_y, C_b, L_b, L_p, L_r, r_t)
     return F_crLTB
 end
 
+
+"""
+    calc_Lr(r_t, E, F_y)
+
+Calculates the limiting laterally unbraced length for the limit state of inelastic lateral-torsional buckling of the applicable section.
+
+Description of applicable member: I-shaped members with slender webs bent about their major axis.
+
+# Arguments
+- `r_t`: radius of gyration of the flange components in flexural compression plus 1/3 of the web area (inch)
+- `E`: modulous of elasticity (ksi)
+- `F_y`: yield strength of steel (ksi)
+
+# Returns 
+- `L_r`: the limiting laterally unbraced length for the limit state of inelastic lateral-torsional buckling (inch)
+
+# Reference
+- AISC Section F5 (F5-5)
+"""
 calc_Lr(r_t, E, F_y) = L_r = Equations.EqF5▬5(r_t, E, F_y)
 
+
+"""
+    calc_Rpg(a_w, h_c, t_w, E, F_y)
+
+Calculates the intermediate variables needed to then solve for moment capacities of the applicable section.
+
+Description of applicable member: I-shaped members with slender webs bent about their major axis.
+
+# Arguments
+- `a_w`: see AISC F4-12
+- `h_c`: twice the distance from the centroid to the following: (inch)
+    - the inside face of the compression flange less the fillet or corner radius for rolled shapes
+    - the nearest line of fasteners at the compression flange or inside face of the compression flange when welds are used for built-up sections
+- `t_w`: thickness of the web (inch)
+- `E`: modulous of elasticity (ksi)
+- `F_y`: yield strength of steel (ksi)
+
+# Returns 
+- `R_pg`: bending strength reduction factor
+
+# Reference
+- AISC Section F5 (F5-6)
+"""
 function calc_Rpg(a_w, h_c, t_w, E, F_y)
     R_pg = Equations.EqF5▬6(a_w, h_c, t_w, E, F_y)
     R_pg = min(R_pg, 1.0)
 end
 
+
+"""
+    calc_FcrCFLB(E, F_y, k_c, b_fc, t_fc, λ_f, λ_pf, λ_rf, λ_fclass)
+
+Calculates the critical stress relating to compression flange lateral buckling of the applicable section.
+
+Description of applicable member: I-shaped members with slender webs bent about their major axis.
+
+# Arguments
+- `E`: modulous of elasticity (ksi)
+- `F_y`: yield strength of steel (ksi)
+- `k_c`: 
+- `b_fc`: width of compression flange (inch)
+- `t_fc`: thickness of compression flange (inch)
+- `λ_f`: slenderness ratio of the flange
+- `λ_pf`: compact slenderness ratio limit of the flange
+- `λ_rf`: noncompact slenderness ratio limit of the flange
+- `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
+
+# Returns 
+- `F_crCFLB`: critical stress relating to compression flange lateral buckling
+
+# Reference
+- AISC Section F5 (F5-8 through F5-9)
+"""
 function calc_FcrCFLB(E, F_y, k_c, b_fc, t_fc, λ_f, λ_pf, λ_rf, λ_fclass)
     if λ_fclass == :compact
         F_crCFLB = F_y
@@ -45,6 +147,42 @@ function calc_FcrCFLB(E, F_y, k_c, b_fc, t_fc, λ_f, λ_pf, λ_rf, λ_fclass)
     return F_crCFLB
 end
 
+
+"""
+    calc_variables(E, F_y, S_xc, b_fc, t_fc, h, h_c, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b=1)
+
+Calculates the intermediate variables needed to then solve for moment capacities of the applicable section.
+
+Description of applicable member: I-shaped members with slender webs bent about their major axis.
+
+# Arguments
+- `E`: modulous of elasticity (ksi)
+- `F_y`: yield strength of steel (ksi)
+- `S_xc`: elastic section modulous referred to compression flange (inch^3)
+- `b_fc`: width of compression flange (inch)
+- `t_fc`: thickness of compression flange (inch)
+- `h`: clear distance between flanges less the fillets (inch)
+- `h_c`: twice the distance from the centroid to the following: (inch)
+    - the inside face of the compression flange less the fillet or corner radius for rolled shapes
+    - the nearest line of fasteners at the compression flange or inside face of the compression flange when welds are used for built-up sections
+- `t_w`: thickness of the web (inch)
+- `λ_f`: slenderness ratio of the flange
+- `λ_pf`: compact slenderness ratio limit of the flange
+- `λ_rf`: noncompact slenderness ratio limit of the flange
+- `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
+- `L_b`: unbraced length (inch)
+- `C_b`: lateral torsional buckling modification factor
+
+# Returns 
+    (;M_p, R_pg, F_crLTB, F_crCFLB)
+- `M_p`: plastic moment of the section (kip-ft)
+- `R_pg`: bending strength reduction factor
+- `F_crLTB`: critical stress relating to lateral torsional buckling (ksi)
+- `F_crCFLB`: critical stress relating to compression flange lateral buckling
+
+# Reference
+- AISC Section F5
+"""
 function calc_variables(E, F_y, S_xc, b_fc, t_fc, h, h_c, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b=1)
 
     a_w = F4.calc_aw(h_c, t_w, b_fc, t_fc)
@@ -69,6 +207,7 @@ function calc_variables(E, F_y, S_xc, b_fc, t_fc, h, h_c, t_w, λ_f, λ_pf, λ_r
 
     return (;M_p, R_pg, F_crLTB, F_crCFLB)
 end
+
 
 """
     calc_MnCFY(M_p)
