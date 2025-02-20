@@ -1,3 +1,11 @@
+"""
+    module F4
+
+This section applies to doubly symmetric I-shaped members bent about their major
+axis with noncompact webs and singly symmetric I-shaped members with webs
+attached to the mid-width of the flanges, bent about their major axis, with compact
+or noncompact webs, as defined in Section B4.1 for flexure.
+"""
 module F4
 using StructuralUnits
 import AISCSteel.Utils.UnitConversions as cnv

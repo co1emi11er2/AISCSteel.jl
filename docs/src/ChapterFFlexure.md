@@ -63,6 +63,8 @@ Modules = [AISCSteel.ChapterFFlexure.F5]
 
 ## F6. I-Shaped Members and Channels Bent about Their Minor Axis
 
+This section applies to I-shaped members and channels bent about ther minor axis.
+
 ```@autodocs
 Modules = [AISCSteel.ChapterFFlexure.F6]
 ```

@@ -1,3 +1,10 @@
+"""
+    module F5
+
+This section applies to doubly symmetric and singly symmetric I-shaped members
+with slender webs attached to the mid-width of the flanges and bent about their major
+axis as defined in Section B4.1 for flexure.
+"""
 module F5
 using StructuralUnits
 import AISCSteel.ChapterFFlexure.F4 as F4

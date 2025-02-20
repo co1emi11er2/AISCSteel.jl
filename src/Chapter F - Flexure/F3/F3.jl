@@ -1,3 +1,10 @@
+"""
+    module F3
+
+This section applies to doubly symmetric I-shaped members bent about their major
+axis having compact webs and noncompact or slender flanges as defined in Section
+B4.1 for flexure.
+"""
 module F3
 using StructuralUnits
 
