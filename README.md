@@ -45,7 +45,7 @@ Pkg.add("AISCSteel")
   - [x] HP Shape
   - [x] C Shape
   - [x] MC Shape
-  - [ ] L Shape
+  - [x] L Shape
   - [x] WT Shape
   - [x] MT Shape
   - [x] ST Shape
@@ -65,11 +65,11 @@ Pkg.add("AISCSteel")
   - [x] Calculate based on F3
   - [x] Calculate based on F4
   - [x] Calculate based on F5
-  - [ ] Calculate based on F6
+  - [x] Calculate based on F6
   - [ ] Calculate based on F7
   - [ ] Calculate based on F8
-  - [ ] Calculate based on F9
-  - [ ] Calculate based on F10
+  - [x] Calculate based on F9
+  - [x] Calculate based on F10
   - [ ] Calculate based on F11
   - [ ] Calculate based on F12
 - **Shear Design** (Chapter G)
