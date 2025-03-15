@@ -191,7 +191,7 @@ function calc_Rpc(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yc)
         if h_c/t_w <= λ_pw
             R_pc = Equations.EqF4▬9a(M_p, M_yc)
         else
-            R_pc = Equations.EqF4▬9b(M_p, M_yt, λ, λ_pw, λ_rw)
+            R_pc = Equations.EqF4▬9b(M_p, M_yc, λ_w, λ_pw, λ_rw)
         end
     else
         R_pc = 1.0
@@ -277,7 +277,7 @@ function calc_Rpt(I_yc, I_y, h_c, t_w, λ_w, λ_pw, λ_rw, M_p, M_yt)
         if h_c/t_w <= λ_pw
             R_pt = Equations.EqF4▬16a(M_p, M_yt)
         else
-            R_pt = Equations.EqF4▬16b(M_p, M_yc, λ_w, λ_pw, λ_rw)
+            R_pt = Equations.EqF4▬16b(M_p, M_yt, λ_w, λ_pw, λ_rw)
         end
     else
         R_pt = 1.0
@@ -336,7 +336,7 @@ Description of applicable member: Other I-shaped members with compact webs or no
 """
 function calc_variables(E, F_y, Z_x, S_x, S_xc, S_xt, b_fc, t_fc, h, h_c, t_w, J, h_0, I_y, I_yc, λ_w, λ_pw, λ_rw, L_b, C_b)
 
-    M_p = min(F_y*Z_x, 1.6*F_y*S_x) # no reference equation (in section F4.2.6)
+    M_p = min(F_y*Z_x, 1.6*F_y*S_x) |> cnv.to_moment # no reference equation (in section F4.2.6)
 
     M_yc = calc_Myc(F_y, S_xc)
     M_yt = calc_Myt(F_y, S_xt)

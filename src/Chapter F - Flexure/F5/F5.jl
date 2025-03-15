@@ -255,7 +255,7 @@ Description of applicable member: I-shaped members with slender webs bent about 
 - AISC Section F5.2
 """
 function calc_MnLTB(R_pg, F_crLTB, S_xc)
-    M_nLTB = R_pg*F_crLTB*S_xc
+    M_nLTB = Equations.EqF5▬2(R_pg, F_crLTB, S_xc)
 end
 
 """
@@ -277,7 +277,7 @@ Description of applicable member: I-shaped members with slender webs bent about 
 - AISC Section F5.3
 """
 function calc_MnCFLB(R_pg, F_crCFLB, S_xc)
-    M_nCFLB = R_pg*F_crCFLB*S_xc
+    M_nCFLB = Equations.EqF5▬7(R_pg, F_crCFLB, S_xc)
 end
 
 """
@@ -298,11 +298,11 @@ Description of applicable member: I-shaped members with slender webs bent about 
 - AISC Section F5.4
 """
 function calc_MnTFY(F_y, S_xt)
-    M_nTFY = F_y*S_xt
+    M_nTFY = Equations.EqF5▬10(F_y, S_xt)
 end
 
 """
-    flexure_capacity_f5(E, F_y, S_xc, S_xt, b_fc, t_fc, h, h_c, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b=1)
+    calc_Mn(E, F_y, S_xc, S_xt, b_fc, t_fc, h, h_c, t_w, λ_f, λ_pf, λ_rf, λ_fclass, L_b, C_b=1)
 
 Calculates the moment capacity of the applicable section.
 
