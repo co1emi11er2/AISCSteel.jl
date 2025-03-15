@@ -44,8 +44,8 @@ function EqF4▬9a(M_p, M_yc)
     R_pc = M_p / M_yc
 end
 
-function EqF4▬9b(M_p, M_yt, λ, λ_pw, λ_rw)
-    R_pc = min((M_p / M_yt) - (M_p / M_yt - 1) * ((λ - λ_pw) / (λ_rw - λ_pw)), M_p / M_yt)
+function EqF4▬9b(M_p, M_yc, λ, λ_pw, λ_rw)
+    R_pc = min((M_p / M_yc) - (M_p / M_yc - 1) * ((λ - λ_pw) / (λ_rw - λ_pw)), M_p / M_yc)
 end
 
 function EqF4▬10()
@@ -76,8 +76,8 @@ function EqF4▬16a(M_p, M_yt)
     R_pt = M_p / M_yt
 end
 
-function EqF4▬16b(M_p, M_yc, λ_w, λ_pw, λ_rw)
-    R_pt = min((M_p / M_yc) - (M_p / M_yc - 1) * ((λ_w - λ_pw) / (λ_rw - λ_pw)), M_p / M_yc)
+function EqF4▬16b(M_p, M_yt, λ_w, λ_pw, λ_rw)
+    R_pt = min((M_p / M_yt) - (M_p / M_yt - 1) * ((λ_w - λ_pw) / (λ_rw - λ_pw)), M_p / M_yt)
 end
 
 function EqF4▬17()
