@@ -4,6 +4,10 @@
 This section applies to square and rectangular HSS, and box sections bent about
 either axis, having compact, noncompact, or slender webs or flanges as defined in Section
 B4.1 for flexure.
+
+There are two sections:
+- HSS - for HSS shapes 
+- Box for Box shapes
 """
 module F7
 
@@ -37,48 +41,57 @@ calc_Mp(F_y, Z) = M_p = Equations.EqF7▬1(F_y, Z)
 
 
 """
-    calc_be_HSS(t_f, E, F_y, b)
+    calc_Ie(I, b, b_e, t_f, Ht)
 
-Calculates the effective width of the compression flange.
+Calculates the effective second moment of inertia of the HSS Shape with slender flanges.
 
 Description of applicable member: square and rectangular HSS sections bent about
-either axis
+either axis with slender flanges
 
 # Arguments
+- `I`: second moment of inertia about axis of bending (inch^4)
+- `b`: width of flange (inch)
+- `b_e`: effective width of the compression flange
 - `t_f`: thickness of the compression flange (inch)
-- `E`: modulous of elasticity (ksi)
-- `F_y`: yield strength of steel (ksi)
-- `b`: width of the compression flange (inch)
+- `Ht`: overall depth of square HSS or longer wall of rectangular HSS (inch)
 
 # Returns 
-- `b_e`: effective width of the compression flange
+- `I_e`: effective second moment of inertia about axis of bending (inch^4)
 
 # Reference
-- AISC Section F7 (F7-4)
+- AISC Section F7
 """
-calc_be_HSS(t_f, E, F_y, b) = b_e = Equations.EqF7▬4(t_f, E, F_y, b)
+function calc_Ie(I, b, b_e, t_f, Ht)
+    b = b - b_e
+    a = b*t_f
+    d = (Ht - t_f)/2
+    I_e = I - 2*( (b*t_f^3)/12 + a*d^2 )
+    return I_e
+end
 
 
 """
-    calc_be_box(t_f, E, F_y, b)
+    calc_Se(I_e, Ht)
 
-Calculates the effective width of the compression flange.
+Calculates the effective second moment of inertia of the HSS Shape with slender flanges.
 
-Description of applicable member: box sections bent about either axis
+Description of applicable member: square and rectangular HSS sections bent about
+either axis with slender flanges
 
 # Arguments
-- `t_f`: thickness of the compression flange (inch)
-- `E`: modulous of elasticity (ksi)
-- `F_y`: yield strength of steel (ksi)
-- `b`: width of the compression flange (inch)
+- `I_e`: effective second moment of inertia about axis of bending (inch^4)
+- `Ht`: overall depth of square HSS or longer wall of rectangular HSS (inch)
 
 # Returns 
-- `b_e`: effective width of the compression flange
+- `S_e`: effective elastic section modulus about the axis of bending (inch^3)
 
 # Reference
-- AISC Section F7 (F7-4)
+- AISC Section F7
 """
-calc_be_box(t_f, E, F_y, b) = b_e = Equations.EqF7▬5(t_f, E, F_y, b)
+function calc_Se(I_e, Ht)
+    S_e = I_e/ (Ht/2)
+    return S_e
+end
 
 
 """
@@ -200,42 +213,42 @@ either axis
 calc_MnY(M_p) = M_nFY = M_p
 
 
-"""
-    calc_MnFLB(M_p, F_y, S, S_e, λ_f, λ_pf, λ_rf, λ_fclass)
+# """
+#     calc_MnFLB(M_p, F_y, S, S_e, λ_f, λ_pf, λ_rf, λ_fclass)
 
-Calculates the moment capacity of the applicable section for compression flange local buckling.
+# Calculates the moment capacity of the applicable section for compression flange local buckling.
 
-Description of applicable member: square and rectangular HSS, and box sections bent about
-either axis
+# Description of applicable member: square and rectangular HSS, and box sections bent about
+# either axis
 
-# Arguments
-- `M_p`: plastic moment of the section (kip-in)
-- `F_y`: yield strength of steel (ksi)
-- `S`: elastic section modulus about the axis of bending (inch^3)
-- `S_e`: effective elastic section modulus about the axis of bending (inch^3)
-- `λ_f`: slenderness ratio of the flange
-- `λ_pf`: compact slenderness ratio limit of the flange
-- `λ_rf`: noncompact slenderness ratio limit of the flange
-- `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
+# # Arguments
+# - `M_p`: plastic moment of the section (kip-in)
+# - `F_y`: yield strength of steel (ksi)
+# - `S`: elastic section modulus about the axis of bending (inch^3)
+# - `S_e`: effective elastic section modulus about the axis of bending (inch^3)
+# - `λ_f`: slenderness ratio of the flange
+# - `λ_pf`: compact slenderness ratio limit of the flange
+# - `λ_rf`: noncompact slenderness ratio limit of the flange
+# - `λ_fclass`: `compact` `noncompact` or `slender` classification for the flange
 
-# Returns 
-- `M_nFLB`: moment capacity of the section for flange local buckling. (kip-in)
+# # Returns 
+# - `M_nFLB`: moment capacity of the section for flange local buckling. (kip-in)
 
-# Reference
-- AISC Section F7.2
-"""
-function calc_MnFLB(M_p, F_y, S, S_e, λ_f, λ_pf, λ_rf, λ_fclass)
-    # 2. Flange Local Buckling
-    if λ_fclass == :compact
-        M_nFLB = M_p
-    elseif λ_fclass == :noncompact
-        M_nFLB = Equations.EqF7▬2(M_p, F_y, S, λ_f, λ_pf, λ_rf)
-    else
-        M_nFLB = Equations.EqF7▬3(F_y, S_e)
-    end
+# # Reference
+# - AISC Section F7.2
+# """
+# function calc_MnFLB(M_p, F_y, S, S_e, λ_f, λ_pf, λ_rf, λ_fclass)
+#     # 2. Flange Local Buckling
+#     if λ_fclass == :compact
+#         M_nFLB = M_p
+#     elseif λ_fclass == :noncompact
+#         M_nFLB = Equations.EqF7▬2(M_p, F_y, S, λ_f, λ_pf, λ_rf)
+#     else
+#         M_nFLB = Equations.EqF7▬3(F_y, S_e)
+#     end
 
-    return M_nFLB
-end
+#     return M_nFLB
+# end
 
 
 """
@@ -263,7 +276,7 @@ either axis
 - AISC Section F7.3
 """
 function calc_MnWLB(M_p, F_y, S, R_pg, λ_w, λ_pw, λ_rw, λ_wclass)
-    # 2. Flange Local Buckling
+    # 3. Web Local Buckling
     if λ_wclass == :compact
         M_nFLB = M_p
     elseif λ_wclass == :noncompact
@@ -304,6 +317,7 @@ Description of applicable member: rectangular HSS, and box sections bent about t
 - AISC Section F7.4
 """
 function calc_MnLTB(M_p, F_y, S_x, E, J, A_g, r_y, L_b, L_p, L_r, C_b=1)
+    # 4. Lateral Torsional Buckling
     if L_b <= L_p
         M_nLTB = M_p
     elseif L_p < L_b <= L_r
@@ -314,6 +328,13 @@ function calc_MnLTB(M_p, F_y, S_x, E, J, A_g, r_y, L_b, L_p, L_r, C_b=1)
 
     return M_nLTB
 end
+
+
+# include API for HSS
+include("HSS/HSS.jl")
+
+# include API for Box
+include("Box/Box.jl")
 
 
 end # module

@@ -248,4 +248,76 @@ function case15(h, t_w, E, F_y)
 end
 
 
+"""
+    case17(b, t, E, F_y)
+
+Classifies the compressive elements of a member subject to flexural.
+
+Description of applicable member: Webs of doubly-symmetric I-shaped sections and channels.
+
+# Arguments
+- `b`: width of the flat wall of the flange HSS (inch)
+- `t`: thickness of the flange (inch)
+- `E`: elastic section modulous.
+- `F_y`: yield strength of steel.
+
+# Returns
+- `FlexureBucklingType` enum whose value is either `Compact`, `Noncompact`, or `Slender`
+
+# Reference
+- AISC Table B4.1b
+"""
+function case17(b, t, E, F_y)
+    λ = b / t
+    λ_p = 1.12 * sqrt(E / F_y)
+    λ_r = 1.40 * sqrt(E / F_y)
+
+    if λ <= λ_p
+        class = :compact
+    elseif λ_p < λ <= λ_r
+        class = :noncompact
+    else
+        class = :slender
+    end
+
+    return λ, λ_p, λ_r, class
+end
+
+
+"""
+    case19(h, t, E, F_y)
+
+Classifies the compressive elements of a member subject to flexural.
+
+Description of applicable member: Webs of doubly-symmetric I-shaped sections and channels.
+
+# Arguments
+- `h`: height of the flat wall of the web HSS (inch)
+- `t`: thickness of the web (inch)
+- `E`: elastic section modulous.
+- `F_y`: yield strength of steel.
+
+# Returns
+- `FlexureBucklingType` enum whose value is either `Compact`, `Noncompact`, or `Slender`
+
+# Reference
+- AISC Table B4.1b
+"""
+function case19(h, t, E, F_y)
+    λ = h / t
+    λ_p = 2.42 * sqrt(E / F_y)
+    λ_r = 5.70 * sqrt(E / F_y)
+
+    if λ <= λ_p
+        class = :compact
+    elseif λ_p < λ <= λ_r
+        class = :noncompact
+    else
+        class = :slender
+    end
+
+    return λ, λ_p, λ_r, class
+end
+
+
 end

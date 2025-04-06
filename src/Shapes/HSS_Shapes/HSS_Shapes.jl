@@ -9,4 +9,7 @@ abstract type AbstractHSS_Shapes <: AbstractSteelShapes end
 # include Shapes
 include("HSS_Shape.jl")
 
+# Include Flexure
+include("Flexure/Flexure.jl")
+
 end # module

@@ -10,7 +10,7 @@ HSS_Shape in the AISC steel database.
 - `weight`: weight of section (plf)
 - `area`: area of shape (inch2)
 - `Ht`: overall depth of square HSS or longer wall of rectangular HSS (inch)
-- `h`: clear distance between flanges less the fillets (inch)
+- `h`: depth of flat wall of square HSS or longer wall of rectangular HSS (inch)
 - `B`: overall width of square HSS or shorter wall of rectangular HSS (inch)
 - `b`: width of the flat wall of square HSS or the shorter flat wall of rectangular HSS (inch)
 - `t_nom`: nominal thickness of HSS and pipe wall (inch)
