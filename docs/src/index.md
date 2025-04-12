@@ -60,7 +60,7 @@ Modules = [AISCSteel]
   - [x] WT Shape
   - [x] MT Shape
   - [x] ST Shape
-  - [ ] HSS Shape
+  - [x] HSS Shape
   - [ ] HSS_R Shape
   - [ ] PIPE Shape
   - [ ] 2L Shape
@@ -77,7 +77,7 @@ Modules = [AISCSteel]
   - [x] Calculate based on F4
   - [x] Calculate based on F5
   - [ ] Calculate based on F6
-  - [ ] Calculate based on F7
+  - [x] Calculate based on F7
   - [ ] Calculate based on F8
   - [ ] Calculate based on F9
   - [ ] Calculate based on F10

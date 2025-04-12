@@ -75,7 +75,22 @@ Modules = [AISCSteel.ChapterFFlexure.F6]
 
 ## F7. Square and Rectangular HSS and Box Sections
 
-This section is *not implemented*.
+This section applies to square and rectangular HSS, and box sections bent about
+either axis, having compact, noncompact, or slender webs or flanges as defined in Section
+B4.1 for flexure.
+
+
+### HSS
+
+```@autodocs
+Modules = [AISCSteel.ChapterFFlexure.F7.HSS]
+```
+
+### Box
+
+```@autodocs
+Modules = [AISCSteel.ChapterFFlexure.F7.Box]
+```
 
 ## F8. Round HSS
 

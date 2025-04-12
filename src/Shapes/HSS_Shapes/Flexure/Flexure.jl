@@ -11,10 +11,6 @@ This module includes useful functions to calculate bending capacity of rolled HS
 - `classify_web_minor_axis` - classify web for slnderness when bent about the y-axis
 - `calc_Mnx` - moment capacity about the x-axis
 - `calc_Mny` - moment capacity about the y-axis
-
-# Modules
-- `F2` - includes functions specific for F2 sections
-- `F6` - includes functions specific for F6 sections
 """
 module Flexure
 import AISCSteel
@@ -162,6 +158,7 @@ end
 
 """
     calc_Mny(shape::T) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
+    calc_Mny(shape::T, λ_f, λ_pf, λ_rf, λ_fclass, λ_w, λ_pw, λ_rw, λ_wclass) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
 
 This function calculates Mny of the shape.
 

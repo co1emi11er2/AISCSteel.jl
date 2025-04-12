@@ -29,3 +29,9 @@ AISCSteel.Shapes.WTShapes.Flexure.F9.NegativeBending, AISCSteel.Shapes.WTShapes.
 ```@autodocs
 Modules = [AISCSteel.Shapes.LShapes, AISCSteel.Shapes.LShapes.Flexure]
 ```
+
+## HSS_Shapes
+
+```@autodocs
+Modules = [AISCSteel.Shapes.HSS_Shapes, AISCSteel.Shapes.HSS_Shapes.Flexure]
+```
