@@ -49,7 +49,7 @@ Pkg.add("AISCSteel")
   - [x] WT Shape
   - [x] MT Shape
   - [x] ST Shape
-  - [ ] HSS Shape
+  - [x] HSS Shape
   - [ ] HSS_R Shape
   - [ ] PIPE Shape
   - [ ] 2L Shape
@@ -66,7 +66,7 @@ Pkg.add("AISCSteel")
   - [x] Calculate based on F4
   - [x] Calculate based on F5
   - [x] Calculate based on F6
-  - [ ] Calculate based on F7
+  - [x] Calculate based on F7
   - [ ] Calculate based on F8
   - [x] Calculate based on F9
   - [x] Calculate based on F10

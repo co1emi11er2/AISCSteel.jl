@@ -32,5 +32,8 @@ end
     include("Flexure/LShapes.jl")
 end
 
+@testitem "Flexure - HSS_Shapes" begin
+    include("Flexure/HSS_Shapes.jl")
+end
 
 @run_package_tests verbose=true

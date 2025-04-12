@@ -13,4 +13,7 @@ include("WTShapes/WTShapes.jl")
 
 # include LShapes
 include("LShapes/LShapes.jl")
+
+# include HSS_Shapes
+include("HSS_Shapes/HSS_Shapes.jl")
 end # module

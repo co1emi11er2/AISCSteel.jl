@@ -11,7 +11,7 @@ function EqF7▬2(M_p, F_y, S, λ_f, λ_pf, λ_rf)
 end
 
 function EqF7▬3(F_y, S_e)
-    M_nLTB = F_y * S_e |> cnv.to_moment
+    M_nFLB = F_y * S_e |> cnv.to_moment
 end
 
 function EqF7▬4(t_f, E, F_y, b)
