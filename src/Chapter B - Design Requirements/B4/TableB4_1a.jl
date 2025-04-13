@@ -320,4 +320,40 @@ function case19(h, t, E, F_y)
 end
 
 
+"""
+    case20(D, t, E, F_y)
+
+Classifies the compressive elements of a member subject to flexural.
+
+Description of applicable member: Webs of doubly-symmetric I-shaped sections and channels.
+
+# Arguments
+- `D`: outer diameter of the round HSS (inch)
+- `t`: thickness of the wall (inch)
+- `E`: elastic section modulous.
+- `F_y`: yield strength of steel.
+
+# Returns
+- `FlexureBucklingType` enum whose value is either `Compact`, `Noncompact`, or `Slender`
+
+# Reference
+- AISC Table B4.1b
+"""
+function case20(D, t, E, F_y)
+    λ = D / t
+    λ_p = 0.07 * E / F_y
+    λ_r = 0.31 * E / F_y
+
+    if λ <= λ_p
+        class = :compact
+    elseif λ_p < λ <= λ_r
+        class = :noncompact
+    else
+        class = :slender
+    end
+
+    return λ, λ_p, λ_r, class
+end
+
+
 end

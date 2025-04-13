@@ -16,4 +16,7 @@ include("LShapes/LShapes.jl")
 
 # include HSS_Shapes
 include("HSS_Shapes/HSS_Shapes.jl")
+
+# include RoundHSS_Shapes
+include("RoundHSS_Shapes/RoundHSS_Shapes.jl")
 end # module

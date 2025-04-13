@@ -112,7 +112,6 @@ function classify_web_minor_axis((;b, t_des, E, F_y)::T) where T <: AISCSteel.Sh
 end
 
 
-## TODO: Complete updates below
 """
     calc_Mnx(shape::T, L_b, C_b=1) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
     calc_Mnx(shape::T, λ_f, λ_pf, λ_rf, λ_fclass, λ_w, λ_pw, λ_rw, λ_wclass, L_b, C_b=1) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
