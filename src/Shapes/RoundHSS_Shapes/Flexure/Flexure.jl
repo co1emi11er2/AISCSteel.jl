@@ -38,30 +38,6 @@ end
 
 
 """
-    classify_flange_minor_axis(shape::T) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
-
-This function classifies flange for flexure for the shape.
-
-# Arguments
-- `shape`: rolled HSS sections (`HSS_Shape`)
-
-# Returns
-    (λ_f, λ_pf, λ_rf, λ_fclass)
-- `λ`: slenderness ratio of the flange
-- `λ_p`: compact slenderness ratio limit of the flange
-- `λ_r`: noncompact slenderness ratio limit of the flange
-- `λ_class`: `compact` `noncompact` or `slender` classification for the flange
-"""
-function classify_flange_minor_axis((;h, t_des, E, F_y)::T) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
-
-    λ_fvariabels = TableB4⬝1a.case17(h, t_des, E, F_y)
-
-    return λ_fvariabels
-
-end
-
-
-"""
     calc_Mn(shape::T, L_b, C_b=1) where T <: AISCSteel.Shapes.RoundHSS_Shapes.AbstractRoundHSS_Shapes
     calc_Mn(shape::T, λ_class) where T <: AISCSteel.Shapes.RoundHSS_Shapes.AbstractRoundHSS_Shapes
 
