@@ -36,4 +36,8 @@ end
     include("Flexure/HSS_Shapes.jl")
 end
 
+@testitem "Flexure - RoundHSS_Shapes" begin
+    include("Flexure/RoundHSS_Shapes.jl")
+end
+
 @run_package_tests verbose=true
