@@ -93,13 +93,13 @@ function calc_Pn((;area, r_x, r_y, E, F_y, b_f, t_f, h, t_w)::T, L_cx, L_cy, λ_
         if λ_fclass == :nonslender
             P_n = E3.calc_Pn(F_n, area)
         else
-            b = b_f
+            b = b_f/2
             t = t_f
-            c_1 = 0.18
-            c_2 = 1.31
-            F_el = E7.calc_Fel(c_2, λ_rw, λ_w, F_y)
+            c_1 = 0.22
+            c_2 = 1.49
+            F_el = E7.calc_Fel(c_2, λ_rf, λ_f, F_y)
             b_e = E7.calc_be(λ_f, λ_rf, F_y, F_n, b, c_1, F_el)
-            A_e = A_g - 2*(b - b_e)*t
+            A_e = area - 4*(b - b_e)*t
             P_n = E7.calc_Pn(F_n, A_e)
         end
     else
@@ -112,18 +112,20 @@ function calc_Pn((;area, r_x, r_y, E, F_y, b_f, t_f, h, t_w)::T, L_cx, L_cy, λ_
             b_e = E7.calc_be(λ_w, λ_rw, F_y, F_n, b, c_1, F_el)
             A_e = E7.calc_Ae(area, b, b_e, t)
             P_n = E7.calc_Pn(F_n, A_e)
-        else
+        else   
+            # flanges
+            c_1 = 0.22
+            c_2 = 1.49
+            F_el = E7.calc_Fel(c_2, λ_rf, λ_f, F_y)
+            b = b_f/2
+            t = t_f
+            b_e = E7.calc_be(λ_f, λ_rf, F_y, F_n, b, c_1, F_el)
+            A_e = area - 4*(b - b_e)*t
+
+            # web
             c_1 = 0.18
             c_2 = 1.31
             F_el = E7.calc_Fel(c_2, λ_rw, λ_w, F_y)
-
-            # flanges
-            b = b_f
-            t = t_f
-            b_e = E7.calc_be(λ_f, λ_rf, F_y, F_n, b, c_1, F_el)
-            A_e = A_g - 2*(b - b_e)*t
-
-            # web
             b = h
             t = t_w
             b_e = E7.calc_be(λ_w, λ_rw, F_y, F_n, b, c_1, F_el)

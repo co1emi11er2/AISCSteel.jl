@@ -4,6 +4,10 @@ if isdefined(@__MODULE__,:LanguageServer)
     include("../src/AISCSteel.jl")
 end
 
+@testitem "Compression - IShapes" begin
+    include("Compression/IShapes.jl")
+end
+
 @testitem "Flexure - IShapes" begin
     include("Flexure/IShapes.jl")
 end
