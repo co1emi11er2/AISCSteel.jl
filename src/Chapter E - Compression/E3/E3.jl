@@ -58,7 +58,7 @@ Description of applicable member: member without slender elements.
 # Reference
 - AISC Section E3
 """
-function calc_Fn(L_c, r, F_y, F_e)
+function calc_Fn(L_c, r, E, F_y, F_e)
     if L_c/r <= 4.71*sqrt(E/F_y)
         F_n = Equations.EqE3▬2(F_y, F_e)
     else
@@ -69,8 +69,9 @@ end
 
 """
     calc_Pn(F_n, A_g)
+    calc_Pn(E, L_c, r, F_y, A_g)
 
-Calculates the nominal compressive strength of the applicable section.
+Calculates the nominal compressive strength for flexural buckling of the applicable section.
 
 Description of applicable member: member without slender elements.  
 
@@ -79,7 +80,7 @@ Description of applicable member: member without slender elements.
 - `A_g`: gross area of member (inch^2)
 
 # Returns 
-- `P_n`: nominal compressive strength (kip)
+- `P_n`: nominal compressive strength for flexural buckling (kip)
 
 
 # Reference
@@ -87,6 +88,12 @@ Description of applicable member: member without slender elements.
 """
 function calc_Pn(F_n, A_g)
     P_n = Equations.EqE3▬1(F_n, A_g)
+end
+
+function calc_Pn(E, L_c, r, F_y, A_g)
+    F_e = calc_Fe(E, L_c, r)
+    F_n = calc_Fn(L_c, r, E, F_y, F_e)
+    P_n = calc_Pn(F_n, A_g)
 end
 
 end
