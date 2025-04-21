@@ -75,6 +75,9 @@ This function calculates Pn of the shape.
 - `λ_f`: slenderness ratio of the flange
 - `λ_rf`: nonslender slenderness ratio limit of the flange
 - `λ_fclass`: `nonslender` or `slender` classification for the flange
+- `λ_w`: slenderness ratio of the web
+- `λ_rw`: nonslender slenderness ratio limit of the web
+- `λ_wclass`: `nonslender` or `slender` classification for the web
 
 # Returns
 - `P_n`: nominal compressive strength of the section (kip)
