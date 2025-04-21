@@ -47,7 +47,10 @@ This function classifies web for compression for the shape.
 - `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
 
 # Returns
-- `λ_wclass`: `compact` or `slender` classification for the web
+    (λ_w, λ_rw, λ_wclass)
+- `λ_w`: slenderness ratio of the web
+- `λ_rw`: nonslender slenderness ratio limit of the web
+- `λ_wclass`: `nonslender` or `slender` classification for the web
 """
 function classify_web((;h, t_w, E, F_y)::T) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
@@ -61,14 +64,17 @@ end
 
 """
     calc_Pn(shape::T, L_cx, L_cy) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
-    calc_Pn((;area, r_x, r_y, E, F_y)::T, L_cx, L_cy, λ_f, λ_rf, λ_fclass, λ_w, λ_rw, λ_wclass) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
+    calc_Pn(shape::T, L_cx, L_cy, λ_f, λ_rf, λ_fclass, λ_w, λ_rw, λ_wclass) where T <: AISCSteel.Shapes.IShapes.AbstractRolledIShapes
 
 This function calculates Pn of the shape.
 
 # Arguments
 - `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
-- `L_b`: unbraced length (inch)
-- `C_b`: lateral torsional buckling modification factor (default = 1)
+- `L_cx`: effective length of member for buckling about the x-axis (inch)
+- `L_cy`: effective length of member for buckling about the y-axis (inch)
+- `λ_f`: slenderness ratio of the flange
+- `λ_rf`: nonslender slenderness ratio limit of the flange
+- `λ_fclass`: `nonslender` or `slender` classification for the flange
 
 # Returns
 - `P_n`: nominal compressive strength of the section (kip)
