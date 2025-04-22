@@ -6,7 +6,7 @@ STShape in the AISC steel database.
 # Fields
 - `shape`: name of the WShape
 - `weight`: weight of section (plf)
-- `area`: area of wshape (inch2)
+- `A_g`: area of wshape (inch2)
 - `d`: depth of wshape (inch)
 - `b_f`: width of flange (inch)
 - `t_w`: thickness of web (inch)
@@ -26,13 +26,14 @@ STShape in the AISC steel database.
 - `C_w`: Warping constant (inch6)
 - `r_0`:
 - `H`:
+- `G`: Shear modulus of elasticity of steel = 11200ksi
 - `E`: Elastic section modulus (ksi) = 29000ksi
 - `F_y`: Yield strength(ksi) = 50ksi
 """
 Base.@kwdef struct STShape <: AbstractWTShapes
     shape::String
     weight::AISCSteel.Units.float_plf
-    area::AISCSteel.Units.float_inch2
+    A_g::AISCSteel.Units.float_inch2
     d::AISCSteel.Units.float_inch
     b_f::AISCSteel.Units.float_inch
     t_w::AISCSteel.Units.float_inch
@@ -52,6 +53,7 @@ Base.@kwdef struct STShape <: AbstractWTShapes
     C_w::AISCSteel.Units.float_inch6
     r_0::AISCSteel.Units.float_inch
     H::Float64
+    G::AISCSteel.Units.float_ksi = 11200ksi
     E::AISCSteel.Units.float_ksi = 29000ksi
     F_y::AISCSteel.Units.float_ksi = 50ksi
 end
@@ -61,7 +63,7 @@ end
 
 Constructor for `STShape`.
 """
-function STShape(shape; E=29000ksi, F_y=50ksi)
+function STShape(shape; G=11200ksi, E=29000ksi, F_y=50ksi)
     csv_file_name = "ST_shapes.csv"
     csv_file_path = joinpath("shape files", csv_file_name)
     lookup_col_name = :shape
@@ -91,6 +93,7 @@ function STShape(shape; E=29000ksi, F_y=50ksi)
         wt_shape.Cw * inch^6,
         wt_shape.ro * inch,
         wt_shape.H,
+        G,
         E,
         F_y
     )

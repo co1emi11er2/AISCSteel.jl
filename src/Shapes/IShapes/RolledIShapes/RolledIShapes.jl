@@ -13,7 +13,7 @@ include("HPShape.jl")
 # # Include Flexure
 include("Flexure/Flexure.jl")
 
-# # Include Flexure
+# # Include Compression
 include("Compression/Compression.jl")
 
 end # module

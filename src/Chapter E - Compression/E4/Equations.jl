@@ -12,6 +12,7 @@ function EqE4▬2(E, C_w, L_cz, G, J, I_x, I_y)
 end
 
 function EqE4▬3(F_ey, F_ez, H)
+    @info F_ey F_ez
     F_e = ((F_ey + F_ez)/(2*H) * (1 - sqrt(1 - (4*F_ey*F_ez*H)/(F_ey + F_ez)^2)) )
 end
 
@@ -19,15 +20,15 @@ end
 function EqE4▬4 end
 
 function EqE4▬5(E, L_cx, r_x)
-    F_ex = (π^2*E)/(L_cx*r_x)^2
+    F_ex = (π^2*E)/(L_cx/r_x)^2
 end
 
 function EqE4▬6(E, L_cy, r_y)
-    F_ey = (π^2*E)/(L_cy*r_y)^2
+    F_ey = (π^2*E)/(L_cy/r_y)^2
 end
 
 function EqE4▬7(E, C_w, L_cz, G, J, A_g, r̄_0)
-    F_ez = ( (π^2*E*C_w)/L_cz^2 + G*J)*(1/(A_g*r̄_0^2))
+    F_ez = ((π^2*E*C_w)/L_cz^2)*(1/(A_g*r̄_0^2)) + (G*J)*(1/(A_g*r̄_0^2))
 end
 
 function EqE4▬8(x_0, y_0, r̄_0)

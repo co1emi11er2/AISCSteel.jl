@@ -31,7 +31,7 @@ Description of applicable member: member without slender elements.
 
 
 # Reference
-- AISC Section E3 (F3-4)
+- AISC Section E3 (E3-4)
 """
 function calc_Fe(E, L_c, r)
     F_e = Equations.EqE3▬4(E, L_c, r)
@@ -40,6 +40,7 @@ end
 
 """
     calc_Fn(L_c, r, F_y, F_e)
+    calc_Fn(F_y, F_e)
 
 Calculates the nominal stress of the applicable section.
 
@@ -60,6 +61,13 @@ Description of applicable member: member without slender elements.
 """
 function calc_Fn(L_c, r, E, F_y, F_e)
     if L_c/r <= 4.71*sqrt(E/F_y)
+        F_n = Equations.EqE3▬2(F_y, F_e)
+    else
+        F_n = Equations.EqE3▬3(F_e)
+    end
+end
+function calc_Fn(F_y, F_e)
+    if F_y/F_e <= 2.25
         F_n = Equations.EqE3▬2(F_y, F_e)
     else
         F_n = Equations.EqE3▬3(F_e)

@@ -33,6 +33,38 @@ function case1(b, t, E, F_y)
 end
 
 """
+    case4(d, t_w, E, F_y)
+
+Classifies the section of a member subject to axial compression.
+
+Description of applicable member: Flanges of rolled I-shaped sections, plates projecting from rolled I-shaped sections, outstanding legs of pairs of angles connected with continuous contact, flanges of channels, and flanges of tees.
+
+# Arguments
+- `h`: depth of WTShape.
+- `t_w`: thickness of the web.
+- `E`: elastic section modulous.
+- `F_y`: yield strength of steel.
+
+# Returns
+- `CompressionBucklingType` enum whose value is either `Nonslender` or `Slender`
+
+# Reference
+- AISC Table B4.1a
+"""
+function case4(d, t_w, E, F_y)
+    λ = d / t_w
+    λ_r = 0.75 * sqrt(E / F_y)
+
+    if λ <= λ_r
+        class = :nonslender
+    else
+        class = :slender
+    end
+
+    return λ, λ_r, class
+end
+
+"""
     case5(h, t_w, E, F_y)
 
 Classifies the section of a member subject to axial compression.
