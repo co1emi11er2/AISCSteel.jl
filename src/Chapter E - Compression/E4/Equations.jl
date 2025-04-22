@@ -12,7 +12,6 @@ function EqE4▬2(E, C_w, L_cz, G, J, I_x, I_y)
 end
 
 function EqE4▬3(F_ey, F_ez, H)
-    @info F_ey F_ez
     F_e = ((F_ey + F_ez)/(2*H) * (1 - sqrt(1 - (4*F_ey*F_ez*H)/(F_ey + F_ez)^2)) )
 end
 

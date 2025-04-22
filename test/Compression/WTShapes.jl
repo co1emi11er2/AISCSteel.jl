@@ -17,7 +17,7 @@ end
 let 
     w_name = "wt7x34"
     L_cx = L_cy = L_cz = 20ft
-    ϕP_n_expected = 128 * kip # AISC Example E.1A
+    ϕP_n_expected = 128 * kip # AISC Example E.7
     ϕP_n = test_compression(w_name=w_name, L_cx=L_cx, L_cy=L_cy, L_cz=L_cz)
 
     @test ϕP_n_expected == ϕP_n
@@ -28,9 +28,31 @@ end
 let 
     w_name = "wt7x15"
     L_cx = L_cy = L_cz = 20ft
-    ϕP_n_expected = 36.6 * kip # AISC Example E.1A
+    ϕP_n_expected = 36.6 * kip # AISC Example E.8
     ϕP_n = test_compression(w_name=w_name, L_cx=L_cx, L_cy=L_cy, L_cz=L_cz)
 
     @test ϕP_n_expected == ϕP_n
     
+end
+
+# AISC Table 4-7
+let 
+    w_name = "wt7x15"
+    L_cx = L_cy = L_cz = 0ft
+    ϕP_n_expected = 183 * kip # AISC Table 4-7
+    ϕP_n = test_compression(w_name=w_name, L_cx=L_cx, L_cy=L_cy, L_cz=L_cz)
+
+    @test ϕP_n_expected == ϕP_n
+    
+    L_cx = L_cy = L_cz = 1ft
+    ϕP_n_expected = 142 * kip # AISC Table 4-7
+    ϕP_n = test_compression(w_name=w_name, L_cx=L_cx, L_cy=L_cy, L_cz=L_cz)
+
+    @test ϕP_n_expected == ϕP_n
+
+    L_cx = L_cy = L_cz = 10ft
+    ϕP_n_expected = 106 * kip # AISC Table 4-7
+    ϕP_n = test_compression(w_name=w_name, L_cx=L_cx, L_cy=L_cy, L_cz=L_cz)
+
+    @test ϕP_n_expected == ϕP_n
 end
