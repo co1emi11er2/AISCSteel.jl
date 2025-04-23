@@ -54,12 +54,12 @@ Pkg.add("AISCSteel")
   - [ ] PIPE Shape
   - [ ] 2L Shape
 - **Compression Design** (Chapter E)
-  - [ ] Calculate based on E2
-  - [ ] Calculate based on E3
-  - [ ] Calculate based on E4
+  - [x] Calculate based on E2
+  - [x] Calculate based on E3
+  - [x] Calculate based on E4
   - [ ] Calculate based on E5
   - [ ] Calculate based on E6
-  - [ ] Calculate based on E7
+  - [x] Calculate based on E7
 - **Flexure Design** (Chapter F)
   - [x] Calculate based on F2
   - [x] Calculate based on F3

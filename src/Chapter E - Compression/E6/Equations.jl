@@ -1,0 +1,5 @@
+module Equations
+
+
+
+end # module

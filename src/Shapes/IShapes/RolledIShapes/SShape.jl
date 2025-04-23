@@ -95,6 +95,8 @@ function SShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
     lookup_value = uppercase(shape)
     ishape = AISCSteel.Utils.DatabaseUtils.import_data(lookup_value, lookup_col_name, csv_file_path)
 
+    k1 = ishape.k1 == "–" ? 0 * inch : ishape.k1 * inch
+    WGi = ishape.WGi == "–" ? 0 * inch : parse(Float64, ishape.WGi) * inch
     WGo = ismissing(ishape.WGo) ? 0 * inch : ishape.WGo * inch
 
     SShape(
@@ -106,7 +108,7 @@ function SShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
         ishape.tw * inch,
         ishape.tf * inch,
         ishape.k * inch,
-        ishape.k1 * inch,
+        k1,
         ishape.h * inch,
         ishape.Ix * inch^4,
         ishape.Zx * inch^3,
@@ -129,7 +131,7 @@ function SShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
         ishape.PC * inch,
         ishape.PD * inch,
         ishape.T * inch,
-        ishape.WGi * inch,
+        WGi,
         WGo,
         E,
         F_y

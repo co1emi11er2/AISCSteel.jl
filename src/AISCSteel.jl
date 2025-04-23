@@ -35,6 +35,9 @@ include("Utils/Utils.jl")
 #include Chapter B - Design Requirements
 include("Chapter B - Design Requirements/ChapterBDesignRequirements.jl")
 
+# include Chapter E - Compression
+include("Chapter E - Compression/ChapterECompression.jl")
+
 # include Chapter F - Flexure
 include("Chapter F - Flexure/ChapterFFlexure.jl")
 

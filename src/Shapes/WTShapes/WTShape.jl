@@ -6,7 +6,7 @@ WTShape in the AISC steel database.
 # Fields
 - `shape`: name of the WShape
 - `weight`: weight of section (plf)
-- `area`: area of wshape (inch2)
+- `A_g`: area of wshape (inch2)
 - `d`: depth of wshape (inch)
 - `b_f`: width of flange (inch)
 - `t_w`: thickness of web (inch)
@@ -32,13 +32,14 @@ WTShape in the AISC steel database.
 - `PD`: Box perimeter, as used in AISC Design Guide 19 (inch)
 - `WG_i`: The workable gage for the inner fastener holes in the flange that provides for entering and tightening clearances and edge distance and spacing requirements. The actual size, combination, and orientation of fastener components should be compared with the geometry of the cross section to ensure compatibility. See AISC Manual Part 1 for additional information (inch)
 - `WG_0`: The bolt spacing between inner and outer fastener holes when the workable gage is compatible with four holes across the flange. See AISC Manual Part 1 for additional information (inch)
+- `G`: Shear modulus of elasticity of steel = 11200ksi
 - `E`: Elastic section modulus (ksi) = 29000ksi
 - `F_y`: Yield strength(ksi) = 50ksi
 """
 Base.@kwdef struct WTShape <: AbstractWTShapes
     shape::String
     weight::AISCSteel.Units.float_plf
-    area::AISCSteel.Units.float_inch2
+    A_g::AISCSteel.Units.float_inch2
     d::AISCSteel.Units.float_inch
     b_f::AISCSteel.Units.float_inch
     t_w::AISCSteel.Units.float_inch
@@ -64,6 +65,7 @@ Base.@kwdef struct WTShape <: AbstractWTShapes
     PD::AISCSteel.Units.float_inch
     WG_i::AISCSteel.Units.float_inch
     WG_0::AISCSteel.Units.float_inch
+    G::AISCSteel.Units.float_ksi = 11200ksi
     E::AISCSteel.Units.float_ksi = 29000ksi
     F_y::AISCSteel.Units.float_ksi = 50ksi
 end
@@ -73,7 +75,7 @@ end
 
 Constructor for `WTShape`.
 """
-function WTShape(shape; E=29000ksi, F_y=50ksi)
+function WTShape(shape; G=11200ksi, E=29000ksi, F_y=50ksi)
     csv_file_name = "WT_shapes.csv"
     csv_file_path = joinpath("shape files", csv_file_name)
     lookup_col_name = :shape
@@ -110,6 +112,7 @@ function WTShape(shape; E=29000ksi, F_y=50ksi)
         wt_shape.PD * inch,
         wt_shape.WGi * inch,
         WGo,
+        G,
         E,
         F_y
     )
