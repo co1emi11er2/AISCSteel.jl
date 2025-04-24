@@ -50,7 +50,7 @@ Pkg.add("AISCSteel")
   - [x] MT Shape
   - [x] ST Shape
   - [x] HSS Shape
-  - [ ] HSS_R Shape
+  - [x] HSS_R Shape
   - [ ] PIPE Shape
   - [ ] 2L Shape
 - **Compression Design** (Chapter E)

@@ -1,4 +1,6 @@
 [deps]
 AISCSteel = "599de4a1-440e-403d-8b33-ce14758023a2"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Handcalcs = "e8a07092-c156-4455-ab8e-ed8bc81edefb"
 LiveServer = "16fef848-5104-11e9-1b77-fb7a48bbb589"
+StructuralUnits = "ec81c399-378c-4a82-baa1-80fb2fc85b6c"

@@ -94,7 +94,11 @@ Modules = [AISCSteel.ChapterFFlexure.F7.Box]
 
 ## F8. Round HSS
 
-This section is *not implemented*.
+This section applies round HSS having $D/t$ ratios less than $\frac{0.45E}{F_y}$
+
+```@autodocs
+Modules = [AISCSteel.ChapterFFlexure.F8]
+```
 
 ## F9. Tees and Double Angles Loaded in the Plane of Symmetry
 
