@@ -55,6 +55,7 @@ P_n = wts.Compression.calc_Pn(wt, L_cx, L_cy, L_cz)
 Lets see what the `calc_Pn` function did:
 
 ```@example wtshape
+using Revise
 using Handcalcs
 set_handcalcs(precision=2) # sets number of decimals displayed
 

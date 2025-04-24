@@ -60,6 +60,7 @@ P_n = ris.Compression.calc_Pn(w, L_cx, L_cy)
 This is great. However, as engineers, we would like it if we could see what the function did. That is where [Handcalcs.jl](https://github.com/co1emi11er2/Handcalcs.jl) comes in. This package can look into the function and show you what the function did. All you need to do is type `@handcalcs` in front of the line that called the `calc_Pn` function:
 
 ```@example wshape
+using Revise
 using Handcalcs
 set_handcalcs(precision=2) # sets number of decimals displayed
 
