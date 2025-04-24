@@ -1,7 +1,3 @@
-```@meta
-CurrentModule = AISCSteel
-```
-
 # AISCSteel
 
 [![Build Status](https://github.com/co1emi11er2/AISCSteel.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/co1emi11er2/AISCSteel.jl/actions/workflows/CI.yml?query=branch%3Amain)
