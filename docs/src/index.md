@@ -24,7 +24,7 @@ Pages = [
 Depth = 1
 ```
 
-# Other Contents
+# Other Content
 
 ```@contents
 Pages = [
