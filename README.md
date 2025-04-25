@@ -20,62 +20,81 @@ using Pkg
 Pkg.add("AISCSteel")
 ```
 
-## Roadmap
+# Roadmap
 
-- **Steel Shapes Database**
-  - [x] W Shapes
-  - [x] M Shapes
-  - [x] S Shapes
-  - [x] HP Shapes
-  - [x] C Shapes
-  - [x] MC Shapes
-  - [x] L Shapes
-  - [x] WT Shapes
-  - [x] MT Shapes
-  - [x] ST Shapes
-  - [x] HSS Shapes
-  - [x] HSS_R Shapes
-  - [x] PIPE Shapes
-  - [x] 2L Shapes
-- **Structs**
-  - [x] WShape
-  - [ ] BuiltUpIShape
-  - [x] M Shape
-  - [x] S Shape
-  - [x] HP Shape
-  - [x] C Shape
-  - [x] MC Shape
-  - [x] L Shape
-  - [x] WT Shape
-  - [x] MT Shape
-  - [x] ST Shape
-  - [x] HSS Shape
-  - [ ] HSS_R Shape
-  - [ ] PIPE Shape
-  - [ ] 2L Shape
-- **Compression Design** (Chapter E)
-  - [x] Calculate based on E2
-  - [x] Calculate based on E3
-  - [x] Calculate based on E4
-  - [ ] Calculate based on E5
-  - [ ] Calculate based on E6
-  - [x] Calculate based on E7
-- **Flexure Design** (Chapter F)
-  - [x] Calculate based on F2
-  - [x] Calculate based on F3
-  - [x] Calculate based on F4
-  - [x] Calculate based on F5
-  - [x] Calculate based on F6
-  - [x] Calculate based on F7
-  - [ ] Calculate based on F8
-  - [x] Calculate based on F9
-  - [x] Calculate based on F10
-  - [ ] Calculate based on F11
-  - [ ] Calculate based on F12
-- **Shear Design** (Chapter G)
-  - [ ] Calculate based on G2
-  - [ ] Calculate based on G3
-  - [ ] Calculate based on G4
-  - [ ] Calculate based on G5
-  - [ ] Calculate based on G6
-  - [ ] Calculate based on G7
+## Steel Shapes Database
+
+| Shape Type    | Status      |
+|---------------|-------------|
+| W Shapes      | ✅ Implemented |
+| M Shapes      | ✅ Implemented |
+| S Shapes      | ✅ Implemented |
+| HP Shapes     | ✅ Implemented |
+| C Shapes      | ✅ Implemented |
+| MC Shapes     | ✅ Implemented |
+| L Shapes      | ✅ Implemented |
+| WT Shapes     | ✅ Implemented |
+| MT Shapes     | ✅ Implemented |
+| ST Shapes     | ✅ Implemented |
+| HSS Shapes    | ✅ Implemented |
+| HSS_R Shapes  | ✅ Implemented |
+| PIPE Shapes   | ❌ Not Implemented |
+| 2L Shapes     | ❌ Not Implemented |
+
+## Structs
+
+| Struct Type        | Status      |
+|--------------------|-------------|
+| WShape             | ✅ Implemented |
+| BuiltUpIShape      | ❌ Not Implemented |
+| M Shape            | ✅ Implemented |
+| S Shape            | ✅ Implemented |
+| HP Shape           | ✅ Implemented |
+| C Shape            | ✅ Implemented |
+| MC Shape           | ✅ Implemented |
+| L Shape            | ✅ Implemented |
+| WT Shape           | ✅ Implemented |
+| MT Shape           | ✅ Implemented |
+| ST Shape           | ✅ Implemented |
+| HSS Shape          | ✅ Implemented |
+| HSS_R Shape        | ✅ Implemented |
+| PIPE Shape         | ❌ Not Implemented |
+| 2L Shape           | ❌ Not Implemented |
+
+## Compression Design (Chapter E)
+
+| Task                          | Status      |
+|-------------------------------|-------------|
+| Calculate based on E2         | ✅ Implemented |
+| Calculate based on E3         | ✅ Implemented |
+| Calculate based on E4         | ✅ Implemented |
+| Calculate based on E5         | ❌ Not Implemented |
+| Calculate based on E6         | ❌ Not Implemented |
+| Calculate based on E7         | ✅ Implemented |
+
+## Flexure Design (Chapter F)
+
+| Task                          | Status      |
+|-------------------------------|-------------|
+| Calculate based on F2         | ✅ Implemented |
+| Calculate based on F3         | ✅ Implemented |
+| Calculate based on F4         | ✅ Implemented |
+| Calculate based on F5         | ✅ Implemented |
+| Calculate based on F6         | ✅ Implemented |
+| Calculate based on F7         | ✅ Implemented |
+| Calculate based on F8         | ✅ Implemented |
+| Calculate based on F9         | ✅ Implemented |
+| Calculate based on F10        | ✅ Implemented |
+| Calculate based on F11        | ❌ Not Implemented |
+| Calculate based on F12        | ❌ Not Implemented |
+
+## Shear Design (Chapter G)
+
+| Task                          | Status      |
+|-------------------------------|-------------|
+| Calculate based on G2         | ❌ Not Implemented |
+| Calculate based on G3         | ❌ Not Implemented |
+| Calculate based on G4         | ❌ Not Implemented |
+| Calculate based on G5         | ❌ Not Implemented |
+| Calculate based on G6         | ❌ Not Implemented |
+| Calculate based on G7         | ❌ Not Implemented |
