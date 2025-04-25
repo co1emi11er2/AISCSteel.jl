@@ -13,7 +13,6 @@ See link below for the current IShapes from the AISC v16 steel database.
 Before constructing, import the `AISCSteel` package. Also import the `StructuralUnits` package since we will use it later on.
 
 ```@example wshape
-using Revise # this is for Handcalcs.jl to work properly
 using StructuralUnits
 import AISCSteel
 import AISCSteel.Shapes.IShapes.RolledIShapes as ris
