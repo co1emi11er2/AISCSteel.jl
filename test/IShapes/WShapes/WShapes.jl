@@ -1,8 +1,12 @@
 module WShapes
-using Test
+using  Test, TestItems, TestItemRunner
 
-@testset verbose = true "Flexure" begin
+@testitem "Flexure" begin
 include("Flexure/Flexure.jl")
+end
+
+@testitem "Compression" begin
+    include("Compression/Compression.jl")
 end
 
 end

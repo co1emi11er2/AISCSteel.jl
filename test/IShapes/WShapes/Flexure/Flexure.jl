@@ -1,6 +1,6 @@
 module Flexure
 using StructuralUnits
-using  Test
+using  Test, TestItems, TestItemRunner
 import AISCSteel
 import AISCSteel.ChapterBDesignRequirements.B4.TableB4⬝1a as TableB4⬝1a
 import AISCSteel.Shapes.IShapes.RolledIShapes: WShape

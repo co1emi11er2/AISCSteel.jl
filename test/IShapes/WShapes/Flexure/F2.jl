@@ -1,5 +1,4 @@
 using StructuralUnits
-test_major_flexure = Flexure.test_major_flexure
 ##########################################################################################
 # Design of members for flexure - Section F2
 ##########################################################################################

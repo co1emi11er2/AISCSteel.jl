@@ -1,5 +1,4 @@
 using StructuralUnits
-test_minor_flexure = Flexure.test_minor_flexure
 ##########################################################################################
 # Design of members for flexure - Section F6
 ##########################################################################################

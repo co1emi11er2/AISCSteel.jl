@@ -1,7 +1,7 @@
 module CShapes
-using Test
+using  Test, TestItems, TestItemRunner
 
-@testset verbose = true "Flexure" begin
+@testitem "Flexure" begin
 include("Flexure/Flexure.jl")
 end
 
