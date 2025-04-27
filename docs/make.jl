@@ -21,6 +21,7 @@ makedocs(;
         "Getting Started" => "GettingStarted.md",
         "WShape Example" => "WShape Example.md",
         "WTShape Example" => "WTShape Example.md",
+        "CShape Example" => "CShape Example.md",
         "AISC Steel Shapes" => "Shapes.md",
         "Chapter B - Design Requirements" => "ChapterBDesignRequirements.md",
         "Chapter D - Tension" => "ChapterDTension.md",
