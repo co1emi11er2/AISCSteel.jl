@@ -6,89 +6,91 @@ import AISCSteel.Shapes.HSS_Shapes as hss</code></pre><p>Now that the package ha
 C_b = 1.14
 M_nx = hss.Flexure.calc_Mnx(hss_shape, L_b, C_b)
 ϕM_nx = ϕ_b * M_nx</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">59.70594936286428 ft kip</code></pre><p>Lets see what the <code>calc_Mnx</code> function did:</p><pre><code class="language-julia hljs">using Handcalcs
+set_handcalcs(precision=2) # sets number of decimals displayed
+
 @handcalcs M_nx = hss.Flexure.calc_Mnx(hss_shape, L_b, C_b)</code></pre><p class="math-container">\[\begin{aligned}
-\lambda &amp;= \frac{b}{t} = \frac{5.48\;\mathrm{inch}}{0.174\;\mathrm{inch}} = 31.494252873563223
+\lambda &amp;= \frac{b}{t} = \frac{5.48\;\mathrm{inch}}{0.17\;\mathrm{inch}} = 31.49
 \\[10pt]
-\lambda_{p} &amp;= 1.12 \cdot \sqrt{\frac{E}{F_{y}}} = 1.12 \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 26.973171856494744
+\lambda_{p} &amp;= 1.12 \cdot \sqrt{\frac{E}{F_{y}}} = 1.12 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 26.97
 \\[10pt]
-\lambda_{r} &amp;= 1.4 \cdot \sqrt{\frac{E}{F_{y}}} = 1.4 \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 33.71646482061843
+\lambda_{r} &amp;= 1.4 \cdot \sqrt{\frac{E}{F_{y}}} = 1.4 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 33.72
 \\[10pt]
-\text{Since: }\lambda_{p} &lt; \lambda \leq \lambda_{r} &amp;= 26.973171856494744 &lt; 31.494252873563223 \leq 33.71646482061843 = true
+\text{Since: }\lambda_{p} &lt; \lambda \leq \lambda_{r} &amp;= 26.97 &lt; 31.49 \leq 33.72 = true
 \\[10pt]
 class &amp;= noncompact
 \\[10pt]
-\lambda &amp;= \frac{h}{t} = \frac{9.48\;\mathrm{inch}}{0.174\;\mathrm{inch}} = 54.48275862068966
+\lambda &amp;= \frac{h}{t} = \frac{9.48\;\mathrm{inch}}{0.17\;\mathrm{inch}} = 54.48
 \\[10pt]
-\lambda_{p} &amp;= 2.42 \cdot \sqrt{\frac{E}{F_{y}}} = 2.42 \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 58.28131776135471
+\lambda_{p} &amp;= 2.42 \cdot \sqrt{\frac{E}{F_{y}}} = 2.42 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 58.28
 \\[10pt]
-\lambda_{r} &amp;= 5.7 \cdot \sqrt{\frac{E}{F_{y}}} = 5.7 \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 137.27417819823216
+\lambda_{r} &amp;= 5.7 \cdot \sqrt{\frac{E}{F_{y}}} = 5.7 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 137.27
 \\[10pt]
-\text{Since: }\lambda \leq \lambda_{p} &amp;= 54.48275862068966 \leq 58.28131776135471 = true
+\text{Since: }\lambda \leq \lambda_{p} &amp;= 54.48 \leq 58.28 = true
 \\[10pt]
 class &amp;= compact
 \\[10pt]
 M_{p} &amp;= F_{y} \cdot Z = 50\;\mathrm{ksi} \cdot 18\;\mathrm{inch}^{3} = 75\;\mathrm{ft}\,\mathrm{kip}
 \\[10pt]
-a_{w} &amp;= \frac{2 \cdot h \cdot t_{w}}{b \cdot t_{f}} = \frac{2 \cdot 9.48\;\mathrm{inch} \cdot 0.174\;\mathrm{inch}}{5.48\;\mathrm{inch} \cdot 0.174\;\mathrm{inch}} = 3.4598540145985397
+a_{w} &amp;= \frac{2 \cdot h \cdot t_{w}}{b \cdot t_{f}} = \frac{2 \cdot 9.48\;\mathrm{inch} \cdot 0.17\;\mathrm{inch}}{5.48\;\mathrm{inch} \cdot 0.17\;\mathrm{inch}} = 3.46
 \\[10pt]
 h_{c} &amp;= h = 9.48\;\mathrm{inch}
 \\[10pt]
-R_{pg} &amp;= 1 - \frac{a_{w}}{1200 + 300 \cdot a_{w}} \cdot \left( \frac{h_{c}}{t_{w}} - 5.7 \cdot \sqrt{\frac{E}{F_{y}}} \right) = 1 - \frac{3.4598540145985397}{1200 + 300 \cdot 3.4598540145985397} \cdot \left( \frac{9.48\;\mathrm{inch}}{0.174\;\mathrm{inch}} - 5.7 \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} \right) = 1.127994562556279
+R_{pg} &amp;= 1 - \frac{a_{w}}{1200 + 300 \cdot a_{w}} \cdot \left( \frac{h_{c}}{t_{w}} - 5.7 \cdot \sqrt{\frac{E}{F_{y}}} \right) = 1 - \frac{3.46}{1200 + 300 \cdot 3.46} \cdot \left( \frac{9.48\;\mathrm{inch}}{0.17\;\mathrm{inch}} - 5.7 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} \right) = 1.13
 \\[10pt]
-R_{pg} &amp;= \mathrm{min}\left( R_{pg}, 1.0 \right) = \mathrm{min}\left( 1.127994562556279, 1.0 \right) = 1.0
+R_{pg} &amp;= \mathrm{min}\left( R_{pg}, 1 \right) = \mathrm{min}\left( 1.13, 1 \right) = 1
 \\[10pt]
-L_{p} &amp;= \frac{0.13 \cdot E \cdot r_{y} \cdot \sqrt{J \cdot A_{g}}}{M_{p}} = \frac{0.13 \cdot 2.9 \cdot 10^{4}\;\mathrm{ksi} \cdot 2.52\;\mathrm{inch} \cdot \sqrt{73.8\;\mathrm{inch}^{4} \cdot 5.37\;\mathrm{inch}^{2}}}{75\;\mathrm{ft}\,\mathrm{kip}} = 17.51\;\mathrm{ft}
+L_{p} &amp;= \frac{0.13 \cdot E \cdot r_{y} \cdot \sqrt{J \cdot A_{g}}}{M_{p}} = \frac{0.13 \cdot 29000\;\mathrm{ksi} \cdot 2.52\;\mathrm{inch} \cdot \sqrt{73.8\;\mathrm{inch}^{4} \cdot 5.37\;\mathrm{inch}^{2}}}{75\;\mathrm{ft}\,\mathrm{kip}} = 17.51\;\mathrm{ft}
 \\[10pt]
-L_{r} &amp;= \frac{2 \cdot E \cdot r_{y} \cdot \sqrt{J \cdot A_{g}}}{0.7 \cdot F_{y} \cdot S_{x}} = \frac{2 \cdot 2.9 \cdot 10^{4}\;\mathrm{ksi} \cdot 2.52\;\mathrm{inch} \cdot \sqrt{73.8\;\mathrm{inch}^{4} \cdot 5.37\;\mathrm{inch}^{2}}}{0.7 \cdot 50\;\mathrm{ksi} \cdot 14.9\;\mathrm{inch}^{3}} = 465\;\mathrm{ft}
+L_{r} &amp;= \frac{2 \cdot E \cdot r_{y} \cdot \sqrt{J \cdot A_{g}}}{0.7 \cdot F_{y} \cdot S_{x}} = \frac{2 \cdot 29000\;\mathrm{ksi} \cdot 2.52\;\mathrm{inch} \cdot \sqrt{73.8\;\mathrm{inch}^{4} \cdot 5.37\;\mathrm{inch}^{2}}}{0.7 \cdot 50\;\mathrm{ksi} \cdot 14.9\;\mathrm{inch}^{3}} = 464.95\;\mathrm{ft}
 \\[10pt]
 M_{nFY} &amp;= M_{p} = 75\;\mathrm{ft}\,\mathrm{kip}
 \\[10pt]
 \text{Since: }\lambda_{fclass} &amp;= noncompact = true
 \\[10pt]
-M_{nFLB} &amp;= M_{p} - \left( M_{p} - F_{y} \cdot S \right) \cdot \frac{\lambda_{f} - \lambda_{pf}}{\lambda_{rf} - \lambda_{pf}} = 75\;\mathrm{ft}\,\mathrm{kip} - \left( 75\;\mathrm{ft}\,\mathrm{kip} - 50\;\mathrm{ksi} \cdot 14.9\;\mathrm{inch}^{3} \right) \cdot \frac{31.494252873563223 - 26.973171856494744}{33.71646482061843 - 26.973171856494744} = 66.34\;\mathrm{ft}\,\mathrm{kip}
+M_{nFLB} &amp;= M_{p} - \left( M_{p} - F_{y} \cdot S \right) \cdot \frac{\lambda_{f} - \lambda_{pf}}{\lambda_{rf} - \lambda_{pf}} = 75\;\mathrm{ft}\,\mathrm{kip} - \left( 75\;\mathrm{ft}\,\mathrm{kip} - 50\;\mathrm{ksi} \cdot 14.9\;\mathrm{inch}^{3} \right) \cdot \frac{31.49 - 26.97}{33.72 - 26.97} = 66.34\;\mathrm{ft}\,\mathrm{kip}
 \\[10pt]
 \text{Since: }\lambda_{wclass} &amp;= compact = true
 \\[10pt]
 M_{nFLB} &amp;= M_{p} = 75\;\mathrm{ft}\,\mathrm{kip}
 \\[10pt]
-\text{Since: }L_{p} &lt; L_{b} \leq L_{r} &amp;= 17.51\;\mathrm{ft} &lt; 21\;\mathrm{ft} \leq 465\;\mathrm{ft} = true
+\text{Since: }L_{p} &lt; L_{b} \leq L_{r} &amp;= 17.51\;\mathrm{ft} &lt; 21\;\mathrm{ft} \leq 464.95\;\mathrm{ft} = true
 \\[10pt]
-M_{nLTB} &amp;= C_{b} \cdot \left( M_{p} - \left( M_{p} - 0.7 \cdot F_{y} \cdot S_{x} \right) \cdot \frac{L_{b} - L_{p}}{L_{r} - L_{p}} \right) = 1.14 \cdot \left( 75\;\mathrm{ft}\,\mathrm{kip} - \left( 75\;\mathrm{ft}\,\mathrm{kip} - 0.7 \cdot 50\;\mathrm{ksi} \cdot 14.9\;\mathrm{inch}^{3} \right) \cdot \frac{21\;\mathrm{ft} - 17.51\;\mathrm{ft}}{465\;\mathrm{ft} - 17.51\;\mathrm{ft}} \right) = 85.22\;\mathrm{ft}\,\mathrm{kip}
+M_{nLTB} &amp;= C_{b} \cdot \left( M_{p} - \left( M_{p} - 0.7 \cdot F_{y} \cdot S_{x} \right) \cdot \frac{L_{b} - L_{p}}{L_{r} - L_{p}} \right) = 1.14 \cdot \left( 75\;\mathrm{ft}\,\mathrm{kip} - \left( 75\;\mathrm{ft}\,\mathrm{kip} - 0.7 \cdot 50\;\mathrm{ksi} \cdot 14.9\;\mathrm{inch}^{3} \right) \cdot \frac{21\;\mathrm{ft} - 17.51\;\mathrm{ft}}{464.95\;\mathrm{ft} - 17.51\;\mathrm{ft}} \right) = 85.22\;\mathrm{ft}\,\mathrm{kip}
 \\[10pt]
 M_{n} &amp;= \mathrm{min}\left( M_{nY}, M_{nFLB}, M_{nWLB}, M_{nLTB} \right) = \mathrm{min}\left( 75\;\mathrm{ft}\,\mathrm{kip}, 66.34\;\mathrm{ft}\,\mathrm{kip}, 75\;\mathrm{ft}\,\mathrm{kip}, 85.22\;\mathrm{ft}\,\mathrm{kip} \right) = 66.34\;\mathrm{ft}\,\mathrm{kip}
 \end{aligned}\]</p><h3 id="Minor-Axis-Bending"><a class="docs-heading-anchor" href="#Minor-Axis-Bending">Minor Axis Bending</a><a id="Minor-Axis-Bending-1"></a><a class="docs-heading-anchor-permalink" href="#Minor-Axis-Bending" title="Permalink"></a></h3><p>We can calculate the flexural capacity about the y-axis of the HSS10x6x3/16 shape we just constructed:</p><pre><code class="language-julia hljs">M_ny = hss.Flexure.calc_Mny(hss_shape)
 ϕM_ny = ϕ_b * M_ny</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">32.33912878030443 ft kip</code></pre><p>Lets see what the <code>calc_Mny</code> function did:</p><pre><code class="language-julia hljs">@handcalcs M_ny = hss.Flexure.calc_Mny(hss_shape)</code></pre><p class="math-container">\[\begin{aligned}
-\lambda &amp;= \frac{b}{t} = \frac{9.48\;\mathrm{inch}}{0.174\;\mathrm{inch}} = 54.48275862068966
+\lambda &amp;= \frac{b}{t} = \frac{9.48\;\mathrm{inch}}{0.17\;\mathrm{inch}} = 54.48
 \\[10pt]
-\lambda_{p} &amp;= 1.12 \cdot \sqrt{\frac{E}{F_{y}}} = 1.12 \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 26.973171856494744
+\lambda_{p} &amp;= 1.12 \cdot \sqrt{\frac{E}{F_{y}}} = 1.12 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 26.97
 \\[10pt]
-\lambda_{r} &amp;= 1.4 \cdot \sqrt{\frac{E}{F_{y}}} = 1.4 \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 33.71646482061843
+\lambda_{r} &amp;= 1.4 \cdot \sqrt{\frac{E}{F_{y}}} = 1.4 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 33.72
 \\[10pt]
-\text{Since: }\lambda \leq \lambda_{p} &amp;= 54.48275862068966 \leq 26.973171856494744 = false
+\text{Since: }\lambda \leq \lambda_{p} &amp;= 54.48 \leq 26.97 = false
 \\[10pt]
-\lambda_{p} &lt; \lambda \leq \lambda_{r} &amp;= 26.973171856494744 &lt; 54.48275862068966 \leq 33.71646482061843 = false
+\lambda_{p} &lt; \lambda \leq \lambda_{r} &amp;= 26.97 &lt; 54.48 \leq 33.72 = false
 \\[10pt]
 class &amp;= slender
 \\[10pt]
-\lambda &amp;= \frac{h}{t} = \frac{5.48\;\mathrm{inch}}{0.174\;\mathrm{inch}} = 31.494252873563223
+\lambda &amp;= \frac{h}{t} = \frac{5.48\;\mathrm{inch}}{0.17\;\mathrm{inch}} = 31.49
 \\[10pt]
-\lambda_{p} &amp;= 2.42 \cdot \sqrt{\frac{E}{F_{y}}} = 2.42 \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 58.28131776135471
+\lambda_{p} &amp;= 2.42 \cdot \sqrt{\frac{E}{F_{y}}} = 2.42 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 58.28
 \\[10pt]
-\lambda_{r} &amp;= 5.7 \cdot \sqrt{\frac{E}{F_{y}}} = 5.7 \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 137.27417819823216
+\lambda_{r} &amp;= 5.7 \cdot \sqrt{\frac{E}{F_{y}}} = 5.7 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 137.27
 \\[10pt]
-\text{Since: }\lambda \leq \lambda_{p} &amp;= 31.494252873563223 \leq 58.28131776135471 = true
+\text{Since: }\lambda \leq \lambda_{p} &amp;= 31.49 \leq 58.28 = true
 \\[10pt]
 class &amp;= compact
 \\[10pt]
 M_{p} &amp;= F_{y} \cdot Z = 50\;\mathrm{ksi} \cdot 12.7\;\mathrm{inch}^{3} = 52.92\;\mathrm{ft}\,\mathrm{kip}
 \\[10pt]
-a_{w} &amp;= \frac{2 \cdot h \cdot t_{w}}{b \cdot t_{f}} = \frac{2 \cdot 5.48\;\mathrm{inch} \cdot 0.174\;\mathrm{inch}}{9.48\;\mathrm{inch} \cdot 0.174\;\mathrm{inch}} = 1.1561181434599157
+a_{w} &amp;= \frac{2 \cdot h \cdot t_{w}}{b \cdot t_{f}} = \frac{2 \cdot 5.48\;\mathrm{inch} \cdot 0.17\;\mathrm{inch}}{9.48\;\mathrm{inch} \cdot 0.17\;\mathrm{inch}} = 1.16
 \\[10pt]
 h_{c} &amp;= h = 5.48\;\mathrm{inch}
 \\[10pt]
-R_{pg} &amp;= 1 - \frac{a_{w}}{1200 + 300 \cdot a_{w}} \cdot \left( \frac{h_{c}}{t_{w}} - 5.7 \cdot \sqrt{\frac{E}{F_{y}}} \right) = 1 - \frac{1.1561181434599157}{1200 + 300 \cdot 1.1561181434599157} \cdot \left( \frac{5.48\;\mathrm{inch}}{0.174\;\mathrm{inch}} - 5.7 \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} \right) = 1.0790608279840679
+R_{pg} &amp;= 1 - \frac{a_{w}}{1200 + 300 \cdot a_{w}} \cdot \left( \frac{h_{c}}{t_{w}} - 5.7 \cdot \sqrt{\frac{E}{F_{y}}} \right) = 1 - \frac{1.16}{1200 + 300 \cdot 1.16} \cdot \left( \frac{5.48\;\mathrm{inch}}{0.17\;\mathrm{inch}} - 5.7 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} \right) = 1.08
 \\[10pt]
-R_{pg} &amp;= \mathrm{min}\left( R_{pg}, 1.0 \right) = \mathrm{min}\left( 1.0790608279840679, 1.0 \right) = 1.0
+R_{pg} &amp;= \mathrm{min}\left( R_{pg}, 1 \right) = \mathrm{min}\left( 1.08, 1 \right) = 1
 \\[10pt]
 M_{nFY} &amp;= M_{p} = 52.92\;\mathrm{ft}\,\mathrm{kip}
 \\[10pt]
@@ -96,23 +98,23 @@ M_{nFY} &amp;= M_{p} = 52.92\;\mathrm{ft}\,\mathrm{kip}
 \\[10pt]
 \lambda_{fclass} &amp;= noncompact = slender = false
 \\[10pt]
-b_{e} &amp;= 1.92 \cdot t_{f} \cdot \sqrt{\frac{E}{F_{y}}} \cdot \left( 1 - \frac{0.38}{\frac{b}{t_{f}}} \cdot \sqrt{\frac{E}{F_{y}}} \right) = 1.92 \cdot 0.174\;\mathrm{inch} \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} \cdot \left( 1 - \frac{0.38}{\frac{9.48\;\mathrm{inch}}{0.174\;\mathrm{inch}}} \cdot \sqrt{\frac{2.9 \cdot 10^{4}\;\mathrm{ksi}}{50\;\mathrm{ksi}}} \right) = 6.694\;\mathrm{inch}
+b_{e} &amp;= 1.92 \cdot t_{f} \cdot \sqrt{\frac{E}{F_{y}}} \cdot \left( 1 - \frac{0.38}{\frac{b}{t_{f}}} \cdot \sqrt{\frac{E}{F_{y}}} \right) = 1.92 \cdot 0.17\;\mathrm{inch} \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} \cdot \left( 1 - \frac{0.38}{\frac{9.48\;\mathrm{inch}}{0.17\;\mathrm{inch}}} \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} \right) = 6.69\;\mathrm{inch}
 \\[10pt]
-b &amp;= b - b_{e} = 9.48\;\mathrm{inch} - 6.694\;\mathrm{inch} = 2.786\;\mathrm{inch}
+b &amp;= b - b_{e} = 9.48\;\mathrm{inch} - 6.69\;\mathrm{inch} = 2.79\;\mathrm{inch}
 \\[10pt]
-a &amp;= b \cdot t_{f} = 2.786\;\mathrm{inch} \cdot 0.174\;\mathrm{inch} = 0.4847\;\mathrm{inch}^{2}
+a &amp;= b \cdot t_{f} = 2.79\;\mathrm{inch} \cdot 0.17\;\mathrm{inch} = 0.48\;\mathrm{inch}^{2}
 \\[10pt]
-d &amp;= \frac{Ht - t_{f}}{2} = \frac{6\;\mathrm{inch} - 0.174\;\mathrm{inch}}{2} = 2.913\;\mathrm{inch}
+d &amp;= \frac{Ht - t_{f}}{2} = \frac{6\;\mathrm{inch} - 0.17\;\mathrm{inch}}{2} = 2.91\;\mathrm{inch}
 \\[10pt]
-I_{e} &amp;= I - 2 \cdot \left( \frac{b \cdot t_{f}^{3}}{12} + a \cdot d^{2} \right) = 34.1\;\mathrm{inch}^{4} - 2 \cdot \left( \frac{2.786\;\mathrm{inch} \cdot \left( 0.174\;\mathrm{inch} \right)^{3}}{12} + 0.4847\;\mathrm{inch}^{2} \cdot \left( 2.913\;\mathrm{inch} \right)^{2} \right) = 25.87\;\mathrm{inch}^{4}
+I_{e} &amp;= I - 2 \cdot \left( \frac{b \cdot t_{f}^{3}}{12} + a \cdot d^{2} \right) = 34.1\;\mathrm{inch}^{4} - 2 \cdot \left( \frac{2.79\;\mathrm{inch} \cdot \left( 0.17\;\mathrm{inch} \right)^{3}}{12} + 0.48\;\mathrm{inch}^{2} \cdot \left( 2.91\;\mathrm{inch} \right)^{2} \right) = 25.87\;\mathrm{inch}^{4}
 \\[10pt]
-S_{e} &amp;= \frac{I_{e}}{\frac{Ht}{2}} = \frac{25.87\;\mathrm{inch}^{4}}{\frac{6\;\mathrm{inch}}{2}} = 8.624\;\mathrm{inch}^{3}
+S_{e} &amp;= \frac{I_{e}}{\frac{Ht}{2}} = \frac{25.87\;\mathrm{inch}^{4}}{\frac{6\;\mathrm{inch}}{2}} = 8.62\;\mathrm{inch}^{3}
 \\[10pt]
-M_{nFLB} &amp;= F_{y} \cdot S_{e} = 50\;\mathrm{ksi} \cdot 8.624\;\mathrm{inch}^{3} = 35.93\;\mathrm{ft}\,\mathrm{kip}
+M_{nFLB} &amp;= F_{y} \cdot S_{e} = 50\;\mathrm{ksi} \cdot 8.62\;\mathrm{inch}^{3} = 35.93\;\mathrm{ft}\,\mathrm{kip}
 \\[10pt]
 \text{Since: }\lambda_{wclass} &amp;= compact = true
 \\[10pt]
 M_{nFLB} &amp;= M_{p} = 52.92\;\mathrm{ft}\,\mathrm{kip}
 \\[10pt]
 M_{n} &amp;= \mathrm{min}\left( M_{nY}, M_{nFLB}, M_{nWLB} \right) = \mathrm{min}\left( 52.92\;\mathrm{ft}\,\mathrm{kip}, 35.93\;\mathrm{ft}\,\mathrm{kip}, 52.92\;\mathrm{ft}\,\mathrm{kip} \right) = 35.93\;\mathrm{ft}\,\mathrm{kip}
-\end{aligned}\]</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../CShape Example/">« CShape Example</a><a class="docs-footer-nextpage" href="../RoundHSS_Shape Example/">RoundHSS_Shape Example »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.10.2 on <span class="colophon-date" title="Monday 28 April 2025 01:58">Monday 28 April 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body><div data-docstringscollapsed="true"></div></html>
+\end{aligned}\]</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../CShape Example/">« CShape Example</a><a class="docs-footer-nextpage" href="../RoundHSS_Shape Example/">RoundHSS_Shape Example »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.10.2 on <span class="colophon-date" title="Monday 28 April 2025 20:13">Monday 28 April 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body><div data-docstringscollapsed="true"></div></html>
