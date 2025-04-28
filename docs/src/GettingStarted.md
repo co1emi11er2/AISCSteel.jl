@@ -122,3 +122,6 @@ Next move on to the Examples to see basic use cases:
 
 - [WShape Example](@ref)
 - [WTShape Example](@ref)
+- [CShape Example](@ref)
+- [HSS_Shape Example](@ref)
+- [RoundHSS_Shape Example](@ref)
