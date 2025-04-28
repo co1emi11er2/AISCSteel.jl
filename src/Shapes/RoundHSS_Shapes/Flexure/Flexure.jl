@@ -38,7 +38,7 @@ end
 
 
 """
-    calc_Mn(shape::T, L_b, C_b=1) where T <: AISCSteel.Shapes.RoundHSS_Shapes.AbstractRoundHSS_Shapes
+    calc_Mn(shape::T) where T <: AISCSteel.Shapes.RoundHSS_Shapes.AbstractRoundHSS_Shapes
     calc_Mn(shape::T, λ_class) where T <: AISCSteel.Shapes.RoundHSS_Shapes.AbstractRoundHSS_Shapes
 
 This function calculates Mnx of the shape.
