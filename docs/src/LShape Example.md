@@ -12,7 +12,7 @@ See link below for the current LShapes from the AISC v16 steel database.
 
 Before constructing, import the `AISCSteel` package. Also import the `StructuralUnits` package since we will use it later on.
 
-```@example lshape
+```julia
 using StructuralUnits
 import AISCSteel
 import AISCSteel.Shapes.LShapes as ls
@@ -20,7 +20,7 @@ import AISCSteel.Shapes.LShapes as ls
 
 Now that the package has been imported, lets construct a W14X90.
 
-``` @example lshape
+``` julia
 c = ls.LShape("L4x4x1/4")
 ```
 
@@ -28,13 +28,13 @@ The following went and searched through the AISC v16 steel database and pulled t
 
 The width of the longer leg:
 
-``` @example lshape
+``` julia
 c.b
 ```
 
 The weight of the LShape:
 
-``` @example lshape
+``` julia
 c.weight
 ```
 
@@ -48,7 +48,7 @@ See link below for the available functions relating to flexure for the LShape me
 
 We can calculate the flexural capacity about the x-axis of the W14X90 shape we just constructed:
 
-```@example lshape
+```julia
 
 L_b = 5ft
 ϕ_b = 0.9
@@ -58,7 +58,7 @@ M_nx = ls.Flexure.calc_Mnx(c, L_b)
 
 Lets see what the `calc_Mnx` function did:
 
-```@example lshape
+```julia
 using Handcalcs
 @handcalcs M_nx = ls.Flexure.calc_Mnx(c, L_b)
 ```
@@ -67,7 +67,7 @@ using Handcalcs
 
 We can calculate the flexural capacity about the y-axis of the W14X90 shape we just constructed:
 
-```@example lshape
+```julia
 
 M_ny = ls.Flexure.calc_Mny(c)
 ϕM_ny = ϕ_b * M_ny
@@ -75,6 +75,6 @@ M_ny = ls.Flexure.calc_Mny(c)
 
 Lets see what the `calc_Mny` function did:
 
-```@example lshape
+```julia
 @handcalcs M_ny = ls.Flexure.calc_Mny(c)
 ```

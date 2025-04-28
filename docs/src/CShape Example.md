@@ -18,7 +18,7 @@ import AISCSteel
 import AISCSteel.Shapes.CShapes as cs
 ```
 
-Now that the package has been imported, lets construct a W14X90.
+Now that the package has been imported, lets construct a C15x33.9.
 
 ``` @example cshape
 c = cs.CShape("C15x33.9")
@@ -46,7 +46,7 @@ See link below for the available functions relating to flexure for the CShape me
 
 ### Major Axis Bending
 
-We can calculate the flexural capacity about the x-axis of the W14X90 shape we just constructed:
+We can calculate the flexural capacity about the x-axis of the C15x33.9 shape we just constructed:
 
 ```@example cshape
 
@@ -65,7 +65,7 @@ using Handcalcs
 
 ### Minor Axis Bending
 
-We can calculate the flexural capacity about the y-axis of the W14X90 shape we just constructed:
+We can calculate the flexural capacity about the y-axis of the C15x33.9 shape we just constructed:
 
 ```@example cshape
 

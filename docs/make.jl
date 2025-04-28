@@ -22,6 +22,8 @@ makedocs(;
         "WShape Example" => "WShape Example.md",
         "WTShape Example" => "WTShape Example.md",
         "CShape Example" => "CShape Example.md",
+        "HSS_Shape Example" => "HSS_Shape Example.md",
+        "RoundHSS_Shape Example" => "RoundHSS_Shape Example.md",
         "AISC Steel Shapes" => "Shapes.md",
         "Chapter B - Design Requirements" => "ChapterBDesignRequirements.md",
         "Chapter D - Tension" => "ChapterDTension.md",
