@@ -15,7 +15,10 @@ AISCSteel is a Julia package that follows the American Institute of Steel Constr
 Pages = [
     "GettingStarted.md",
     "WShape Example.md",
-    "WTShape Example.md"
+    "WTShape Example.md",
+    "CShape Example.md",
+    "HSS_Shape Example.md",
+    "RoundHSS_Shape Example.md"
 ]
 Depth = 1
 ```

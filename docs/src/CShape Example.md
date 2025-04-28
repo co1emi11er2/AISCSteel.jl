@@ -60,6 +60,8 @@ Lets see what the `calc_Mnx` function did:
 
 ```@example cshape
 using Handcalcs
+set_handcalcs(precision=2) # sets number of decimals displayed
+
 @handcalcs M_nx = cs.Flexure.calc_Mnx(c, L_b)
 ```
 

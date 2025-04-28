@@ -61,6 +61,8 @@ Lets see what the `calc_Mnx` function did:
 
 ```@example hss_shape
 using Handcalcs
+set_handcalcs(precision=2) # sets number of decimals displayed
+
 @handcalcs M_nx = hss.Flexure.calc_Mnx(hss_shape, L_b, C_b)
 ```
 

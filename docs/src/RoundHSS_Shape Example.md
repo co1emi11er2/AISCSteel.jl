@@ -59,6 +59,8 @@ Lets see what the `calc_Mn` function did:
 
 ```@example rhss_shape
 using Handcalcs
+set_handcalcs(precision=2) # sets number of decimals displayed
+
 @handcalcs M_n = rhss.Flexure.calc_Mn(rhss_shape)
 ```
 
