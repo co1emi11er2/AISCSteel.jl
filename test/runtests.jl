@@ -34,7 +34,9 @@ end
 # @testset verbose = true "WTShapes" begin
 #     include("WTShapes/WTShapes.jl")
 # end
-
+@testitem "Compression - LShapes" begin
+    include("Compression/LShapes.jl")
+end
 @testitem "Flexure - LShapes" begin
     include("Flexure/LShapes.jl")
 end

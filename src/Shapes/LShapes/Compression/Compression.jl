@@ -32,8 +32,8 @@ This function classifies flange for compression for the shape.
 """
 function classify_leg((;b, t, E, F_y)::T) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
 
-    b = b_f/2
-    t = t_f
+    b = b
+    t = t
     λ_class = TableB4⬝1a.case3(b, t, E, F_y)
 
     return λ_class
@@ -42,15 +42,15 @@ end
 
 
 """
-    calc_Pn(shape::T, leg_connected, L_c) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
-    calc_Pn(shape::T, leg_connected, L_c, λ, λ_r, λ_class) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+    calc_Pn(shape::T, leg_connected, L) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+    calc_Pn(shape::T, leg_connected, L, λ, λ_r, λ_class) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
 
 This function calculates Pn of the shape.
 
 # Arguments
 - `shape`: rolled i-shape section (`WTShape`)
 - `leg_connected`: the leg that is connected (`:short` or `:long`)
-- `L_c`: effective length of member for buckling about the x-axis (inch)
+- `L`: length of member between work points (inch)
 - `λ`: slenderness ratio of the long leg
 - `λ_r`: nonslender slenderness ratio limit of the long leg
 - `λ_class`: `nonslender` or `slender` classification for the long leg
@@ -68,77 +68,41 @@ This function calculates Pn of the shape.
 # Reference
 - AISC Section E3, E5, E7
 """
-function calc_Pn((;A_g, r_x, r_y, G, E, F_y, b_f, t_f, d, t_w, ȳ, I_x, I_y, C_w, J)::T, L_cx, λ, λ_r, λ_class) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+function calc_Pn((;A_g, r_x, r_y, r_z, E, F_y, b, t, d)::T, leg_connected, L, λ, λ_r, λ_class) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
 
-    F_ex = E4.calc_Fex(E, L_cx, r_x)
-    F_ey = E4.calc_Fey(E, L_cy, r_y)
-
-    # calc F_ez
-    x_0 = 0inch
-    y_0 = ȳ - t_f/2
-    r̄_0 = calc_r̄0(x_0, y_0, I_x, I_y, A_g)
-    F_ez = E4.calc_Fez(E, C_w, L_cz, G, J, A_g, r̄_0)
-
-    H = E4.calc_H(x_0, y_0, r̄_0)
-    F_e = calc_Fe(F_ey, F_ez, H)
-    F_e = min(F_ex, F_ey, F_e)
+    
+    if leg_connected == :long
+        r_a = r_y
+        L_c = E5.LongLeg.calc_Lc_part_a(L, r_a)
+    else
+        r_a = r_x
+        L_c = E5.ShortLeg.calc_Lc_part_a(L, r_a, r_z, b, d)
+    end
+    
+    F_e = E3.calc_Fe(E, L_c, r_a)
     F_n = E3.calc_Fn(F_y, F_e)
 
-    if λ_wclass == :nonslender
-        if λ_fclass == :nonslender
-            P_n = E3.calc_Pn(F_n, A_g)
-        else
-            b = b_f/2
-            t = t_f
-            c_1 = 0.22
-            c_2 = 1.49
-            F_el = E7.calc_Fel(c_2, λ_rf, λ_f, F_y)
-            b_e = E7.calc_be(λ_f, λ_rf, F_y, F_n, b, c_1, F_el)
-            A_e = A_g - 2*(b - b_e)*t
-            P_n = E7.calc_Pn(F_n, A_e)
-        end
+    if λ_class == :nonslender
+        P_n = E3.calc_Pn(F_n, A_g)
     else
-        if λ_fclass == :nonslender
-            b = d
-            t = t_w
-            c_1 = 0.22
-            c_2 = 1.49
-            F_el = E7.calc_Fel(c_2, λ_rw, λ_w, F_y)
-            b_e = E7.calc_be(λ_w, λ_rw, F_y, F_n, b, c_1, F_el)
-            A_e = E7.calc_Ae(A_g, b, b_e, t)
-            P_n = E7.calc_Pn(F_n, A_e)
-        else   
-            # flanges
-            c_1 = 0.22
-            c_2 = 1.49
-            F_el = E7.calc_Fel(c_2, λ_rf, λ_f, F_y)
-            b = b_f/2
-            t = t_f
-            b_e = E7.calc_be(λ_f, λ_rf, F_y, F_n, b, c_1, F_el)
-            A_e = A_g - 4*(b - b_e)*t
-
-            # web
-            c_1 = 0.22
-            c_2 = 1.49
-            F_el = E7.calc_Fel(c_2, λ_rw, λ_w, F_y)
-            b = d
-            t = t_w
-            b_e = E7.calc_be(λ_w, λ_rw, F_y, F_n, b, c_1, F_el)
-            A_e = A_e - (b - b_e)*t
-
-            P_n = E7.calc_Pn(F_n, A_e)
-        end
+        b = b
+        t = t
+        c_1 = 0.22
+        c_2 = 1.49
+        F_el = E7.calc_Fel(c_2, λ_r, λ, F_y)
+        b_e = E7.calc_be(λ, λ_r, F_y, F_n, b, c_1, F_el)
+        A_e = E7.calc_Ae(A_g, b, b_e, t)
+        P_n = E7.calc_Pn(F_n, A_e)
     end
 
     return P_n
 end
 
-function calc_Pn(w::T, L_cx, L_cy, L_cz) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+function calc_Pn(lshape::T, leg_connected, L) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
     
-    λ_f, λ_rf, λ_fclass = classify_leg(w)
-    λ_w, λ_rw, λ_wclass = classify_web(w)
+    λ, λ_r, λ_class = classify_leg(lshape)
 
-    P_n = calc_Pn(w, L_cx, L_cy, L_cz, λ_f, λ_rf, λ_fclass, λ_w, λ_rw, λ_wclass)
+    P_n = calc_Pn(lshape, leg_connected, L, λ, λ_r, λ_class)
 
     return P_n
 end
