@@ -8,4 +8,6 @@ abstract type AbstractLShapes <: AbstractSteelShapes end
 include("LShape.jl")
 
 include("Flexure/Flexure.jl")
+
+include("Compression/Compression.jl")
 end
