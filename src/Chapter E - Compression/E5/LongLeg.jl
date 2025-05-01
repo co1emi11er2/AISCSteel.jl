@@ -7,7 +7,7 @@ module LongLeg
 import AISCSteel.ChapterECompression.E5.Equations as Equations
 
 """
-    calc_Lc_part_a(L, r_a)
+    calc_Lc_type_a(L, r_a)
 
 This function calculates L_c of the shape. For angles that are individual members or are web members of planar trusses with adjacent web members attached to the same side of the gusset plate or chord.
 
@@ -21,7 +21,7 @@ This function calculates L_c of the shape. For angles that are individual member
 # Reference
 - AISC Section E5 part a
 """
-function calc_Lc_part_a(L, r_a)
+function calc_Lc_type_a(L, r_a)
     if L/r_a <= 80
         L_c = Equations.EqE5▬1(L, r_a)
     else
@@ -30,7 +30,7 @@ function calc_Lc_part_a(L, r_a)
 end
 
 """
-    calc_Lc_part_b(L, r_a)
+    calc_Lc_type_b(L, r_a)
 
 This function calculates L_c of the shape. For angles that are web members of box or space trusses with adjacent web members attached to the same side of the gusset plate or chord.
 
@@ -44,7 +44,7 @@ This function calculates L_c of the shape. For angles that are web members of bo
 # Reference
 - AISC Section E5 part b
 """
-function calc_Lc_part_b(L, r_a)
+function calc_Lc_type_b(L, r_a)
     if L/r_a <= 75
         L_c = Equations.EqE5▬3(L, r_a)
     else

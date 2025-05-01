@@ -42,13 +42,18 @@ end
 
 
 """
+    # assumes connection_type = :type_a
     calc_Pn(shape::T, leg_connected, L) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
-    calc_Pn(shape::T, leg_connected, L, λ, λ_r, λ_class) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+
+    # must specify connection_type
+    calc_Pn(shape::T, connection_type, leg_connected, L) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+    calc_Pn(shape::T, connection_type, leg_connected, L, λ, λ_r, λ_class) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
 
 This function calculates Pn of the shape.
 
 # Arguments
 - `shape`: rolled i-shape section (`WTShape`)
+- `connection_type`: the type of connection specified in E5 (`type_a` or `type_b`)
 - `leg_connected`: the leg that is connected (`:short` or `:long`)
 - `L`: length of member between work points (inch)
 - `λ`: slenderness ratio of the long leg
@@ -68,17 +73,27 @@ This function calculates Pn of the shape.
 # Reference
 - AISC Section E3, E5, E7
 """
-function calc_Pn((;A_g, r_x, r_y, r_z, E, F_y, b, t, d)::T, leg_connected, L, λ, λ_r, λ_class) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+function calc_Pn((;A_g, r_x, r_y, r_z, E, F_y, b, t, d)::T, connection_type, leg_connected, L, λ, λ_r, λ_class) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
 
-    
-    if leg_connected == :long
-        r_a = r_y
-        L_c = E5.LongLeg.calc_Lc_part_a(L, r_a)
+    # determine L_c
+    if connection_type == :type_a
+        if leg_connected == :long
+            r_a = r_y
+            L_c = E5.LongLeg.calc_Lc_type_a(L, r_a)
+        else
+            r_a = r_x
+            L_c = E5.ShortLeg.calc_Lc_type_a(L, r_a, r_z, b, d)
+        end
     else
-        r_a = r_x
-        L_c = E5.ShortLeg.calc_Lc_part_a(L, r_a, r_z, b, d)
+        if leg_connected == :long
+            r_a = r_y
+            L_c = E5.LongLeg.calc_Lc_type_b(L, r_a)
+        else
+            r_a = r_x
+            L_c = E5.ShortLeg.calc_Lc_type_b(L, r_a, r_z, b, d)
+        end    
     end
-    
+
     F_e = E3.calc_Fe(E, L_c, r_a)
     F_n = E3.calc_Fn(F_y, F_e)
 
@@ -100,11 +115,19 @@ end
 
 function calc_Pn(lshape::T, leg_connected, L) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
     
-    λ, λ_r, λ_class = classify_leg(lshape)
-
-    P_n = calc_Pn(lshape, leg_connected, L, λ, λ_r, λ_class)
+    P_n = calc_Pn(lshape, :type_a, leg_connected, L)
 
     return P_n
 end
+
+function calc_Pn(lshape::T, connection_type, leg_connected, L) where T <: AISCSteel.Shapes.LShapes.AbstractLShapes
+    
+    λ, λ_r, λ_class = classify_leg(lshape)
+
+    P_n = calc_Pn(lshape, connection_type, leg_connected, L, λ, λ_r, λ_class)
+
+    return P_n
+end
+
 
 end # module
