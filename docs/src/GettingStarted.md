@@ -121,7 +121,8 @@ AISCSteel.Shapes.IShapes.RolledIShapes.WShape("W14X90", 90.0 plf, 26.5 inch^2, 1
 Next move on to the Examples to see basic use cases:
 
 - [WShape Example](@ref)
-- [WTShape Example](@ref)
 - [CShape Example](@ref)
+- [LShape Example](@ref)
+- [WTShape Example](@ref)
 - [HSS_Shape Example](@ref)
 - [RoundHSS_Shape Example](@ref)

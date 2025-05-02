@@ -10,8 +10,8 @@ This module includes useful functions to calculate bending capacity of LShapes.
 - `calc_positive_Mnz` - moment capacity about z-axis when compression is in the toe of the legs.
 - `calc_negative_Mnz` - moment capacity about z-axis when tension is in the toe of the legs.
 - `calc_positive_Mnx` - moment capacity about x-axis when compression is in the toe of the leg.
-- `calc_positive_Mny` - moment capacity about y-axis when compression is in the toe of the leg.
 - `calc_negative_Mnx` - moment capacity about x-axis when tension is in the toe of the leg.
+- `calc_positive_Mny` - moment capacity about y-axis when compression is in the toe of the leg.
 - `calc_negative_Mny` - moment capacity about y-axis when tension is in the toe of the leg.
 
 # Modules

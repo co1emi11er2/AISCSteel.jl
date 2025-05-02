@@ -6,7 +6,7 @@ shape,weight,area,d,b,t,k,x,y,xp,yp,Ix,Zx,Sx,rx,Iy,Zy,Sy,ry,Iz,rz,Sz,J,Cw,ro,H,t
 # Fields
 - `shape`: name of the WShape
 - `weight`: weight of section (plf)
-- `area`: area of wshape (inch^2)
+- `A_g`: area of wshape (inch^2)
 - `d`: width of shorter leg (inch)
 - `b`: width of the longer leg (inch)
 - `t`: Thickness of angle leg (inch)
@@ -39,7 +39,7 @@ shape,weight,area,d,b,t,k,x,y,xp,yp,Ix,Zx,Sx,rx,Iy,Zy,Sy,ry,Iz,rz,Sz,J,Cw,ro,H,t
 Base.@kwdef struct LShape <: AbstractLShapes
     shape::String
     weight::AISCSteel.Units.float_plf
-    area::AISCSteel.Units.float_inch2
+    A_g::AISCSteel.Units.float_inch2
     d::AISCSteel.Units.float_inch
     b::AISCSteel.Units.float_inch
     t::AISCSteel.Units.float_inch

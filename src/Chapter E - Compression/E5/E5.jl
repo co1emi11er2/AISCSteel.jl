@@ -13,4 +13,7 @@ include("Equations.jl")
 # Equations below are the public API for E5
 ##########################################################################################
 
+include("LongLeg.jl")
+include("ShortLeg.jl")
+
 end

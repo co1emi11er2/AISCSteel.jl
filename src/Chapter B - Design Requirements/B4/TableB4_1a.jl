@@ -24,13 +24,47 @@ function case1(b, t, E, F_y)
     λ_r = 0.56 * sqrt(E / F_y)
 
     if λ <= λ_r
-        class = :nonslender
+        λ_class = :nonslender
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_r, class
+    return λ, λ_r, λ_class
 end
+
+
+"""
+    case3(b, t, E, F_y)
+
+Classifies the section of a member subject to axial compression.
+
+Description of applicable member: Legs of single angles, legs of double angles with separators, and all other unstiffened elements.
+
+# Arguments
+- `b`: length of the angle leg.
+- `t`: thickness of the flange.
+- `E`: elastic section modulous.
+- `F_y`: yield strength of steel.
+
+# Returns
+- `CompressionBucklingType` enum whose value is either `Nonslender` or `Slender`
+
+# Reference
+- AISC Table B4.1a
+"""
+function case3(b, t, E, F_y)
+    λ = b / t
+    λ_r = 0.45 * sqrt(E / F_y)
+
+    if λ <= λ_r
+        λ_class = :nonslender
+    else
+        λ_class = :slender
+    end
+
+    return λ, λ_r, λ_class
+end
+
 
 """
     case4(d, t_w, E, F_y)
@@ -56,12 +90,12 @@ function case4(d, t_w, E, F_y)
     λ_r = 0.75 * sqrt(E / F_y)
 
     if λ <= λ_r
-        class = :nonslender
+        λ_class = :nonslender
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_r, class
+    return λ, λ_r, λ_class
 end
 
 """
@@ -90,12 +124,12 @@ function case5(h, t_w, E, F_y)
     λ_r = 1.49 * sqrt(E / F_y)
 
     if λ <= λ_r
-        class = :nonslender
+        λ_class = :nonslender
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_r, class
+    return λ, λ_r, λ_class
 end
 
 """
@@ -123,14 +157,14 @@ function case10(b, t, E, F_y)
     λ_r = 1.0 * sqrt(E / F_y)
 
     if λ <= λ_p
-        class = :compact
+        λ_class = :compact
     elseif λ_p < λ <= λ_r
-        class = :noncompact
+        λ_class = :noncompact
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_p, λ_r, class
+    return λ, λ_p, λ_r, λ_class
 end
 
 """
@@ -159,14 +193,14 @@ function case11(b, t, E, F_y, F_L, k_c)
     λ_r = 0.95 * sqrt(k_c * E / F_L)
 
     if λ <= λ_p
-        class = :compact
+        λ_class = :compact
     elseif λ_p < λ <= λ_r
-        class = :noncompact
+        λ_class = :noncompact
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_p, λ_r, class
+    return λ, λ_p, λ_r, λ_class
 end
 
 """
@@ -194,7 +228,7 @@ function case12(b, t, E, F_y)
     λ_p = 0.54 * sqrt(E / F_y)
     λ_r = 0.91 * sqrt(E / F_y)
 
-    class = if λ <= λ_p
+    λ_class = if λ <= λ_p
         :compact
     elseif λ_p < λ <= λ_r
         :noncompact
@@ -202,7 +236,7 @@ function case12(b, t, E, F_y)
         :slender
     end
 
-    return λ, λ_p, λ_r, class
+    return λ, λ_p, λ_r, λ_class
 end
 
 """
@@ -230,14 +264,14 @@ function case13(b, t, E, F_y)
     λ_r = 1.0 * sqrt(E / F_y)
 
     if λ <= λ_p
-        class = :compact
+        λ_class = :compact
     elseif λ_p < λ <= λ_r
-        class = :noncompact
+        λ_class = :noncompact
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_p, λ_r, class
+    return λ, λ_p, λ_r, λ_class
 end
 
 """
@@ -265,14 +299,14 @@ function case14(d, t_w, E, F_y)
     λ_r = 1.52 * sqrt(E / F_y)
 
     if λ <= λ_p
-        class = :compact
+        λ_class = :compact
     elseif λ_p < λ <= λ_r
-        class = :noncompact
+        λ_class = :noncompact
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_p, λ_r, class
+    return λ, λ_p, λ_r, λ_class
 end
 
 
@@ -303,14 +337,14 @@ function case15(h, t_w, E, F_y)
     λ_r = 5.7 * sqrt(E / F_y)
 
     if λ <= λ_p
-        class = :compact
+        λ_class = :compact
     elseif λ_p < λ <= λ_r
-        class = :noncompact
+        λ_class = :noncompact
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_p, λ_r, class
+    return λ, λ_p, λ_r, λ_class
 end
 
 
@@ -339,14 +373,14 @@ function case17(b, t, E, F_y)
     λ_r = 1.40 * sqrt(E / F_y)
 
     if λ <= λ_p
-        class = :compact
+        λ_class = :compact
     elseif λ_p < λ <= λ_r
-        class = :noncompact
+        λ_class = :noncompact
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_p, λ_r, class
+    return λ, λ_p, λ_r, λ_class
 end
 
 
@@ -375,14 +409,14 @@ function case19(h, t, E, F_y)
     λ_r = 5.70 * sqrt(E / F_y)
 
     if λ <= λ_p
-        class = :compact
+        λ_class = :compact
     elseif λ_p < λ <= λ_r
-        class = :noncompact
+        λ_class = :noncompact
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_p, λ_r, class
+    return λ, λ_p, λ_r, λ_class
 end
 
 
@@ -411,14 +445,14 @@ function case20(D, t, E, F_y)
     λ_r = 0.31 * E / F_y
 
     if λ <= λ_p
-        class = :compact
+        λ_class = :compact
     elseif λ_p < λ <= λ_r
-        class = :noncompact
+        λ_class = :noncompact
     else
-        class = :slender
+        λ_class = :slender
     end
 
-    return λ, λ_p, λ_r, class
+    return λ, λ_p, λ_r, λ_class
 end
 
 
