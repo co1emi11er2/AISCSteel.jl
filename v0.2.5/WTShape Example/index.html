@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>WTShape Example · AISCSteel.jl</title><meta name="title" content="WTShape Example · AISCSteel.jl"/><meta property="og:title" content="WTShape Example · AISCSteel.jl"/><meta property="twitter:title" content="WTShape Example · AISCSteel.jl"/><meta name="description" content="Documentation for AISCSteel.jl."/><meta property="og:description" content="Documentation for AISCSteel.jl."/><meta property="twitter:description" content="Documentation for AISCSteel.jl."/><meta property="og:url" content="https://co1emi11er2.github.io/AISCSteel.jl/WTShape Example/"/><meta property="twitter:url" content="https://co1emi11er2.github.io/AISCSteel.jl/WTShape Example/"/><link rel="canonical" href="https://co1emi11er2.github.io/AISCSteel.jl/WTShape Example/"/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">AISCSteel.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li><a class="tocitem" href="../GettingStarted/">Getting Started</a></li><li><a class="tocitem" href="../WShape Example/">WShape Example</a></li><li><a class="tocitem" href="../CShape Example/">CShape Example</a></li><li><a class="tocitem" href="../LShape Example/">LShape Example</a></li><li class="is-active"><a class="tocitem" href>WTShape Example</a><ul class="internal"><li><a class="tocitem" href="#Constructing-a-WTShape:"><span>Constructing a WTShape:</span></a></li><li><a class="tocitem" href="#Compression-Capacity-of-WTShape:"><span>Compression Capacity of WTShape:</span></a></li><li><a class="tocitem" href="#Flexure-Capacity-of-WTShape:"><span>Flexure Capacity of WTShape:</span></a></li></ul></li><li><a class="tocitem" href="../HSS_Shape Example/">HSS_Shape Example</a></li><li><a class="tocitem" href="../RoundHSS_Shape Example/">RoundHSS_Shape Example</a></li><li><a class="tocitem" href="../Shapes/">AISC Steel Shapes</a></li><li><a class="tocitem" href="../ChapterBDesignRequirements/">Chapter B - Design Requirements</a></li><li><a class="tocitem" href="../ChapterDTension/">Chapter D - Tension</a></li><li><a class="tocitem" href="../ChapterECompression/">Chapter E - Compression</a></li><li><a class="tocitem" href="../ChapterFFlexure/">Chapter F - Flexure</a></li><li><a class="tocitem" href="../ChapterGShear/">Chapter G - Shear</a></li><li><a class="tocitem" href="../Utils/">Utils</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>WTShape Example</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>WTShape Example</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/co1emi11er2/AISCSteel.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/co1emi11er2/AISCSteel.jl/blob/main/docs/src/WTShape Example.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="WTShape-Example"><a class="docs-heading-anchor" href="#WTShape-Example">WTShape Example</a><a id="WTShape-Example-1"></a><a class="docs-heading-anchor-permalink" href="#WTShape-Example" title="Permalink"></a></h1><p>See link below for the current WTShapes from the AISC v16 steel database.</p><ul><li><a href="../Shapes/#WTShapes">WTShapes</a></li></ul><h2 id="Constructing-a-WTShape:"><a class="docs-heading-anchor" href="#Constructing-a-WTShape:">Constructing a WTShape:</a><a id="Constructing-a-WTShape:-1"></a><a class="docs-heading-anchor-permalink" href="#Constructing-a-WTShape:" title="Permalink"></a></h2><p>Before constructing, import the <code>AISCSteel</code> package. Also import the <code>StructuralUnits</code> package since we will use it later on.</p><pre><code class="language-julia hljs">using StructuralUnits
+import AISCSteel
+import AISCSteel.Shapes.WTShapes as wts</code></pre><pre><code class="language-julia hljs">wt = wts.WTShape(&quot;WT5x6&quot;)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">AISCSteel.Shapes.WTShapes.WTShape(&quot;WT5X6&quot;, 6.0 plf, 1.77 inch^2, 4.94 inch, 3.96 inch, 0.19 inch, 0.21 inch, 0.51 inch, 1.36 inch, 0.322 inch, 4.35 inch^4, 2.2 inch^3, 1.22 inch^3, 1.57 inch, 1.09 inch^4, 0.869 inch^3, 0.551 inch^3, 0.785 inch, 0.0272 inch^4, 0.0255 inch^6, 2.16 inch, 0.661, 13.5 inch, 17.4 inch, 13.8 inch, 17.8 inch, 2.25 inch, 0.0 inch, 11200.0 ksi, 29000.0 ksi, 50.0 ksi)</code></pre><p>The following went and searched through the AISC v16 steel database and pulled the relevant info to construct a <code>WTShape</code>. You can now access information in the struct like so:</p><p>The width of the flange:</p><pre><code class="language-julia hljs">wt.b_f</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">3.96 inch</code></pre><p>The weight of the WTShape:</p><pre><code class="language-julia hljs">wt.weight</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">6.0 plf</code></pre><h2 id="Compression-Capacity-of-WTShape:"><a class="docs-heading-anchor" href="#Compression-Capacity-of-WTShape:">Compression Capacity of WTShape:</a><a id="Compression-Capacity-of-WTShape:-1"></a><a class="docs-heading-anchor-permalink" href="#Compression-Capacity-of-WTShape:" title="Permalink"></a></h2><p>See link below for the available functions relating to compression for the WTShape member:</p><ul><li><a href="../Shapes/#Compression-API-for-WTShapes">Compression API for WTShapes</a></li></ul><p>We can calculate the compressive capacity of the WT5X6 shape we just constructed:</p><pre><code class="language-julia hljs">L_cx = L_cy = L_cz = 12ft
+ϕ_c = 0.9
+P_n = wts.Compression.calc_Pn(wt, L_cx, L_cy, L_cz)
+ϕP_n = ϕ_c * P_n</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">10.898729316222246 kip</code></pre><p>Lets see what the <code>calc_Pn</code> function did:</p><pre><code class="language-julia hljs">using Handcalcs
+set_handcalcs(precision=2) # sets number of decimals displayed
+
+@handcalcs P_n = wts.Compression.calc_Pn(wt, L_cx, L_cy, L_cz)</code></pre><p class="math-container">\[\begin{aligned}
+b &amp;= \frac{b_{f}}{2} = \frac{3.96\;\mathrm{inch}}{2} = 1.98\;\mathrm{inch}
+\\[10pt]
+t &amp;= t_{f} = 0.21\;\mathrm{inch}
+\\[10pt]
+\lambda &amp;= \frac{b}{t} = \frac{1.98\;\mathrm{inch}}{0.21\;\mathrm{inch}} = 9.43
+\\[10pt]
+\lambda_{r} &amp;= 0.56 \cdot \sqrt{\frac{E}{F_{y}}} = 0.56 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 13.49
+\\[10pt]
+\text{Since: }\lambda \leq \lambda_{r} &amp;= 9.43 \leq 13.49 = true
+\\[10pt]
+\lambda_{class} &amp;= nonslender
+\\[10pt]
+d &amp;= d = 4.94\;\mathrm{inch}
+\\[10pt]
+t_{w} &amp;= t_{w} = 0.19\;\mathrm{inch}
+\\[10pt]
+\lambda &amp;= \frac{d}{t_{w}} = \frac{4.94\;\mathrm{inch}}{0.19\;\mathrm{inch}} = 26
+\\[10pt]
+\lambda_{r} &amp;= 0.75 \cdot \sqrt{\frac{E}{F_{y}}} = 0.75 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 18.06
+\\[10pt]
+\text{Since: }\lambda \leq \lambda_{r} &amp;= 26 \leq 18.06 = false
+\\[10pt]
+\lambda_{class} &amp;= slender
+\\[10pt]
+F_{ex} &amp;= \frac{\pi^{2} \cdot E}{\left( \frac{L_{cx}}{r_{x}} \right)^{2}} = \frac{3.14^{2} \cdot 29000\;\mathrm{ksi}}{\left( \frac{12\;\mathrm{ft}}{1.57\;\mathrm{inch}} \right)^{2}} = 34.02\;\mathrm{ksi}
+\\[10pt]
+F_{ey} &amp;= \frac{\pi^{2} \cdot E}{\left( \frac{L_{cy}}{r_{y}} \right)^{2}} = \frac{3.14^{2} \cdot 29000\;\mathrm{ksi}}{\left( \frac{12\;\mathrm{ft}}{0.79\;\mathrm{inch}} \right)^{2}} = 8.51\;\mathrm{ksi}
+\\[10pt]
+x_{0} &amp;= 0 \cdot inch = 0 \cdot \mathrm{inch} = 0\;\mathrm{inch}
+\\[10pt]
+y_{0} &amp;= \bar{y} - \frac{t_{f}}{2} = 1.36\;\mathrm{inch} - \frac{0.21\;\mathrm{inch}}{2} = 1.26\;\mathrm{inch}
+\\[10pt]
+\bar{r}_{0} &amp;= \sqrt{x_{0}^{2} + y_{0}^{2} + \frac{I_{x} + I_{y}}{A_{g}}} = \sqrt{\left( 0\;\mathrm{inch} \right)^{2} + \left( 1.26\;\mathrm{inch} \right)^{2} + \frac{4.35\;\mathrm{inch}^{4} + 1.09\;\mathrm{inch}^{4}}{1.77\;\mathrm{inch}^{2}}} = 2.16\;\mathrm{inch}
+\\[10pt]
+F_{ez} &amp;= \frac{\pi^{2} \cdot E \cdot C_{w}}{L_{cz}^{2}} \cdot \frac{1}{A_{g} \cdot \bar{r}_{0}^{2}} + G \cdot J \cdot \frac{1}{A_{g} \cdot \bar{r}_{0}^{2}} = \frac{3.14^{2} \cdot 29000\;\mathrm{ksi} \cdot 0.03\;\mathrm{inch}^{6}}{\left( 12\;\mathrm{ft} \right)^{2}} \cdot \frac{1}{1.77\;\mathrm{inch}^{2} \cdot \left( 2.16\;\mathrm{inch} \right)^{2}} + 11200\;\mathrm{ksi} \cdot 0.03\;\mathrm{inch}^{4} \cdot \frac{1}{1.77\;\mathrm{inch}^{2} \cdot \left( 2.16\;\mathrm{inch} \right)^{2}} = 37.07\;\mathrm{ksi}
+\\[10pt]
+H &amp;= 1 - \frac{x_{0}^{2} + y_{0}^{2}}{\bar{r}_{0}^{2}} = 1 - \frac{\left( 0\;\mathrm{inch} \right)^{2} + \left( 1.26\;\mathrm{inch} \right)^{2}}{\left( 2.16\;\mathrm{inch} \right)^{2}} = 0.66
+\\[10pt]
+F_{e} &amp;= \frac{F_{ey} + F_{ez}}{2 \cdot H} \cdot \left( 1 - \sqrt{1 - \frac{4 \cdot F_{ey} \cdot F_{ez} \cdot H}{\left( F_{ey} + F_{ez} \right)^{2}}} \right) = \frac{8.51\;\mathrm{ksi} + 37.07\;\mathrm{ksi}}{2 \cdot 0.66} \cdot \left( 1 - \sqrt{1 - \frac{4 \cdot 8.51\;\mathrm{ksi} \cdot 37.07\;\mathrm{ksi} \cdot 0.66}{\left( 8.51\;\mathrm{ksi} + 37.07\;\mathrm{ksi} \right)^{2}}} \right) = 7.8\;\mathrm{ksi}
+\\[10pt]
+F_{e} &amp;= \mathrm{min}\left( F_{ex}, F_{ey}, F_{e} \right) = \mathrm{min}\left( 34.02\;\mathrm{ksi}, 8.51\;\mathrm{ksi}, 7.8\;\mathrm{ksi} \right) = 7.8\;\mathrm{ksi}
+\\[10pt]
+\text{Since: }\frac{F_{y}}{F_{e}} \leq 2.25 &amp;= \frac{50\;\mathrm{ksi}}{7.8\;\mathrm{ksi}} \leq 2.25 = false
+\\[10pt]
+F_{n} &amp;= 0.88 \cdot F_{e} = 0.88 \cdot 7.8\;\mathrm{ksi} = 6.84\;\mathrm{ksi}
+\\[10pt]
+\text{Since: }\lambda_{wclass} &amp;= nonslender = slender = false
+\\[10pt]
+\text{Since: }\lambda_{fclass} &amp;= nonslender = true
+\\[10pt]
+b &amp;= d = 4.94\;\mathrm{inch}
+\\[10pt]
+t &amp;= t_{w} = 0.19\;\mathrm{inch}
+\\[10pt]
+c_{1} &amp;= 0.22
+\\[10pt]
+c_{2} &amp;= 1.49
+\\[10pt]
+F_{el} &amp;= \left( c_{2} \cdot \frac{\lambda_{r}}{\lambda} \right)^{2} \cdot F_{y} = \left( 1.49 \cdot \frac{18.06}{26} \right)^{2} \cdot 50\;\mathrm{ksi} = 53.57\;\mathrm{ksi}
+\\[10pt]
+\text{Since: }\lambda \leq \lambda_{r} \cdot \sqrt{\frac{F_{y}}{F_{n}}} &amp;= 26 \leq 18.06 \cdot \sqrt{\frac{50\;\mathrm{ksi}}{6.84\;\mathrm{ksi}}} = true
+\\[10pt]
+b_{e} &amp;= b = 4.94\;\mathrm{inch}
+\\[10pt]
+A_{e} &amp;= A_{g} - \left( b - b_{e} \right) \cdot t = 1.77\;\mathrm{inch}^{2} - \left( 4.94\;\mathrm{inch} - 4.94\;\mathrm{inch} \right) \cdot 0.19\;\mathrm{inch} = 1.77\;\mathrm{inch}^{2}
+\\[10pt]
+P_{n} &amp;= F_{n} \cdot A_{e} = 6.84\;\mathrm{ksi} \cdot 1.77\;\mathrm{inch}^{2} = 12.11\;\mathrm{kip}
+\end{aligned}\]</p><h2 id="Flexure-Capacity-of-WTShape:"><a class="docs-heading-anchor" href="#Flexure-Capacity-of-WTShape:">Flexure Capacity of WTShape:</a><a id="Flexure-Capacity-of-WTShape:-1"></a><a class="docs-heading-anchor-permalink" href="#Flexure-Capacity-of-WTShape:" title="Permalink"></a></h2><p>See link below for the available functions relating to flexure for the WTShape member:</p><ul><li><a href="../Shapes/#Flexure-API-for-WTShapes">Flexure API for WTShapes</a></li></ul><h3 id="Positive-Bending"><a class="docs-heading-anchor" href="#Positive-Bending">Positive Bending</a><a id="Positive-Bending-1"></a><a class="docs-heading-anchor-permalink" href="#Positive-Bending" title="Permalink"></a></h3><p>We can calculate the flexural capacity about the x-axis in positive bending of the WT5X6 shape we just constructed:</p><pre><code class="language-julia hljs">L_b = 0ft
+ϕ_b = 0.9
+M_nx = wts.Flexure.calc_positive_Mnx(wt, L_b)
+ϕM_nx = ϕ_b * M_nx</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">7.320000000000001 ft kip</code></pre><p>Lets see what the <code>calc_Mnx</code> function did:</p><pre><code class="language-julia hljs">@handcalcs M_nx = wts.Flexure.calc_positive_Mnx(wt, L_b)</code></pre><p class="math-container">\[\begin{aligned}
+b &amp;= \frac{b_{f}}{2} = \frac{3.96\;\mathrm{inch}}{2} = 1.98\;\mathrm{inch}
+\\[10pt]
+t &amp;= t_{f} = 0.21\;\mathrm{inch}
+\\[10pt]
+\lambda &amp;= \frac{b}{t} = \frac{1.98\;\mathrm{inch}}{0.21\;\mathrm{inch}} = 9.43
+\\[10pt]
+\lambda_{p} &amp;= 0.38 \cdot \sqrt{\frac{E}{F_{y}}} = 0.38 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 9.15
+\\[10pt]
+\lambda_{r} &amp;= 1 \cdot \sqrt{\frac{E}{F_{y}}} = 1 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 24.08
+\\[10pt]
+\text{Since: }\lambda_{p} &lt; \lambda \leq \lambda_{r} &amp;= 9.15 &lt; 9.43 \leq 24.08 = true
+\\[10pt]
+\lambda_{class} &amp;= noncompact
+\\[10pt]
+S_{xc} &amp;= \frac{I_{x}}{\bar{y}} = \frac{4.35\;\mathrm{inch}^{4}}{1.36\;\mathrm{inch}} = 3.2\;\mathrm{inch}^{3}
+\\[10pt]
+L_{p} &amp;= 1.76 \cdot r_{y} \cdot \sqrt{\frac{E}{F_{y}}} = 1.76 \cdot 0.79\;\mathrm{inch} \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 2.77\;\mathrm{ft}
+\\[10pt]
+L_{r} &amp;= \frac{1.95 \cdot \frac{E}{F_{y}} \cdot \sqrt{I_{y} \cdot J}}{S_{x}} \cdot \sqrt{\frac{2.36 \cdot \frac{F_{y}}{E} \cdot d \cdot S_{x}}{J} + 1} = \frac{1.95 \cdot \frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}} \cdot \sqrt{1.09\;\mathrm{inch}^{4} \cdot 0.03\;\mathrm{inch}^{4}}}{1.22\;\mathrm{inch}^{3}} \cdot \sqrt{\frac{2.36 \cdot \frac{50\;\mathrm{ksi}}{29000\;\mathrm{ksi}} \cdot 4.94\;\mathrm{inch} \cdot 1.22\;\mathrm{inch}^{3}}{0.03\;\mathrm{inch}^{4}} + 1} = 18.34\;\mathrm{ft}
+\\[10pt]
+M_{y} &amp;= F_{y} \cdot S_{x} = 50\;\mathrm{ksi} \cdot 1.22\;\mathrm{inch}^{3} = 5.08\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{p} &amp;= \mathrm{min}\left( F_{y} \cdot Z_{x}, 1.6 \cdot M_{y} \right) = \mathrm{min}\left( 50\;\mathrm{ksi} \cdot 2.2\;\mathrm{inch}^{3}, 1.6 \cdot 5.08\;\mathrm{ft}\,\mathrm{kip} \right) = 8.13\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+B &amp;= 2.3 \cdot \frac{d}{L_{b}} \cdot \sqrt{\frac{I_{y}}{J}} = 2.3 \cdot \frac{4.94\;\mathrm{inch}}{0\;\mathrm{ft}} \cdot \sqrt{\frac{1.09\;\mathrm{inch}^{4}}{0.03\;\mathrm{inch}^{4}}} = \infty\;\mathrm{inch}\,\mathrm{ft}^{-1}
+\\[10pt]
+M_{cr} &amp;= \frac{1.95 \cdot E}{L_{b}} \cdot \sqrt{I_{y} \cdot J} \cdot \left( B + \sqrt{1 + B^{2}} \right) = \frac{1.95 \cdot 29000\;\mathrm{ksi}}{0\;\mathrm{ft}} \cdot \sqrt{1.09\;\mathrm{inch}^{4} \cdot 0.03\;\mathrm{inch}^{4}} \cdot \left( \infty\;\mathrm{inch}\,\mathrm{ft}^{-1} + \sqrt{1 + \left( \infty\;\mathrm{inch}\,\mathrm{ft}^{-1} \right)^{2}} \right) = \infty\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{nY} &amp;= M_{p} = 8.13\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+\text{Since: }L_{b} \leq L_{p} &amp;= 0\;\mathrm{ft} \leq 2.77\;\mathrm{ft} = true
+\\[10pt]
+M_{nLTB} &amp;= M_{p} = 8.13\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+\text{Since: }\lambda_{fclass} &amp;= noncompact = true
+\\[10pt]
+M_{nFLB1} &amp;= M_{p} - \left( M_{p} - F_{y} \cdot S_{xc} \right) \cdot \frac{\lambda_{f} - \lambda_{pf}}{\lambda_{rf} - \lambda_{pf}} = 8.13\;\mathrm{ft}\,\mathrm{kip} - \left( 8.13\;\mathrm{ft}\,\mathrm{kip} - 50\;\mathrm{ksi} \cdot 3.2\;\mathrm{inch}^{3} \right) \cdot \frac{9.43 - 9.15}{24.08 - 9.15} = 8.23\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{nFLB2} &amp;= 1.6 \cdot M_{y} = 1.6 \cdot 5.08\;\mathrm{ft}\,\mathrm{kip} = 8.13\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{nFLB} &amp;= \mathrm{min}\left( M_{nFLB1}, M_{nFLB2} \right) = \mathrm{min}\left( 8.23\;\mathrm{ft}\,\mathrm{kip}, 8.13\;\mathrm{ft}\,\mathrm{kip} \right) = 8.13\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{n} &amp;= \mathrm{min}\left( M_{nY}, M_{nLTB}, M_{nFLB} \right) = \mathrm{min}\left( 8.13\;\mathrm{ft}\,\mathrm{kip}, 8.13\;\mathrm{ft}\,\mathrm{kip}, 8.13\;\mathrm{ft}\,\mathrm{kip} \right) = 8.13\;\mathrm{ft}\,\mathrm{kip}
+\end{aligned}\]</p><h3 id="Negative-Bending"><a class="docs-heading-anchor" href="#Negative-Bending">Negative Bending</a><a id="Negative-Bending-1"></a><a class="docs-heading-anchor-permalink" href="#Negative-Bending" title="Permalink"></a></h3><p>We can calculate the flexural capacity about the y-axis of the WT5X6 shape we just constructed:</p><pre><code class="language-julia hljs">M_ny = wts.Flexure.calc_negative_Mnx(wt, L_b)
+ϕM_ny = ϕ_b * M_ny</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">3.99859809413489 ft kip</code></pre><p>Lets see what the <code>calc_Mny</code> function did:</p><pre><code class="language-julia hljs">@handcalcs M_ny = wts.Flexure.calc_negative_Mnx(wt, L_b)</code></pre><p class="math-container">\[\begin{aligned}
+M_{y} &amp;= F_{y} \cdot S_{x} = 50\;\mathrm{ksi} \cdot 1.22\;\mathrm{inch}^{3} = 5.08\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{p} &amp;= M_{y} = 5.08\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+B &amp;= -2.3 \cdot \frac{d}{L_{b}} \cdot \sqrt{\frac{I_{y}}{J}} = -2.3 \cdot \frac{4.94\;\mathrm{inch}}{0\;\mathrm{ft}} \cdot \sqrt{\frac{1.09\;\mathrm{inch}^{4}}{0.03\;\mathrm{inch}^{4}}} = -\infty\;\mathrm{inch}\,\mathrm{ft}^{-1}
+\\[10pt]
+M_{cr} &amp;= \frac{1.95 \cdot E}{L_{b}} \cdot \sqrt{I_{y} \cdot J} \cdot \left( B + \sqrt{1 + B^{2}} \right) = \frac{1.95 \cdot 29000\;\mathrm{ksi}}{0\;\mathrm{ft}} \cdot \sqrt{1.09\;\mathrm{inch}^{4} \cdot 0.03\;\mathrm{inch}^{4}} \cdot \left( -\infty\;\mathrm{inch}\,\mathrm{ft}^{-1} + \sqrt{1 + \left( -\infty\;\mathrm{inch}\,\mathrm{ft}^{-1} \right)^{2}} \right) = NaN\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+dtw_{ratio} &amp;= \frac{d}{t_{w}} = \frac{4.94\;\mathrm{inch}}{0.19\;\mathrm{inch}} = 26
+\\[10pt]
+limit_{1} &amp;= 0.84 \cdot \sqrt{\frac{E}{F_{y}}} = 0.84 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 20.23
+\\[10pt]
+limit_{2} &amp;= 1.52 \cdot \sqrt{\frac{E}{F_{y}}} = 1.52 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 36.61
+\\[10pt]
+\text{Since: }limit_{1} &lt; dtw_{ratio} \leq limit_{2} &amp;= 20.23 &lt; 26 \leq 36.61 = true
+\\[10pt]
+F_{cr} &amp;= \left( 1.43 - 0.52 \cdot \frac{d}{t_{w}} \cdot \sqrt{\frac{F_{y}}{E}} \right) \cdot F_{y} = \left( 1.43 - 0.52 \cdot \frac{4.94\;\mathrm{inch}}{0.19\;\mathrm{inch}} \cdot \sqrt{\frac{50\;\mathrm{ksi}}{29000\;\mathrm{ksi}}} \right) \cdot 50\;\mathrm{ksi} = 43.7\;\mathrm{ksi}
+\\[10pt]
+M_{nY} &amp;= M_{p} = 5.08\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{nLTB} &amp;= \mathrm{min}\left( M_{cr}, M_{y} \right) = \mathrm{min}\left( NaN\;\mathrm{ft}\,\mathrm{kip}, 5.08\;\mathrm{ft}\,\mathrm{kip} \right) = 5.08\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{nLB} &amp;= F_{cr} \cdot S_{x} = 43.7\;\mathrm{ksi} \cdot 1.22\;\mathrm{inch}^{3} = 4.44\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{n} &amp;= \mathrm{min}\left( M_{nY}, M_{nLTB}, M_{nLB} \right) = \mathrm{min}\left( 5.08\;\mathrm{ft}\,\mathrm{kip}, 5.08\;\mathrm{ft}\,\mathrm{kip}, 4.44\;\mathrm{ft}\,\mathrm{kip} \right) = 4.44\;\mathrm{ft}\,\mathrm{kip}
+\end{aligned}\]</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../LShape Example/">« LShape Example</a><a class="docs-footer-nextpage" href="../HSS_Shape Example/">HSS_Shape Example »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.10.2 on <span class="colophon-date" title="Friday 2 May 2025 18:41">Friday 2 May 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body><div data-docstringscollapsed="true"></div></html>
