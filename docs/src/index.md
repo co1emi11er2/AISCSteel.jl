@@ -91,7 +91,7 @@ Modules = [AISCSteel]
 | Calculate based on E2         | ✅ Implemented |
 | Calculate based on E3         | ✅ Implemented |
 | Calculate based on E4         | ✅ Implemented |
-| Calculate based on E5         | ❌ Not Implemented |
+| Calculate based on E5         | ✅ Not Implemented |
 | Calculate based on E6         | ❌ Not Implemented |
 | Calculate based on E7         | ✅ Implemented |
 
