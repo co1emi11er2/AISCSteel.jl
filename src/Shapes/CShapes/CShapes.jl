@@ -16,6 +16,9 @@ include("MCShape.jl")
 # # Include Flexure
 include("Flexure/Flexure.jl")
 
+# # Include Compression
+include("Compression/Compression.jl")
+
 # ##########################################################################################
 # # Design of members for flexure - Section F2
 # ##########################################################################################
