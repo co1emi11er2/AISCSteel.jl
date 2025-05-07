@@ -133,6 +133,38 @@ function case5(h, t_w, E, F_y)
 end
 
 """
+    case6(b, t, E, F_y)
+
+Classifies the section of a member subject to axial compression.
+
+Description of applicable member: Walls of rectangular HSS
+
+# Arguments
+- `b`: width of the flat wall.
+- `t`: thickness of the wall.
+- `E`: elastic section modulous.
+- `F_y`: yield strength of steel.
+
+# Returns
+- `CompressionBucklingType` enum whose value is either `Nonslender` or `Slender`
+
+# Reference
+- AISC Table B4.1a
+"""
+function case6(b, t, E, F_y)
+    λ = b / t
+    λ_r = 1.40 * sqrt(E / F_y)
+
+    if λ <= λ_r
+        λ_class = :nonslender
+    else
+        λ_class = :slender
+    end
+
+    return λ, λ_r, λ_class
+end
+
+"""
     case10(b, t, E, F_y)
 
 Classifies the compressive elements of a member subject to flexural.

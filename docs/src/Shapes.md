@@ -96,7 +96,9 @@ Modules = [AISCSteel.Shapes.HSS_Shapes]
 
 ### Compression API for HSS Shapes
 
-This section is *not implemented*.
+```@autodocs
+Modules = [AISCSteel.Shapes.HSS_Shapes.Compression]
+```
 
 ### Flexure API for HSS Shapes
 

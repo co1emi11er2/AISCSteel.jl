@@ -137,9 +137,9 @@ This function calculates Mnx of the shape.
 # Reference
 - AISC Section F7
 """
-function calc_Mnx((;E, F_y, Z_x, h, t_des, b, r_y, J, area, S_x, I_x, Ht)::T, λ_f, λ_pf, λ_rf, λ_fclass, λ_w, λ_pw, λ_rw, λ_wclass, L_b, C_b) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
+function calc_Mnx((;E, F_y, Z_x, h, t_des, b, r_y, J, A_g, S_x, I_x, Ht)::T, λ_f, λ_pf, λ_rf, λ_fclass, λ_w, λ_pw, λ_rw, λ_wclass, L_b, C_b) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
     
-    M_nx = F7.HSS.calc_Mnx(E, F_y, Z_x, h, t_des, b, t_des, r_y, J, area, S_x, I_x, Ht, λ_f, λ_pf, λ_rf, λ_fclass, λ_w, λ_pw, λ_rw, λ_wclass, L_b, C_b)
+    M_nx = F7.HSS.calc_Mnx(E, F_y, Z_x, h, t_des, b, t_des, r_y, J, A_g, S_x, I_x, Ht, λ_f, λ_pf, λ_rf, λ_fclass, λ_w, λ_pw, λ_rw, λ_wclass, L_b, C_b)
 
     return M_nx
 end
@@ -170,7 +170,7 @@ This function calculates Mny of the shape.
 # Reference
 - AISC Section F7
 """
-function calc_Mny((;E, F_y, Z_y, h, t_des, b, r_y, J, area, S_y, I_y, B)::T, λ_f, λ_pf, λ_rf, λ_fclass, λ_w, λ_pw, λ_rw, λ_wclass) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
+function calc_Mny((;E, F_y, Z_y, h, t_des, b, r_y, J, A_g, S_y, I_y, B)::T, λ_f, λ_pf, λ_rf, λ_fclass, λ_w, λ_pw, λ_rw, λ_wclass) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
     
     M_nx = F7.HSS.calc_Mny(E, F_y, Z_y, b, t_des, h, t_des, S_y, I_y, B, λ_f, λ_pf, λ_rf, λ_fclass, λ_w, λ_pw, λ_rw, λ_wclass)
 

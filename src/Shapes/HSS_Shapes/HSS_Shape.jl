@@ -8,7 +8,7 @@ HSS_Shape in the AISC steel database.
 
 - `shape`: name of the HSS
 - `weight`: weight of section (plf)
-- `area`: area of shape (inch2)
+- `A_g`: area of shape (inch2)
 - `Ht`: overall depth of square HSS or longer wall of rectangular HSS (inch)
 - `h`: depth of flat wall of square HSS or longer wall of rectangular HSS (inch)
 - `B`: overall width of square HSS or shorter wall of rectangular HSS (inch)
@@ -31,7 +31,7 @@ HSS_Shape in the AISC steel database.
 Base.@kwdef struct HSS_Shape <: AbstractHSS_Shapes
     shape::String
     weight::AISCSteel.Units.float_plf
-    area::AISCSteel.Units.float_inch2
+    A_g::AISCSteel.Units.float_inch2
     Ht::AISCSteel.Units.float_inch
     h::AISCSteel.Units.float_inch
     B::AISCSteel.Units.float_inch

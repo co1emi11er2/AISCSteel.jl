@@ -12,4 +12,7 @@ include("HSS_Shape.jl")
 # Include Flexure
 include("Flexure/Flexure.jl")
 
+# Include Compression
+include("Compression/Compression.jl")
+
 end # module
