@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>WShapes · AISCSteel.jl</title><meta name="title" content="WShapes · AISCSteel.jl"/><meta property="og:title" content="WShapes · AISCSteel.jl"/><meta property="twitter:title" content="WShapes · AISCSteel.jl"/><meta name="description" content="Documentation for AISCSteel.jl."/><meta property="og:description" content="Documentation for AISCSteel.jl."/><meta property="twitter:description" content="Documentation for AISCSteel.jl."/><meta property="og:url" content="https://co1emi11er2.github.io/AISCSteel.jl/WShape Example/"/><meta property="twitter:url" content="https://co1emi11er2.github.io/AISCSteel.jl/WShape Example/"/><link rel="canonical" href="https://co1emi11er2.github.io/AISCSteel.jl/WShape Example/"/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">AISCSteel.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><input class="collapse-toggle" id="menuitem-1" type="checkbox"/><label class="tocitem" for="menuitem-1"><span class="docs-label">Introduction</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../">Home</a></li><li><a class="tocitem" href="../GettingStarted/">Getting Started</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2" type="checkbox" checked/><label class="tocitem" for="menuitem-2"><span class="docs-label">Examples</span><i class="docs-chevron"></i></label><ul class="collapsed"><li class="is-active"><a class="tocitem" href>WShapes</a><ul class="internal"><li><a class="tocitem" href="#Constructing-a-WShape:"><span>Constructing a WShape:</span></a></li><li><a class="tocitem" href="#Compression-Capacity-of-WShape:"><span>Compression Capacity of WShape:</span></a></li><li><a class="tocitem" href="#Flexure-Capacity-of-WShape:"><span>Flexure Capacity of WShape:</span></a></li></ul></li><li><a class="tocitem" href="../CShape Example/">CShapes</a></li><li><a class="tocitem" href="../LShape Example/">LShapes</a></li><li><a class="tocitem" href="../WTShape Example/">WTShapes</a></li><li><a class="tocitem" href="../HSS_Shape Example/">HSS_Shapes</a></li><li><a class="tocitem" href="../RoundHSS_Shape Example/">RoundHSS_Shapes</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3" type="checkbox"/><label class="tocitem" for="menuitem-3"><span class="docs-label">AISC Steel Shapes API</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../Shapes API/IShapes API/">IShapes</a></li><li><a class="tocitem" href="../Shapes API/CShapes API/">CShapes</a></li><li><a class="tocitem" href="../Shapes API/WTShapes API/">WTShapes</a></li><li><a class="tocitem" href="../Shapes API/LShapes API/">LShapes</a></li><li><a class="tocitem" href="../Shapes API/HSS_Shapes API/">HSS Shapes</a></li><li><a class="tocitem" href="../Shapes API/RoundHSS_Shapes API/">Round HSS Shapes</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-4" type="checkbox"/><label class="tocitem" for="menuitem-4"><span class="docs-label">Chapters</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../ChapterBDesignRequirements/">Chapter B - Design Requirements</a></li><li><a class="tocitem" href="../ChapterDTension/">Chapter D - Tension</a></li><li><a class="tocitem" href="../ChapterECompression/">Chapter E - Compression</a></li><li><a class="tocitem" href="../ChapterFFlexure/">Chapter F - Flexure</a></li><li><a class="tocitem" href="../ChapterGShear/">Chapter G - Shear</a></li></ul></li><li><a class="tocitem" href="../Utils/">Utils</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>WShapes</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>WShapes</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/co1emi11er2/AISCSteel.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/co1emi11er2/AISCSteel.jl/blob/main/docs/src/WShape Example.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="WShape-Example"><a class="docs-heading-anchor" href="#WShape-Example">WShape Example</a><a id="WShape-Example-1"></a><a class="docs-heading-anchor-permalink" href="#WShape-Example" title="Permalink"></a></h1><p>See link below for the current IShapes from the AISC v16 steel database.</p><ul><li><a href="../Shapes API/IShapes API/#IShapes">IShapes</a></li></ul><h2 id="Constructing-a-WShape:"><a class="docs-heading-anchor" href="#Constructing-a-WShape:">Constructing a WShape:</a><a id="Constructing-a-WShape:-1"></a><a class="docs-heading-anchor-permalink" href="#Constructing-a-WShape:" title="Permalink"></a></h2><p>Before constructing, import the <code>AISCSteel</code> package. Also import the <code>StructuralUnits</code> package since we will use it later on.</p><pre><code class="language-julia hljs">using StructuralUnits
+import AISCSteel
+import AISCSteel.Shapes.IShapes.RolledIShapes as ris</code></pre><div class="admonition is-info" id="Importing-the-Package-feb9de0f9c20a07a"><header class="admonition-header">Importing the Package<a class="admonition-anchor" href="#Importing-the-Package-feb9de0f9c20a07a" title="Permalink"></a></header><div class="admonition-body"><p>The reason to call <code>using</code> for <code>StructuralUnits</code> is so the variables like <code>ft</code>, <code>inch</code>, <code>kip</code>, etc are available automatically to you. Using the <code>import</code> for <code>AISCSteel</code> is better so the functions are still contained in the <code>AISCSteel</code> package. This is how <code>AISCSteel</code> was intened to be used. The structure of the package will help guide you to where you want to go. As you type the <code>.</code>, suggestions will pop up giving you an idea of where you need to go. You may have to hit <code>Tab</code> to see the suggestions. In the Julia REPL you will need to hit <code>Tab</code> twice to see the list of suggestions.</p></div></div><p>Now that the package has been imported, lets construct a W14X90.</p><pre><code class="language-julia hljs">w = ris.WShape(&quot;W14x90&quot;)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">AISCSteel.Shapes.IShapes.RolledIShapes.WShape(&quot;W14X90&quot;, 90.0 plf, 26.5 inch^2, 14.0 inch, 14.5 inch, 0.44 inch, 0.71 inch, 1.31 inch, 1.4375 inch, 11.396 inch, 999.0 inch^4, 157.0 inch^3, 143.0 inch^3, 6.14 inch, 362.0 inch^4, 75.6 inch^3, 49.9 inch^3, 3.7 inch, 4.06 inch^4, 16000.0 inch^6, 48.2 inch^2, 124.0 inch^4, 33.2 inch^3, 77.1 inch^3, 4.1 inch, 13.3 inch, 69.6 inch, 84.1 inch, 42.5 inch, 57.0 inch, 10.0 inch, 5.5 inch, 0.0 inch, 29000.0 ksi, 50.0 ksi)</code></pre><p>The following went and searched through the AISC v16 steel database and pulled the relevant info to construct a <code>WShape</code>. You can now access information in the struct like so:</p><p>The width of the flange:</p><pre><code class="language-julia hljs">w.b_f</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">14.5 inch</code></pre><p>The weight of the WShape:</p><pre><code class="language-julia hljs">w.weight</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">90.0 plf</code></pre><h2 id="Compression-Capacity-of-WShape:"><a class="docs-heading-anchor" href="#Compression-Capacity-of-WShape:">Compression Capacity of WShape:</a><a id="Compression-Capacity-of-WShape:-1"></a><a class="docs-heading-anchor-permalink" href="#Compression-Capacity-of-WShape:" title="Permalink"></a></h2><p>See link below for the available functions relating to compression for the WShape member:</p><ul><li><a href="../Shapes API/IShapes API/#Compression-API-for-IShapes">Compression API for IShapes</a></li></ul><p>We can calculate the compressive capacity of the W14X90 shape we just constructed:</p><pre><code class="language-julia hljs">L_cx = L_cy = 20ft
+ϕ_c = 0.9
+P_n = ris.Compression.calc_Pn(w, L_cx, L_cy)
+ϕP_n = ϕ_c * P_n</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">876.7044321578569 kip</code></pre><p>This is great. However, as engineers, we would like it if we could see what the function did. That is where <a href="https://github.com/co1emi11er2/Handcalcs.jl">Handcalcs.jl</a> comes in. This package can look into the function and show you what the function did. All you need to do is type <code>@handcalcs</code> in front of the line that called the <code>calc_Pn</code> function:</p><pre><code class="language-julia hljs">using Handcalcs
+set_handcalcs(precision=2) # sets number of decimals displayed
+
+@handcalcs P_n = ris.Compression.calc_Pn(w, L_cx, L_cy)</code></pre><p class="math-container">\[\begin{aligned}
+b &amp;= \frac{b_{f}}{2} = \frac{14.5\;\mathrm{inch}}{2} = 7.25\;\mathrm{inch}
+\\[10pt]
+t &amp;= t_{f} = 0.71\;\mathrm{inch}
+\\[10pt]
+\lambda &amp;= \frac{b}{t} = \frac{7.25\;\mathrm{inch}}{0.71\;\mathrm{inch}} = 10.21
+\\[10pt]
+\lambda_{r} &amp;= 0.56 \cdot \sqrt{\frac{E}{F_{y}}} = 0.56 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 13.49
+\\[10pt]
+\text{Since: }\lambda \leq \lambda_{r} &amp;= 10.21 \leq 13.49 = true
+\\[10pt]
+\lambda_{class} &amp;= nonslender
+\\[10pt]
+h &amp;= h = 11.4\;\mathrm{inch}
+\\[10pt]
+t_{w} &amp;= t_{w} = 0.44\;\mathrm{inch}
+\\[10pt]
+\lambda &amp;= \frac{h}{t_{w}} = \frac{11.4\;\mathrm{inch}}{0.44\;\mathrm{inch}} = 25.9
+\\[10pt]
+\lambda_{r} &amp;= 1.49 \cdot \sqrt{\frac{E}{F_{y}}} = 1.49 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 35.88
+\\[10pt]
+\text{Since: }\lambda \leq \lambda_{r} &amp;= 25.9 \leq 35.88 = true
+\\[10pt]
+\lambda_{class} &amp;= nonslender
+\\[10pt]
+\text{Since: }\frac{L_{cx}}{r_{x}} &gt; \frac{L_{cy}}{r_{y}} &amp;= \frac{20\;\mathrm{ft}}{6.14\;\mathrm{inch}} &gt; \frac{20\;\mathrm{ft}}{3.7\;\mathrm{inch}} = false
+\\[10pt]
+L_{c} &amp;= L_{cy} = 20\;\mathrm{ft}
+\\[10pt]
+r &amp;= r_{y} = 3.7\;\mathrm{inch}
+\\[10pt]
+F_{e} &amp;= \frac{\pi^{2} \cdot E}{\left( \frac{L_{c}}{r} \right)^{2}} = \frac{3.14^{2} \cdot 29000\;\mathrm{ksi}}{\left( \frac{20\;\mathrm{ft}}{3.7\;\mathrm{inch}} \right)^{2}} = 68.03\;\mathrm{ksi}
+\\[10pt]
+\text{Since: }\frac{L_{c}}{r} \leq 4.71 \cdot \sqrt{\frac{E}{F_{y}}} &amp;= \frac{20\;\mathrm{ft}}{3.7\;\mathrm{inch}} \leq 4.71 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = true
+\\[10pt]
+F_{n} &amp;= 0.66^{\frac{F_{y}}{F_{e}}} \cdot F_{y} = 0.66^{\frac{50\;\mathrm{ksi}}{68.03\;\mathrm{ksi}}} \cdot 50\;\mathrm{ksi} = 36.76\;\mathrm{ksi}
+\\[10pt]
+\text{Since: }\lambda_{wclass} &amp;= nonslender = true
+\\[10pt]
+\text{Since: }\lambda_{fclass} &amp;= nonslender = true
+\\[10pt]
+P_{n} &amp;= F_{n} \cdot A_{g} = 36.76\;\mathrm{ksi} \cdot 26.5\;\mathrm{inch}^{2} = 974.12\;\mathrm{kip}
+\end{aligned}\]</p><p>Wow! No more black boxes! </p><div class="admonition is-info" id="AISCSteel-and-Handcalcs-aa411ad2b7caefcb"><header class="admonition-header">AISCSteel and Handcalcs<a class="admonition-anchor" href="#AISCSteel-and-Handcalcs-aa411ad2b7caefcb" title="Permalink"></a></header><div class="admonition-body"><p>AISCSteel has been designed with <a href="https://github.com/co1emi11er2/Handcalcs.jl">Handcalcs.jl</a> in mind. So if you are in an environment like <a href="https://plutojl.org/">Pluto</a> or <a href="https://jupyter.org/">Jupyter Notebook</a>, you can use <code>@handcalcs</code> to understand what is going on inside the function. You can also use it to generate nice, readable calculations. See <a href="https://github.com/co1emi11er2/Handcalcs.jl/blob/master/examples/aisc_example.pdf">here</a>. There is also an extensive demo to see more functionality. See the <a href="https://featured.plutojl.org/math/handcalcsdemo">Handcalcs Demo</a>.</p></div></div><h2 id="Flexure-Capacity-of-WShape:"><a class="docs-heading-anchor" href="#Flexure-Capacity-of-WShape:">Flexure Capacity of WShape:</a><a id="Flexure-Capacity-of-WShape:-1"></a><a class="docs-heading-anchor-permalink" href="#Flexure-Capacity-of-WShape:" title="Permalink"></a></h2><p>See link below for the available functions relating to flexure for the WShape member:</p><ul><li><a href="../Shapes API/IShapes API/#Flexure-API-for-IShapes">Flexure API for IShapes</a></li></ul><h3 id="Major-Axis-Bending"><a class="docs-heading-anchor" href="#Major-Axis-Bending">Major Axis Bending</a><a id="Major-Axis-Bending-1"></a><a class="docs-heading-anchor-permalink" href="#Major-Axis-Bending" title="Permalink"></a></h3><p>We can calculate the flexural capacity about the x-axis of the W14X90 shape we just constructed:</p><pre><code class="language-julia hljs">L_b = 20ft
+ϕ_b = 0.9
+M_nx = ris.Flexure.calc_Mnx(w, L_b)
+ϕM_nx = ϕ_b * M_nx</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">538.5180966509897 ft kip</code></pre><p>Lets see what the <code>calc_Mnx</code> function did:</p><pre><code class="language-julia hljs">@handcalcs M_nx = ris.Flexure.calc_Mnx(w, L_b)</code></pre><p class="math-container">\[\begin{aligned}
+b &amp;= \frac{b_{f}}{2} = \frac{14.5\;\mathrm{inch}}{2} = 7.25\;\mathrm{inch}
+\\[10pt]
+t &amp;= t_{f} = 0.71\;\mathrm{inch}
+\\[10pt]
+\lambda &amp;= \frac{b}{t} = \frac{7.25\;\mathrm{inch}}{0.71\;\mathrm{inch}} = 10.21
+\\[10pt]
+\lambda_{p} &amp;= 0.38 \cdot \sqrt{\frac{E}{F_{y}}} = 0.38 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 9.15
+\\[10pt]
+\lambda_{r} &amp;= 1 \cdot \sqrt{\frac{E}{F_{y}}} = 1 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 24.08
+\\[10pt]
+\text{Since: }\lambda_{p} &lt; \lambda \leq \lambda_{r} &amp;= 9.15 &lt; 10.21 \leq 24.08 = true
+\\[10pt]
+\lambda_{class} &amp;= noncompact
+\\[10pt]
+h &amp;= h = 11.4\;\mathrm{inch}
+\\[10pt]
+t_{w} &amp;= t_{w} = 0.44\;\mathrm{inch}
+\\[10pt]
+\lambda &amp;= \frac{h}{t_{w}} = \frac{11.4\;\mathrm{inch}}{0.44\;\mathrm{inch}} = 25.9
+\\[10pt]
+\lambda_{p} &amp;= 3.76 \cdot \sqrt{\frac{E}{F_{y}}} = 3.76 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 90.55
+\\[10pt]
+\lambda_{r} &amp;= 5.7 \cdot \sqrt{\frac{E}{F_{y}}} = 5.7 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 137.27
+\\[10pt]
+\text{Since: }\lambda \leq \lambda_{p} &amp;= 25.9 \leq 90.55 = true
+\\[10pt]
+\lambda_{class} &amp;= compact
+\\[10pt]
+\lambda_f, \lambda_pf, \lambda_rf, \lambda_fclass &amp;= \lambda_{fvariabels} = \left[
+\begin{array}{c}
+10.21 \\
+9.15 \\
+24.08 \\
+noncompact \\
+\end{array}
+\right]
+\\[10pt]
+\lambda_w, \lambda_pw, \lambda_rw, \lambda_wclass &amp;= \lambda_{wvariabels} = \left[
+\begin{array}{c}
+25.9 \\
+90.55 \\
+137.27 \\
+compact \\
+\end{array}
+\right]
+\\[10pt]
+\text{Since: }\lambda_{wclass} &amp;= compact = true
+\\[10pt]
+\text{Since: }\lambda_{fclass} &amp;= compact = noncompact = false
+\\[10pt]
+c &amp;= 1
+\\[10pt]
+M_{p} &amp;= F_{y} \cdot Z_{x} = 50\;\mathrm{ksi} \cdot 157\;\mathrm{inch}^{3} = 654.17\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+L_{p} &amp;= 1.76 \cdot r_{y} \cdot \sqrt{\frac{E}{F_{y}}} = 1.76 \cdot 3.7\;\mathrm{inch} \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 13.07\;\mathrm{ft}
+\\[10pt]
+L_{r} &amp;= 1.95 \cdot r_{ts} \cdot \frac{E}{0.7 \cdot F_{y}} \cdot \sqrt{\frac{J \cdot c}{S_{x} \cdot h_{0}} + \sqrt{\left( \frac{J \cdot c}{S_{x} \cdot h_{0}} \right)^{2} + 6.76 \cdot \left( \frac{0.7 \cdot F_{y}}{E} \right)^{2}}} = 1.95 \cdot 4.1\;\mathrm{inch} \cdot \frac{29000\;\mathrm{ksi}}{0.7 \cdot 50\;\mathrm{ksi}} \cdot \sqrt{\frac{4.06\;\mathrm{inch}^{4} \cdot 1}{143\;\mathrm{inch}^{3} \cdot 13.3\;\mathrm{inch}} + \sqrt{\left( \frac{4.06\;\mathrm{inch}^{4} \cdot 1}{143\;\mathrm{inch}^{3} \cdot 13.3\;\mathrm{inch}} \right)^{2} + 6.76 \cdot \left( \frac{0.7 \cdot 50\;\mathrm{ksi}}{29000\;\mathrm{ksi}} \right)^{2}}} = 42.51\;\mathrm{ft}
+\\[10pt]
+F_{cr} &amp;= \frac{C_{b} \cdot \pi^{2} \cdot E}{\left( \frac{L_{b}}{r_{ts}} \right)^{2}} \cdot \sqrt{1 + 0.08 \cdot \frac{J \cdot c}{S_{x} \cdot h_{0}} \cdot \left( \frac{L_{b}}{r_{ts}} \right)^{2}} = \frac{1 \cdot 3.14^{2} \cdot 29000\;\mathrm{ksi}}{\left( \frac{20\;\mathrm{ft}}{4.1\;\mathrm{inch}} \right)^{2}} \cdot \sqrt{1 + 0.08 \cdot \frac{4.06\;\mathrm{inch}^{4} \cdot 1}{143\;\mathrm{inch}^{3} \cdot 13.3\;\mathrm{inch}} \cdot \left( \frac{20\;\mathrm{ft}}{4.1\;\mathrm{inch}} \right)^{2}} = 104.68\;\mathrm{ksi}
+\\[10pt]
+k_{c} &amp;= \frac{4}{\sqrt{\frac{h}{t_{w}}}} = \frac{4}{\sqrt{\frac{11.4\;\mathrm{inch}}{0.44\;\mathrm{inch}}}} = 0.79
+\\[10pt]
+k_{c} &amp;= \mathrm{max}\left( \mathrm{min}\left( k_{c}, 0.76 \right), 0.35 \right) = \mathrm{max}\left( \mathrm{min}\left( 0.79, 0.76 \right), 0.35 \right) = 0.76
+\\[10pt]
+\text{Since: }L_{p} &lt; L_{b} \leq L_{r} &amp;= 13.07\;\mathrm{ft} &lt; 20\;\mathrm{ft} \leq 42.51\;\mathrm{ft} = true
+\\[10pt]
+M_{nLTB} &amp;= C_{b} \cdot \left( M_{p} - \left( M_{p} - 0.7 \cdot F_{y} \cdot S_{x} \right) \cdot \frac{L_{b} - L_{p}}{L_{r} - L_{p}} \right) = 1 \cdot \left( 654.17\;\mathrm{ft}\,\mathrm{kip} - \left( 654.17\;\mathrm{ft}\,\mathrm{kip} - 0.7 \cdot 50\;\mathrm{ksi} \cdot 143\;\mathrm{inch}^{3} \right) \cdot \frac{20\;\mathrm{ft} - 13.07\;\mathrm{ft}}{42.51\;\mathrm{ft} - 13.07\;\mathrm{ft}} \right) = 598.35\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+\text{Since: }\lambda_{fclass} &amp;= noncompact = true
+\\[10pt]
+M_{nCFLB} &amp;= M_{p} - \left( M_{p} - 0.7 \cdot F_{y} \cdot S_{x} \right) \cdot \frac{\lambda_{f} - \lambda_{pf}}{\lambda_{rf} - \lambda_{pf}} = 654.17\;\mathrm{ft}\,\mathrm{kip} - \left( 654.17\;\mathrm{ft}\,\mathrm{kip} - 0.7 \cdot 50\;\mathrm{ksi} \cdot 143\;\mathrm{inch}^{3} \right) \cdot \frac{10.21 - 9.15}{24.08 - 9.15} = 637.34\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{n} &amp;= \mathrm{min}\left( M_{nLTB}, M_{nCFLB} \right) = \mathrm{min}\left( 598.35\;\mathrm{ft}\,\mathrm{kip}, 637.34\;\mathrm{ft}\,\mathrm{kip} \right) = 598.35\;\mathrm{ft}\,\mathrm{kip}
+\end{aligned}\]</p><h3 id="Minor-Axis-Bending"><a class="docs-heading-anchor" href="#Minor-Axis-Bending">Minor Axis Bending</a><a id="Minor-Axis-Bending-1"></a><a class="docs-heading-anchor-permalink" href="#Minor-Axis-Bending" title="Permalink"></a></h3><p>We can calculate the flexural capacity about the y-axis of the W14X90 shape we just constructed:</p><pre><code class="language-julia hljs">M_ny = ris.Flexure.calc_Mny(w)
+ϕM_ny = ϕ_b * M_ny</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">272.6765792141038 ft kip</code></pre><p>Lets see what the <code>calc_Mny</code> function did:</p><pre><code class="language-julia hljs">@handcalcs M_ny = ris.Flexure.calc_Mny(w)</code></pre><p class="math-container">\[\begin{aligned}
+b &amp;= \frac{b_{f}}{2} = \frac{14.5\;\mathrm{inch}}{2} = 7.25\;\mathrm{inch}
+\\[10pt]
+t &amp;= t_{f} = 0.71\;\mathrm{inch}
+\\[10pt]
+\lambda &amp;= \frac{b}{t} = \frac{7.25\;\mathrm{inch}}{0.71\;\mathrm{inch}} = 10.21
+\\[10pt]
+\lambda_{p} &amp;= 0.38 \cdot \sqrt{\frac{E}{F_{y}}} = 0.38 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 9.15
+\\[10pt]
+\lambda_{r} &amp;= 1 \cdot \sqrt{\frac{E}{F_{y}}} = 1 \cdot \sqrt{\frac{29000\;\mathrm{ksi}}{50\;\mathrm{ksi}}} = 24.08
+\\[10pt]
+\text{Since: }\lambda_{p} &lt; \lambda \leq \lambda_{r} &amp;= 9.15 &lt; 10.21 \leq 24.08 = true
+\\[10pt]
+\lambda_{class} &amp;= noncompact
+\\[10pt]
+b &amp;= \frac{b_{f}}{2} = \frac{14.5\;\mathrm{inch}}{2} = 7.25\;\mathrm{inch}
+\\[10pt]
+M_{p} &amp;= \mathrm{min}\left( F_{y} \cdot Z_{y}, 1.6 \cdot F_{y} \cdot S_{y} \right) = \mathrm{min}\left( 50\;\mathrm{ksi} \cdot 75.6\;\mathrm{inch}^{3}, 1.6 \cdot 50\;\mathrm{ksi} \cdot 49.9\;\mathrm{inch}^{3} \right) = 315\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+F_{cr} &amp;= \frac{0.7 \cdot E}{\left( \frac{b}{t_{f}} \right)^{2}} = \frac{0.7 \cdot 29000\;\mathrm{ksi}}{\left( \frac{7.25\;\mathrm{inch}}{0.71\;\mathrm{inch}} \right)^{2}} = 194.69\;\mathrm{ksi}
+\\[10pt]
+M_{nFY} &amp;= M_{p} = 315\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+\text{Since: }\lambda_{fclass} &amp;= noncompact = true
+\\[10pt]
+M_{nLTB} &amp;= M_{p} - \left( M_{p} - 0.7 \cdot F_{y} \cdot S_{y} \right) \cdot \frac{\lambda_{f} - \lambda_{pf}}{\lambda_{rf} - \lambda_{pf}} = 315\;\mathrm{ft}\,\mathrm{kip} - \left( 315\;\mathrm{ft}\,\mathrm{kip} - 0.7 \cdot 50\;\mathrm{ksi} \cdot 49.9\;\mathrm{inch}^{3} \right) \cdot \frac{10.21 - 9.15}{24.08 - 9.15} = 302.97\;\mathrm{ft}\,\mathrm{kip}
+\\[10pt]
+M_{n} &amp;= \mathrm{min}\left( M_{nFY}, M_{nFLB} \right) = \mathrm{min}\left( 315\;\mathrm{ft}\,\mathrm{kip}, 302.97\;\mathrm{ft}\,\mathrm{kip} \right) = 302.97\;\mathrm{ft}\,\mathrm{kip}
+\end{aligned}\]</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../GettingStarted/">« Getting Started</a><a class="docs-footer-nextpage" href="../CShape Example/">CShapes »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.11.3 on <span class="colophon-date" title="Thursday 15 May 2025 14:05">Thursday 15 May 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body><div data-docstringscollapsed="true"></div></html>
