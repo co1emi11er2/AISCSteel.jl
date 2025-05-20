@@ -48,6 +48,10 @@ end
     include("Flexure/HSS_Shapes.jl")
 end
 
+@testitem "Compression - RoundHSS_Shapes" begin
+    include("Compression/RoundHSS_Shapes.jl")
+end
+
 @testitem "Flexure - RoundHSS_Shapes" begin
     include("Flexure/RoundHSS_Shapes.jl")
 end
