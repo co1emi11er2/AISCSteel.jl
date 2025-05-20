@@ -185,7 +185,7 @@ Description of applicable member: Walls of round HSS
 """
 function case9(D, t, E, F_y)
     λ = D / t
-    λ_r = 0.11 * sqrt(E / F_y)
+    λ_r = 0.11 * E / F_y
 
     if λ <= λ_r
         λ_class = :nonslender

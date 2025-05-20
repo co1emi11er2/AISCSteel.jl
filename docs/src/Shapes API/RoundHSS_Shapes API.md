@@ -10,8 +10,9 @@ Modules = [AISCSteel.Shapes.RoundHSS_Shapes]
 
 ## Compression API for Round HSS Shapes
 
-This section is *not implemented*.
-
+```@autodocs
+Modules = [AISCSteel.Shapes.RoundHSS_Shapes.Compression]
+```
 ## Flexure API for Round HSS Shapes
 
 ```@autodocs
