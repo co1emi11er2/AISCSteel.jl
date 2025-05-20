@@ -88,7 +88,7 @@ This function calculates Pn of the shape.
 - `P_n`: nominal compressive strength of the section (kip)
 
 # Reference
-- AISC Section E3, E4, E7
+- AISC Section E3, E7
 """
 function calc_Pn((;A_g, r_x, r_y, E, F_y, b, t_des, h)::T, L_cx, L_cy, λ_b, λ_rb, λ_bclass, λ_h, λ_rh, λ_hclass) where T <: AISCSteel.Shapes.HSS_Shapes.AbstractHSS_Shapes
 
