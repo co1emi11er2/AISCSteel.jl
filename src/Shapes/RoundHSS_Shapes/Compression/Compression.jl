@@ -51,18 +51,15 @@ This function calculates Pn of the shape.
 - `shape`: rolled hss-shape section (`RoundHSS_Shape`)
 - `L_cx`: effective length of member for buckling about the x-axis (inch)
 - `L_cy`: effective length of member for buckling about the y-axis (inch)
-- `λ_b`: slenderness ratio of the shorter wall
-- `λ_rb`: nonslender slenderness ratio limit of the shorter wall
-- `λ_bclass`: `nonslender` or `slender` classification for the shorter wall
-- `λ_h`: slenderness ratio of the longer wall
-- `λ_rh`: nonslender slenderness ratio limit of the longer wall
-- `λ_hclass`: `nonslender` or `slender` classification for the longer wall
+- `λ`: slenderness ratio of the wall
+- `λ_r`: nonslender slenderness ratio limit of the wall
+- `λ_class`: `nonslender` or `slender` classification for the wall
 
 # Returns
 - `P_n`: nominal compressive strength of the section (kip)
 
 # Reference
-- AISC Section E3, E4, E7
+- AISC Section E3, E7
 """
 function calc_Pn((;A_g, r_x, r_y, E, F_y, OD, t_des)::T, L_cx, L_cy, λ, λ_r, λ_class) where T <: AISCSteel.Shapes.RoundHSS_Shapes.AbstractRoundHSS_Shapes
 
