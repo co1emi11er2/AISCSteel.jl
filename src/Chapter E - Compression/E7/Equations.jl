@@ -25,7 +25,7 @@ function EqE7▬6(A_g)
     A_e = A_g |> cnv.to_L²
 end
 
-function EqE7▬7(A_g)
+function EqE7▬7(E, F_y, D, t, A_g)
     A_e = ((0.038*E)/(F_y*(D/t)) + 2/3)*A_g |> cnv.to_L²
 end
 
