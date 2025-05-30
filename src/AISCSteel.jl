@@ -3,7 +3,7 @@ module AISCSteel
 ##########################################################################################
 # Imports
 ##########################################################################################
-using CSV, DataFramesMeta, EnumX, StructuralUnits
+using CSV, DataFramesMeta, EnumX, StructuralUnits, PrecompileTools
 
 ##########################################################################################
 # Exports
@@ -44,6 +44,7 @@ include("Chapter F - Flexure/ChapterFFlexure.jl")
 # include Shapes
 include("Shapes/Shapes.jl")
 
-
+# include precompilation
+include("precompile.jl")
 
 end
