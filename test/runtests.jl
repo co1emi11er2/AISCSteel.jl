@@ -41,8 +41,15 @@ end
     include("Flexure/LShapes.jl")
 end
 
+@testitem "Compression - HSS_Shapes" begin
+    include("Compression/HSS_Shapes.jl")
+end
 @testitem "Flexure - HSS_Shapes" begin
     include("Flexure/HSS_Shapes.jl")
+end
+
+@testitem "Compression - RoundHSS_Shapes" begin
+    include("Compression/RoundHSS_Shapes.jl")
 end
 
 @testitem "Flexure - RoundHSS_Shapes" begin

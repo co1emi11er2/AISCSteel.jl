@@ -38,6 +38,31 @@ The weight of the HSS_Shape:
 hss_shape.weight
 ```
 
+## Compression Capacity of HSS_Shape:
+
+See link below for the available functions relating to compression for the HSS_Shape member:
+
+- [Compression API for HSS Shapes](@ref)
+
+We can calculate the compressive capacity of the HSS10x6x3/16 shape we just constructed:
+
+```@example hss_shape
+
+L_cx = L_cy = 12ft
+ϕ_c = 0.9
+P_n = hss.Compression.calc_Pn(hss_shape, L_cx, L_cy)
+ϕP_n = ϕ_c * P_n
+```
+
+Lets see what the `calc_Pn` function did:
+
+```@example hss_shape
+using Handcalcs
+set_handcalcs(precision=2) # sets number of decimals displayed
+
+@handcalcs P_n = hss.Compression.calc_Pn(hss_shape, L_cx, L_cy)
+```
+
 ## Flexure Capacity of HSS_Shape:
 
 See link below for the available functions relating to flexure for the HSS_Shape member:
@@ -60,9 +85,6 @@ M_nx = hss.Flexure.calc_Mnx(hss_shape, L_b, C_b)
 Lets see what the `calc_Mnx` function did:
 
 ```@example hss_shape
-using Handcalcs
-set_handcalcs(precision=2) # sets number of decimals displayed
-
 @handcalcs M_nx = hss.Flexure.calc_Mnx(hss_shape, L_b, C_b)
 ```
 

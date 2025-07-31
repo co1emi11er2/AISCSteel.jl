@@ -38,6 +38,31 @@ The weight of the RoundHSS_Shape:
 rhss_shape.weight
 ```
 
+## Compression Capacity of HSS_Shape:
+
+See link below for the available functions relating to compression for the RoundHSS_Shape member:
+
+- [Compression API for Round HSS Shapes](@ref)
+
+We can calculate the compressive capacity of the HSS20.000x0.500 shape we just constructed:
+
+```@example rhss_shape
+
+L_cx = L_cy = 18ft
+ϕ_c = 0.9
+P_n = rhss.Compression.calc_Pn(rhss_shape, L_cx, L_cy)
+ϕP_n = ϕ_c * P_n
+```
+
+Lets see what the `calc_Pn` function did:
+
+```@example rhss_shape
+using Handcalcs
+set_handcalcs(precision=2) # sets number of decimals displayed
+
+@handcalcs P_n = rhss.Compression.calc_Pn(rhss_shape, L_cx, L_cy)
+```
+
 ## Flexure Capacity of RoundHSS_Shape:
 
 See link below for the available functions relating to flexure for the RoundHSS_Shape member:
@@ -58,9 +83,6 @@ M_n = rhss.Flexure.calc_Mn(rhss_shape)
 Lets see what the `calc_Mn` function did:
 
 ```@example rhss_shape
-using Handcalcs
-set_handcalcs(precision=2) # sets number of decimals displayed
-
 @handcalcs M_n = rhss.Flexure.calc_Mn(rhss_shape)
 ```
 

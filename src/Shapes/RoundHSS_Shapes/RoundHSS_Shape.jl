@@ -8,7 +8,7 @@ RoundHSS_Shape in the AISC steel database.
 
 - `shape`: name of the HSS
 - `weight`: weight of section (plf)
-- `area`: area of shape (inch2)
+- `A_g`: area of shape (inch2)
 - `OD`: outside diameter of round HSS or pipe (inch)
 - `t_nom`: nominal thickness of HSS and pipe wall (inch)
 - `t_des`: design thickness of HSS and pipe wall (inch)
@@ -28,7 +28,7 @@ RoundHSS_Shape in the AISC steel database.
 Base.@kwdef struct RoundHSS_Shape <: AbstractRoundHSS_Shapes
     shape::String
     weight::AISCSteel.Units.float_plf
-    area::AISCSteel.Units.float_inch2
+    A_g::AISCSteel.Units.float_inch2
     OD::AISCSteel.Units.float_inch
     t_nom::AISCSteel.Units.float_inch
     t_des::AISCSteel.Units.float_inch
