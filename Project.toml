@@ -1,7 +1,7 @@
 name = "AISCSteel"
 uuid = "599de4a1-440e-403d-8b33-ce14758023a2"
 authors = ["Cole Miller"]
-version = "0.2.7"
+version = "0.2.8"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
