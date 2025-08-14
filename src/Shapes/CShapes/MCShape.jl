@@ -104,7 +104,7 @@ function MCShape(shape; G=11200ksi, E=29000ksi, F_y=50ksi, C_b=1)
     lookup_value = uppercase(shape)
     cshape = AISCSteel.Utils.DatabaseUtils.import_data(lookup_value, lookup_col_name, csv_file_path)
 
-    WGi = ismissing(cshape.WGi) ? 0 * inch : parse(Float64, cshape.WGi) * inch
+    WGi = cshape.WGi == "–" ? 0 * inch : parse(Float64, cshape.WGi) * inch
 
     MCShape(
         cshape.shape,
@@ -145,6 +145,7 @@ function MCShape(shape; G=11200ksi, E=29000ksi, F_y=50ksi, C_b=1)
         cshape.PD * inch,
         cshape.T * inch,
         WGi,
+        G,
         E,
         F_y
     )
