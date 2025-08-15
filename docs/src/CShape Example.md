@@ -38,6 +38,31 @@ The weight of the CShape:
 c.weight
 ```
 
+## Compression Capacity of CShape:
+
+See link below for the available functions relating to compression for the WTShape member:
+
+- [Compression API for CShapes](@ref)
+
+We can calculate the compressive capacity of the WT5X6 shape we just constructed:
+
+```@example cshape
+
+L_cx = L_cy = L_cz = 12ft
+ϕ_c = 0.9
+P_n = cs.Compression.calc_Pn(c, L_cx, L_cy, L_cz)
+ϕP_n = ϕ_c * P_n
+```
+
+Lets see what the `calc_Pn` function did:
+
+```@example cshape
+using Handcalcs
+set_handcalcs(precision=2) # sets number of decimals displayed
+
+@handcalcs P_n = cs.Compression.calc_Pn(c, L_cx, L_cy, L_cz)
+```
+
 ## Flexure Capacity of CShape:
 
 See link below for the available functions relating to flexure for the CShape member:
@@ -59,9 +84,6 @@ M_nx = cs.Flexure.calc_Mnx(c, L_b)
 Lets see what the `calc_Mnx` function did:
 
 ```@example cshape
-using Handcalcs
-set_handcalcs(precision=2) # sets number of decimals displayed
-
 @handcalcs M_nx = cs.Flexure.calc_Mnx(c, L_b)
 ```
 

@@ -10,7 +10,9 @@ Modules = [AISCSteel.Shapes.CShapes]
 
 ## Compression API for CShapes
 
-This section is *not implemented*.
+```@autodocs
+Modules = [AISCSteel.Shapes.CShapes.Compression]
+```
 
 ## Flexure API for CShapes
 

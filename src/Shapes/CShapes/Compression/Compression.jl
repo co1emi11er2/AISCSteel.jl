@@ -1,7 +1,7 @@
 """
     module Compression
 
-This module includes useful functions to calculate compression capacity of rolled i-shape sections (`WShape`, `MShape`, `SShape`, `HPShape`).
+This module includes useful functions to calculate compression capacity of rolled c-shape sections (`CShape`).
 
 # Functions
 - `classify_flange` - classify flange for slenderness
@@ -17,12 +17,12 @@ import AISCSteel.ChapterECompression.E4 as E4
 import AISCSteel.ChapterECompression.E7 as E7
 
 """
-    classify_flange(shape::T) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
+    classify_flange(shape::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
 
 This function classifies flange for compression for the shape.
 
 # Arguments
-- `shape`: rolled i-shape section (`WTShape`)
+- `shape`: rolled c-shape section (`CShape`)
 
 # Returns
     (λ_f, λ_rf, λ_fclass)
@@ -30,9 +30,9 @@ This function classifies flange for compression for the shape.
 - `λ_rf`: nonslender slenderness ratio limit of the flange
 - `λ_fclass`: `nonslender` or `slender` classification for the flange
 """
-function classify_flange((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
+function classify_flange((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
 
-    b = b_f/2
+    b = b_f
     t = t_f
     λ_fclass = TableB4⬝1a.case1(b, t, E, F_y)
 
@@ -41,12 +41,12 @@ function classify_flange((;b_f, t_f, E, F_y)::T) where T <: AISCSteel.Shapes.WTS
 end
 
 """
-    classify_web(shape::T) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
+    classify_web(shape::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
 
 This function classifies web for compression for the shape.
 
 # Arguments
-- `shape`: rolled i-shape section (`WShape`, `MShape`, `SShape`, `HPShape`)
+- `shape`: rolled c-shape section (`CShape`)
 
 # Returns
     (λ_w, λ_rw, λ_wclass)
@@ -54,15 +54,16 @@ This function classifies web for compression for the shape.
 - `λ_rw`: nonslender slenderness ratio limit of the web
 - `λ_wclass`: `nonslender` or `slender` classification for the web
 """
-function classify_web((;d, t_w, E, F_y)::T) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
+function classify_web((;h, t_w, E, F_y)::T) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
 
-    d = d
+    h = h
     t_w = t_w
-    λ_wvariables = TableB4⬝1a.case4(d, t_w, E, F_y)
+    λ_wvariables = TableB4⬝1a.case5(h, t_w, E, F_y)
 
     return λ_wvariables
 
 end
+
 
 """
     calc_Fe(F_ey, F_ez, H)
@@ -70,7 +71,7 @@ end
 This function calculates F_e of the shape.
 
 # Arguments
-- `F_ey`: elastic buckling stress with respect to the y-axis (ksi)
+- `F_ey`: elastic buckling stress with respect to the y-axis (ksi) (x-axis for c-shapes)
 - `F_ez`: elastic buckling stress with respect to the z-axis (ksi)
 - `H`: flexural constant
 
@@ -109,13 +110,13 @@ function calc_r̄0(x_0, y_0, I_x, I_y, A_g)
 end
 
 """
-    calc_Pn(shape::T, L_cx, L_cy, L_cz) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
-    calc_Pn(shape::T, L_cx, L_cy, L_cz, λ_f, λ_rf, λ_fclass, λ_w, λ_rw, λ_wclass) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
+    calc_Pn(shape::T, L_cx, L_cy, L_cz) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
+    calc_Pn(shape::T, L_cx, L_cy, L_cz, λ_f, λ_rf, λ_fclass, λ_w, λ_rw, λ_wclass) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
 
 This function calculates Pn of the shape.
 
 # Arguments
-- `shape`: rolled i-shape section (`WTShape`)
+- `shape`: rolled c-shape section (`CShape`)
 - `L_cx`: effective length of member for buckling about the x-axis (inch)
 - `L_cy`: effective length of member for buckling about the y-axis (inch)
 - `λ_f`: slenderness ratio of the flange
@@ -131,19 +132,15 @@ This function calculates Pn of the shape.
 # Reference
 - AISC Section E3, E4, E7
 """
-function calc_Pn((;A_g, r_x, r_y, G, E, F_y, b_f, t_f, d, t_w, ȳ, I_x, I_y, C_w, J)::T, L_cx, L_cy, L_cz, λ_f, λ_rf, λ_fclass, λ_w, λ_rw, λ_wclass) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
+function calc_Pn((;A_g, r_x, r_y, r_0, H, G, E, F_y, b_f, t_f, h, t_w, I_x, I_y, C_w, J)::T, L_cx, L_cy, L_cz, λ_f, λ_rf, λ_fclass, λ_w, λ_rw, λ_wclass) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
 
     F_ex = E4.calc_Fex(E, L_cx, r_x)
     F_ey = E4.calc_Fey(E, L_cy, r_y)
 
     # calc F_ez
-    x_0 = 0inch
-    y_0 = ȳ - t_f/2
-    r̄_0 = calc_r̄0(x_0, y_0, I_x, I_y, A_g)
-    F_ez = E4.calc_Fez(E, C_w, L_cz, G, J, A_g, r̄_0)
+    F_ez = E4.calc_Fez(E, C_w, L_cz, G, J, A_g, r_0)
 
-    H = E4.calc_H(x_0, y_0, r̄_0)
-    F_e = calc_Fe(F_ey, F_ez, H)
+    F_e = calc_Fe(F_ex, F_ez, H)
     F_e = min(F_ex, F_ey, F_e)
     F_n = E3.calc_Fn(F_y, F_e)
 
@@ -151,7 +148,7 @@ function calc_Pn((;A_g, r_x, r_y, G, E, F_y, b_f, t_f, d, t_w, ȳ, I_x, I_y, C_
         if λ_fclass == :nonslender
             P_n = E3.calc_Pn(F_n, A_g)
         else
-            b = b_f/2
+            b = b_f
             t = t_f
             c_1 = 0.22
             c_2 = 1.49
@@ -162,10 +159,10 @@ function calc_Pn((;A_g, r_x, r_y, G, E, F_y, b_f, t_f, d, t_w, ȳ, I_x, I_y, C_
         end
     else
         if λ_fclass == :nonslender
-            b = d
+            b = h
             t = t_w
-            c_1 = 0.22
-            c_2 = 1.49
+            c_1 = 0.18
+            c_2 = 1.31
             F_el = E7.calc_Fel(c_2, λ_rw, λ_w, F_y)
             b_e = E7.calc_be(λ_w, λ_rw, F_y, F_n, b, c_1, F_el)
             A_e = E7.calc_Ae(A_g, b, b_e, t)
@@ -175,16 +172,16 @@ function calc_Pn((;A_g, r_x, r_y, G, E, F_y, b_f, t_f, d, t_w, ȳ, I_x, I_y, C_
             c_1 = 0.22
             c_2 = 1.49
             F_el = E7.calc_Fel(c_2, λ_rf, λ_f, F_y)
-            b = b_f/2
+            b = b_f
             t = t_f
             b_e = E7.calc_be(λ_f, λ_rf, F_y, F_n, b, c_1, F_el)
             A_e = A_g - 2*(b - b_e)*t
 
             # web
-            c_1 = 0.22
-            c_2 = 1.49
+            c_1 = 0.18
+            c_2 = 1.31
             F_el = E7.calc_Fel(c_2, λ_rw, λ_w, F_y)
-            b = d
+            b = h
             t = t_w
             b_e = E7.calc_be(λ_w, λ_rw, F_y, F_n, b, c_1, F_el)
             A_e = A_e - (b - b_e)*t
@@ -196,7 +193,7 @@ function calc_Pn((;A_g, r_x, r_y, G, E, F_y, b_f, t_f, d, t_w, ȳ, I_x, I_y, C_
     return P_n
 end
 
-function calc_Pn(w::T, L_cx, L_cy, L_cz) where T <: AISCSteel.Shapes.WTShapes.AbstractWTShapes
+function calc_Pn(w::T, L_cx, L_cy, L_cz) where T <: AISCSteel.Shapes.CShapes.AbstractCShapes
     
     λ_f, λ_rf, λ_fclass = classify_flange(w)
     λ_w, λ_rw, λ_wclass = classify_web(w)

@@ -8,7 +8,7 @@ MCShape in the AISC steel database.
 
 - `shape`: name of the WShape
 - `weight`: weight of section (plf)
-- `area`: area of wshape (inch2)
+- `A_g`: area of wshape (inch2)
 - `d`: depth of wshape (inch)
 - `b_f`: width of flange (inch)
 - `t_w`: thickness of web (inch)
@@ -44,13 +44,14 @@ MCShape in the AISC steel database.
 - `PD`: Box perimeter, as used in AISC Design Guide 19 (inch)
 - `T`: Distance between web toes od fillets at the top and bottom of web (inch)
 - `WG_i`: The workable gage for the inner fastener holes in the flange that provides for entering and tightening clearances and edge distance and spacing requirements. The actual size, combination, and orientation of fastener components should be compared with the geometry of the cross section to ensure compatibility. See AISC Manual Part 1 for additional information (inch)
+- `G`: Shear modulus of elasticity of steel = 11200ksi
 - `E`: Elastic section modulus (ksi) = 29000ksi
 - `F_y`: Yield strength(ksi) = 50ksi
 """
 Base.@kwdef struct MCShape <: AbstractCShapes
     shape::String
     weight::AISCSteel.Units.float_plf
-    area::AISCSteel.Units.float_inch2
+    A_g::AISCSteel.Units.float_inch2
     d::AISCSteel.Units.float_inch
     b_f::AISCSteel.Units.float_inch
     t_w::AISCSteel.Units.float_inch
@@ -86,23 +87,24 @@ Base.@kwdef struct MCShape <: AbstractCShapes
     PD::AISCSteel.Units.float_inch
     T::AISCSteel.Units.float_inch
     WG_i::AISCSteel.Units.float_inch
+    G::AISCSteel.Units.float_ksi = 11200ksi
     E::AISCSteel.Units.float_ksi = 29000ksi
     F_y::AISCSteel.Units.float_ksi = 50ksi
 end
 
 """
-    MCShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
+    MCShape(shape; G=11200ksi, E=29000ksi, F_y=50ksi, C_b=1)
 
 Constructor for `MCShape`.
 """
-function MCShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
+function MCShape(shape; G=11200ksi, E=29000ksi, F_y=50ksi, C_b=1)
     csv_file_name = "MC_shapes.csv"
     csv_file_path = joinpath("shape files", csv_file_name)
     lookup_col_name = :shape
     lookup_value = uppercase(shape)
     cshape = AISCSteel.Utils.DatabaseUtils.import_data(lookup_value, lookup_col_name, csv_file_path)
 
-    WGi = ismissing(cshape.WGi) ? 0 * inch : parse(Float64, cshape.WGi) * inch
+    WGi = cshape.WGi == "–" ? 0 * inch : parse(Float64, cshape.WGi) * inch
 
     MCShape(
         cshape.shape,
@@ -143,6 +145,7 @@ function MCShape(shape; E=29000ksi, F_y=50ksi, C_b=1)
         cshape.PD * inch,
         cshape.T * inch,
         WGi,
+        G,
         E,
         F_y
     )

@@ -16,6 +16,10 @@ end
     include("Flexure/CShapes.jl")
 end
 
+@testitem "Compression - CShapes" begin
+    include("Compression/CShapes.jl")
+end
+
 @testitem "Compression - WTShapes" begin
     include("Compression/WTShapes.jl")
 end
