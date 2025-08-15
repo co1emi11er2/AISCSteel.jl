@@ -19,17 +19,4 @@ function import_data(lookup_value, lookup_col_name::Symbol, csv_file_path::Strin
     return first(df)
 end
 
-"""
-    import_database(csv_file_path::String)
-
-Searches the specified data location and returns the database as a DataFrame
-
-# Parameters
-- `csv_file_path`::String - The name of csv file in the data directory
-"""
-function import_database(csv_file_path::String)
-    df = CSV.read(AISCSteel.datadir(csv_file_path), DataFrame)
-    return df
-end
-
 end
