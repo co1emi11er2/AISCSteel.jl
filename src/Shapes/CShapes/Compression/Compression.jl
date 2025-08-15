@@ -46,7 +46,7 @@ end
 This function classifies web for compression for the shape.
 
 # Arguments
-- `shape`: rolled i-shape section (`CShape`)
+- `shape`: rolled c-shape section (`CShape`)
 
 # Returns
     (λ_w, λ_rw, λ_wclass)
@@ -116,7 +116,7 @@ end
 This function calculates Pn of the shape.
 
 # Arguments
-- `shape`: rolled i-shape section (`WTShape`)
+- `shape`: rolled c-shape section (`CShape`)
 - `L_cx`: effective length of member for buckling about the x-axis (inch)
 - `L_cy`: effective length of member for buckling about the y-axis (inch)
 - `λ_f`: slenderness ratio of the flange
