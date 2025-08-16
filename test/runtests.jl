@@ -60,4 +60,8 @@ end
     include("Flexure/RoundHSS_Shapes.jl")
 end
 
+@testitem "Databases" begin
+    include("Database/Database.jl")
+end
+
 @run_package_tests verbose=true

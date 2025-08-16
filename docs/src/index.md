@@ -19,7 +19,8 @@ Pages = [
     "LShape Example.md",
     "WTShape Example.md",
     "HSS_Shape Example.md",
-    "RoundHSS_Shape Example.md"
+    "RoundHSS_Shape Example.md",
+    "Database Example.md",
 ]
 Depth = 1
 ```

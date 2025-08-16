@@ -29,6 +29,7 @@ makedocs(;
             "WTShapes" => "WTShape Example.md",
             "HSS_Shapes" => "HSS_Shape Example.md",
             "RoundHSS_Shapes" => "RoundHSS_Shape Example.md",
+            "Working with AISC Databases" => "Database Example.md",
         ],
         "AISC Steel Shapes API" => [
             "Shapes API/IShapes API.md",
