@@ -32,6 +32,9 @@ include("Units.jl")
 # include utilities
 include("Utils/Utils.jl")
 
+# include Database
+include("Database/Database.jl")
+
 #include Chapter B - Design Requirements
 include("Chapter B - Design Requirements/ChapterBDesignRequirements.jl")
 

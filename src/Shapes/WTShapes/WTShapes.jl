@@ -6,6 +6,8 @@ module WTShapes
 using StructuralUnits
 import AISCSteel
 import AISCSteel.Shapes: AbstractSteelShapes
+import AISCSteel.Database: aisc_database
+
 abstract type AbstractWTShapes <: AbstractSteelShapes end
 
 # include shapes
@@ -27,20 +29,20 @@ include("Compression/Compression.jl")
 # # Database
 # ##########################################################################################
 
-function wtshapes_database()
+function aisc_database(::Type{WTShape})
     csv_file_name = "WT_shapes.csv"
     csv_file_path = joinpath("shape files", csv_file_name)
     AISCSteel.Utils.DatabaseUtils.import_database(csv_file_path)
 end
 
-function mtshapes_database()
+function aisc_database(::Type{MTShape})
     csv_file_name = "MT_shapes.csv"
     csv_file_path = joinpath("shape files", csv_file_name)
     AISCSteel.Utils.DatabaseUtils.import_database(csv_file_path)
 end
 
-function stshapes_database()
-    csv_file_name = "sT_shapes.csv"
+function aisc_database(::Type{STShape})
+    csv_file_name = "ST_shapes.csv"
     csv_file_path = joinpath("shape files", csv_file_name)
     AISCSteel.Utils.DatabaseUtils.import_database(csv_file_path)
 end

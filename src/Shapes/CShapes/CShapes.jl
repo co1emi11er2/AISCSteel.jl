@@ -6,6 +6,8 @@ module CShapes
 using StructuralUnits
 import AISCSteel
 import AISCSteel.Shapes: AbstractSteelShapes
+import AISCSteel.Database: aisc_database
+
 abstract type AbstractCShapes <: AbstractSteelShapes end
 
 # include shapes
@@ -23,13 +25,13 @@ include("Compression/Compression.jl")
 # # Database
 # ##########################################################################################
 
-function cshapes_database()
+function aisc_database(::Type{CShape})
     csv_file_name = "C_shapes.csv"
     csv_file_path = joinpath("shape files", csv_file_name)
     AISCSteel.Utils.DatabaseUtils.import_database(csv_file_path)
 end
 
-function mcshapes_database()
+function aisc_database(::Type{MCShape})
     csv_file_name = "MC_shapes.csv"
     csv_file_path = joinpath("shape files", csv_file_name)
     AISCSteel.Utils.DatabaseUtils.import_database(csv_file_path)
