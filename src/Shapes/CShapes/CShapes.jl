@@ -22,7 +22,7 @@ include("Flexure/Flexure.jl")
 include("Compression/Compression.jl")
 
 # ##########################################################################################
-# # Database
+# # Design of members for flexure - Section F2
 # ##########################################################################################
 
 function aisc_database(::Type{CShape})
