@@ -1,4 +1,3 @@
-import DataFrames: DataFrame
 import AISCSteel.Database: aisc_database
 import AISCSteel.Shapes.IShapes.RolledIShapes: WShape, SShape, MShape, HPShape
 import AISCSteel.Shapes.WTShapes: WTShape, MTShape, STShape
@@ -13,7 +12,6 @@ import AISCSteel.Shapes.CShapes: CShape, MCShape
 
 function test_database(SteelShape, shape_names)
     db = aisc_database(SteelShape)
-    @test db isa DataFrame
     @test first(db.shape, 2) == shape_names
 end
 
@@ -51,5 +49,4 @@ df = aisc_database(WShape) do shapes
             shape.Ix < 100
         end
 end
-@test df isa DataFrame
 @test first(df.shape, 2) == ["W12X14", "W10X19"]
